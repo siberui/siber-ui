@@ -46,13 +46,7 @@
     "access": "public"
   },
   "license": "MIT",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.20.0",
-      "onFail": "download"
-    }
-  },
+
   "type": "module",
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
