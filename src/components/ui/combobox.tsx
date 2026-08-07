@@ -1,0 +1,214 @@
+import * as React from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/utils/cn';
+import { Popover, PopoverContent, PopoverTrigger } from './popover';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  type CommandVariant,
+} from './command';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Combobox Trigger Styling (Similar to Input/DatePicker)
+// ─────────────────────────────────────────────────────────────────────────────
+const comboboxTriggerVariants = cva(
+  [
+    'flex w-full text-slate-100 placeholder:text-slate-600 font-sans text-left items-center justify-between',
+    'bg-white/[0.03] backdrop-blur-sm',
+    'transition-all duration-300 ease-out',
+    'focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
+  ].join(' '),
+  {
+    variants: {
+      variant: {
+        default: [
+          'border border-white/[0.08] hover:border-white/[0.15]',
+          'focus-visible:border-cyan-500/50 focus-visible:ring-1 focus-visible:ring-cyan-500/30',
+          'focus-visible:shadow-[0_0_20px_rgba(0,240,255,0.1),0_0_50px_rgba(0,240,255,0.04)]',
+        ].join(' '),
+        neon: [
+          'border border-cyan-500/20 bg-cyan-950/[0.06] text-cyan-100',
+          'hover:border-cyan-500/35 font-mono',
+          'focus-visible:border-cyan-400/60 focus-visible:ring-1 focus-visible:ring-cyan-400/30',
+          'focus-visible:shadow-[0_0_25px_rgba(0,240,255,0.15),0_0_60px_rgba(0,240,255,0.06)]',
+        ].join(' '),
+        glass: [
+          'border border-transparent bg-white/[0.02]',
+          'hover:bg-white/[0.05]',
+          'focus-visible:bg-white/[0.04] focus-visible:border-white/[0.1]',
+        ].join(' '),
+      },
+      inputSize: {
+        sm: 'h-8 px-2.5 text-xs rounded-md',
+        md: 'h-10 px-3.5 text-sm rounded-md',
+        lg: 'h-12 px-4 text-base rounded-lg',
+      },
+      state: {
+        normal: '',
+        error: [
+          'border-rose-500/40 text-rose-200',
+          'focus-visible:border-rose-500/60 focus-visible:ring-rose-500/25',
+          'focus-visible:shadow-[0_0_20px_rgba(244,63,94,0.12),0_0_50px_rgba(244,63,94,0.05)]',
+        ].join(' '),
+        success: [
+          'border-emerald-500/40 text-emerald-200',
+          'focus-visible:border-emerald-400/60 focus-visible:ring-emerald-400/25',
+          'focus-visible:shadow-[0_0_20px_rgba(57,255,20,0.12),0_0_50px_rgba(57,255,20,0.05)]',
+        ].join(' '),
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      inputSize: 'md',
+      state: 'normal',
+    },
+  }
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────────────────────────────────
+export interface ComboboxOption {
+  value: string;
+  label: string;
+}
+
+export interface ComboboxProps
+  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange' | 'value'>,
+    VariantProps<typeof comboboxTriggerVariants> {
+  options: ComboboxOption[];
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  searchPlaceholder?: string;
+  emptyText?: string;
+  error?: string | boolean;
+  success?: boolean;
+  label?: string;
+  helperText?: string;
+  disabled?: boolean;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Component
+// ─────────────────────────────────────────────────────────────────────────────
+const Combobox = React.forwardRef<HTMLButtonElement, ComboboxProps>(
+  (
+    {
+      className,
+      options,
+      value,
+      onChange,
+      placeholder = 'Select an option',
+      searchPlaceholder = 'Search...',
+      emptyText = 'No option found.',
+      variant = 'default',
+      inputSize,
+      state,
+      error,
+      success,
+      label,
+      helperText,
+      id,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const triggerId = id || React.useId();
+    const computedState = error ? 'error' : success ? 'success' : state;
+    const [open, setOpen] = React.useState(false);
+
+    const selectedOption = React.useMemo(
+      () => options.find((opt) => opt.value === value),
+      [options, value]
+    );
+
+    return (
+      <div className="flex flex-col gap-1.5 w-full">
+        {label && (
+          <label
+            htmlFor={triggerId}
+            className="text-[11px] font-mono tracking-wider text-slate-500 uppercase flex items-center justify-between"
+          >
+            <span>{label}</span>
+            {error && typeof error === 'string' && (
+              <span className="text-[10px] text-rose-400/80 normal-case font-sans">
+                {error}
+              </span>
+            )}
+          </label>
+        )}
+
+        <Popover open={open} onOpenChange={setOpen} variant={variant as CommandVariant}>
+          <PopoverTrigger asChild>
+            <button
+              id={triggerId}
+              ref={ref}
+              disabled={disabled}
+              role="combobox"
+              aria-expanded={open}
+              className={cn(
+                comboboxTriggerVariants({ variant, inputSize, state: computedState }),
+                !value && (variant === 'neon' ? 'text-cyan-800/50' : 'text-slate-500'),
+                className
+              )}
+              {...props}
+            >
+              <span className="truncate">
+                {selectedOption ? selectedOption.label : placeholder}
+              </span>
+              <ChevronsUpDown
+                className={cn(
+                  'ml-2 h-4 w-4 shrink-0 opacity-50',
+                  variant === 'neon' ? 'text-cyan-400' : 'text-slate-400'
+                )}
+              />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
+            <Command variant={variant as CommandVariant}>
+              <CommandInput placeholder={searchPlaceholder} />
+              <CommandList>
+                <CommandEmpty>{emptyText}</CommandEmpty>
+                <CommandGroup>
+                  {options.map((option) => (
+                    <CommandItem
+                      key={option.value}
+                      value={option.value}
+                      onSelect={(currentValue) => {
+                        onChange?.(currentValue === value ? '' : currentValue);
+                        setOpen(false);
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          'mr-2 h-4 w-4',
+                          value === option.value ? 'opacity-100' : 'opacity-0'
+                        )}
+                      />
+                      {option.label}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+
+        {helperText && !error && (
+          <p className="text-[11px] text-slate-600 font-mono">{helperText}</p>
+        )}
+      </div>
+    );
+  }
+);
+
+Combobox.displayName = 'Combobox';
+
+export { Combobox };
