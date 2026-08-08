@@ -1,8 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans:
+      'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     /* Cyber Ambient Colors */
@@ -19,39 +21,32 @@
 
     /* Soft Aura Glows — wider spread, lower opacity for premium diffusion */
     --glow-cyan:
-      0 0 20px rgba(0, 240, 255, 0.15),
-      0 0 50px rgba(0, 240, 255, 0.08),
+      0 0 20px rgba(0, 240, 255, 0.15), 0 0 50px rgba(0, 240, 255, 0.08),
       0 0 80px rgba(0, 240, 255, 0.04);
 
     --glow-purple:
-      0 0 20px rgba(168, 85, 247, 0.15),
-      0 0 50px rgba(168, 85, 247, 0.08),
+      0 0 20px rgba(168, 85, 247, 0.15), 0 0 50px rgba(168, 85, 247, 0.08),
       0 0 80px rgba(168, 85, 247, 0.04);
 
     --glow-green:
-      0 0 20px rgba(57, 255, 20, 0.15),
-      0 0 50px rgba(57, 255, 20, 0.08),
+      0 0 20px rgba(57, 255, 20, 0.15), 0 0 50px rgba(57, 255, 20, 0.08),
       0 0 80px rgba(57, 255, 20, 0.04);
 
     --glow-rose:
-      0 0 20px rgba(244, 63, 94, 0.15),
-      0 0 50px rgba(244, 63, 94, 0.08),
+      0 0 20px rgba(244, 63, 94, 0.15), 0 0 50px rgba(244, 63, 94, 0.08),
       0 0 80px rgba(244, 63, 94, 0.04);
 
     /* Hover Aura Intensified — still soft, slightly brighter */
     --glow-cyan-hover:
-      0 0 25px rgba(0, 240, 255, 0.22),
-      0 0 60px rgba(0, 240, 255, 0.12),
+      0 0 25px rgba(0, 240, 255, 0.22), 0 0 60px rgba(0, 240, 255, 0.12),
       0 0 100px rgba(0, 240, 255, 0.05);
 
     --glow-purple-hover:
-      0 0 25px rgba(168, 85, 247, 0.22),
-      0 0 60px rgba(168, 85, 247, 0.12),
+      0 0 25px rgba(168, 85, 247, 0.22), 0 0 60px rgba(168, 85, 247, 0.12),
       0 0 100px rgba(168, 85, 247, 0.05);
 
     --glow-green-hover:
-      0 0 25px rgba(57, 255, 20, 0.22),
-      0 0 60px rgba(57, 255, 20, 0.12),
+      0 0 25px rgba(57, 255, 20, 0.22), 0 0 60px rgba(57, 255, 20, 0.12),
       0 0 100px rgba(57, 255, 20, 0.05);
 
     /* Cyber Icon Stroke Width — thinner for hi-tech precision */
@@ -99,10 +94,18 @@
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(0, 240, 255, 0.5) 0%, rgba(0, 240, 255, 0) 50%);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 240, 255, 0.5) 0%,
+    rgba(0, 240, 255, 0) 50%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   pointer-events: none;
 }
@@ -116,10 +119,18 @@
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.5) 0%, rgba(168, 85, 247, 0) 50%);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.5) 0%,
+    rgba(168, 85, 247, 0) 50%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   pointer-events: none;
 }
@@ -133,17 +144,26 @@
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(57, 255, 20, 0.5) 0%, rgba(57, 255, 20, 0) 50%);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  background: linear-gradient(
+    180deg,
+    rgba(57, 255, 20, 0.5) 0%,
+    rgba(57, 255, 20, 0) 50%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   pointer-events: none;
 }
 
 /* Cyber Pulse — softer, more atmospheric */
 @keyframes cyber-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6));
   }
@@ -159,7 +179,8 @@
 
 /* Aura breathe — very subtle ambient glow expansion for premium feel */
 @keyframes aura-breathe {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow:
       0 0 20px rgba(0, 240, 255, 0.1),
       0 0 40px rgba(0, 240, 255, 0.05);
@@ -332,25 +353,55 @@
 
 /* Premium Neon Flicker / Hacker Glitch */
 @keyframes neon-flicker {
-  0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-  32% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-  33% { opacity: 0.6; filter: none; }
-  34% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-  65% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-  66% { opacity: 0.4; filter: none; }
-  67% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-  98% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); }
-  99% { opacity: 0.8; filter: drop-shadow(0 0 4px currentColor); }
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  38% {
+    opacity: 0.96;
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  39% {
+    opacity: 0.88;
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  40% {
+    opacity: 0.97;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  72% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  73% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  74% {
+    opacity: 0.98;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
 }
 
 .animate-neon-flicker {
   animation: neon-flicker 2.5s infinite linear;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-neon-flicker {
+    animation: none !important;
+  }
+}
+
 /* Radar Scan Animation */
 @keyframes radar-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .animate-radar-spin {
   animation: radar-spin 3s linear infinite;
@@ -358,20 +409,36 @@
 
 /* Marquee Animations */
 @keyframes marquee-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @keyframes marquee-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 @keyframes marquee-up {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
 @keyframes marquee-down {
-  0% { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .animate-marquee-left {
