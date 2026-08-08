@@ -32,5 +32,5 @@ test('publishes the stylesheet declared by the globals.css export', async () => 
     './dist/styles/globals.css',
   );
   assert.deepEqual(packageJson.files, ['dist']);
-  assert.match(stylesheetContents, /@import "tailwindcss"/);
+  assert.match(stylesheetContents, /@import\s+['"]tailwindcss['"]/);
 });
