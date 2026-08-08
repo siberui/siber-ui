@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { cn } from '@siberui/react';
 
 type Status = 'Stable' | 'New' | 'Experimental' | 'Deprecated';

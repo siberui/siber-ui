@@ -23,6 +23,7 @@ const TerminalBlock = React.forwardRef<HTMLDivElement, TerminalBlockProps>(
     return (
       <div
         ref={ref}
+        data-language={language}
         className={cn(
           'relative overflow-hidden rounded-lg border border-slate-800 bg-slate-950 font-mono text-sm shadow-md',
           className

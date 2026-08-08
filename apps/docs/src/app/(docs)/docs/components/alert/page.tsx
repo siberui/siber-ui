@@ -5,7 +5,7 @@ import { ContentSection } from '@/components/docs/core/ContentSection';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
 import { Alert } from '@siberui/react';
-import { Terminal, ShieldAlert, AlertTriangle } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 
 const headings = [
   { id: 'examples', text: 'Examples', level: 2 },

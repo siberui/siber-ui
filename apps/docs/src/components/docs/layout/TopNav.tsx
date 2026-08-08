@@ -1,9 +1,10 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@siberui/react';
-import { Code, GitBranch, Search, Moon, Monitor } from 'lucide-react';
+import { Code, GitBranch, Search, Monitor } from 'lucide-react';
 import { DocSearchModal } from '../DocSearchModal';
 
 export function TopNav() {
@@ -14,14 +15,14 @@ export function TopNav() {
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2 group">
-            <img src="/logo.svg" alt="Siber UI" className="h-7 w-7 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
+            <Image src="/logo.svg" alt="Siber UI" width={28} height={28} className="h-7 w-7 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
             <span className="text-base font-semibold tracking-[0.25em] text-slate-100 transition-colors duration-300 group-hover:text-cyan-400">
               SIBER UI
             </span>
           </Link>
           <div className="hidden md:flex">
             <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 text-[10px] font-mono tracking-widest text-cyan-300">
-              v1.0.0
+              v1.0.2
             </span>
           </div>
         </div>

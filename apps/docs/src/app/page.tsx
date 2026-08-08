@@ -35,21 +35,24 @@ import {
   Zap,
   Search,
   Sliders,
-  CheckCircle2,
   AlertTriangle,
   Radio,
   Cpu,
-  Lock,
   HelpCircle,
   Terminal,
-  Check,
-  Globe,
-  Activity,
-  ShieldCheck,
 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { DocSearchModal } from '@/components/docs/DocSearchModal';
 
+const showcaseTabs = [
+  { id: 'all', label: 'All Components' },
+  { id: 'controls', label: 'Interactive Controls' },
+  { id: 'telemetry', label: 'Status & Telemetry' },
+  { id: 'alerts', label: 'Feedback & Alerts' },
+] as const;
+
+type ShowcaseTab = (typeof showcaseTabs)[number]['id'];
 
 export default function Home() {
   const [accentColor, setAccentColor] = useState<'cyan' | 'purple' | 'emerald' | 'rose'>('cyan');
@@ -60,7 +63,7 @@ export default function Home() {
   const [btnSize, setBtnSize] = useState<'sm' | 'md' | 'lg'>('md');
   const [isLoadingDemo, setIsLoadingDemo] = useState(false);
   const [sliderVal, setSliderVal] = useState<number[]>([74]);
-  const [activeTab, setActiveTab] = useState<'all' | 'controls' | 'telemetry' | 'alerts'>('all');
+  const [activeTab, setActiveTab] = useState<ShowcaseTab>('all');
   const [overclock, setOverclock] = useState(true);
   const [shieldDefense, setShieldDefense] = useState(true);
   const [threatLevel, setThreatLevel] = useState<number>(14);
@@ -101,7 +104,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 group cursor-default">
-              <img src="/logo.svg" alt="Siber UI" className="h-8 w-8 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
+              <Image src="/logo.svg" alt="Siber UI" width={32} height={32} className="h-8 w-8 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
               <span className="text-lg font-semibold tracking-[0.25em] text-slate-100 transition-colors duration-300 group-hover:text-cyan-400">
                 SIBER UI
               </span>
@@ -172,7 +175,7 @@ export default function Home() {
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-sm font-mono tracking-[0.2em] text-cyan-300">
               <span className="h-2 w-2 animate-pulse rounded-full bg-cyan-400" />
-              v1.0.0 is now live
+              v1.0.2 is now live
             </div>
 
             <GlitchText
@@ -294,15 +297,10 @@ export default function Home() {
 
           {/* Filter Bar */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-            {[
-              { id: 'all', label: 'All Components' },
-              { id: 'controls', label: 'Interactive Controls' },
-              { id: 'telemetry', label: 'Status & Telemetry' },
-              { id: 'alerts', label: 'Feedback & Alerts' },
-            ].map((tab) => (
+            {showcaseTabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id)}
                 className={`rounded-full px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_12px_rgba(0,240,255,0.2)]'
@@ -616,7 +614,7 @@ export default function Home() {
         <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-400">
-              // Architecture &amp; Philosophy
+              {'// Architecture & Philosophy'}
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-white md:text-4xl">
               Built for Speed. Styled for Impact.

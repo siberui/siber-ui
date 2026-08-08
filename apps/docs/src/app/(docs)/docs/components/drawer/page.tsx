@@ -4,7 +4,7 @@ import { ComponentHeader } from '@/components/docs/core/ComponentHeader';
 import { ContentSection } from '@/components/docs/core/ContentSection';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
-import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose, Button } from '@siberui/react';
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, Button } from '@siberui/react';
 
 const headings = [
   { id: 'examples', text: 'Examples', level: 2 },

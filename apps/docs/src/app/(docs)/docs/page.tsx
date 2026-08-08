@@ -57,7 +57,7 @@ export default function DocsIntroductionPage() {
           Once installed, you can start importing components:
         </p>
         <div className="p-4 rounded-lg border border-white/10 bg-black/50 text-sm font-mono text-cyan-300">
-          import {'{'} Button {'}'} from '@siberui/react';
+          import {'{'} Button {'}'} from {'@siberui/react'};
         </div>
         <div className="mt-6 flex gap-4">
           <Link href="/docs/components/button" className="inline-flex h-10 items-center justify-center rounded-md bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-cyan-400">

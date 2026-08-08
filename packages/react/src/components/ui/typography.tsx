@@ -105,13 +105,12 @@ export interface TextProps
   as?: 'p' | 'span' | 'div' | 'label' | 'small' | 'strong' | 'em';
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Text = React.forwardRef<any, TextProps>(
+const Text = React.forwardRef<HTMLElement, TextProps>(
   ({ className, as = 'p', variant, size, weight, mono, ...props }, ref) => {
     const Comp = as;
     return (
       <Comp
-        ref={ref}
+        ref={ref as unknown as React.Ref<never>}
         className={cn(textVariants({ variant, size, weight, mono, className }))}
         {...props}
       />

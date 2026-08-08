@@ -49,7 +49,7 @@ export default function DialogDocsPage() {
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle>Edit Profile</DialogTitle>
-                      <DialogDescription>Make changes to your profile here. Click save when you're done.</DialogDescription>
+                      <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>
                     </DialogHeader>
                     <div className="py-4">
                       <FormField label="Username"><Input defaultValue="@hacker" /></FormField>

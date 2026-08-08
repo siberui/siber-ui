@@ -40,7 +40,7 @@ export default function AvatarDocsPage() {
 
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Fallbacks & Rings</h3>
-            <p className="text-sm text-slate-400 mb-4">When the image fails to load or isn't provided, initials are shown.</p>
+            <p className="text-sm text-slate-400 mb-4">When the image fails to load or isn&apos;t provided, initials are shown.</p>
             <Playground code={`<div className="flex gap-4">
   <Avatar name="Admin User" ring="cyan" />
   <Avatar name="Guest Account" ring="purple" />

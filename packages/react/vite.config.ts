@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import dts from 'vite-plugin-dts';
+import fs from 'node:fs';
 import path from 'path';
 
 export default defineConfig({
@@ -11,7 +12,22 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ['src'],
+      exclude: ['src/**/*.stories.ts', 'src/**/*.stories.tsx'],
     }),
+    {
+      name: 'copy-globals-css-to-dist',
+      writeBundle() {
+        const source = path.resolve(
+          import.meta.dirname,
+          'src/styles/globals.css',
+        );
+        const targetDir = path.resolve(import.meta.dirname, 'dist/styles');
+        const target = path.resolve(targetDir, 'globals.css');
+
+        fs.mkdirSync(targetDir, { recursive: true });
+        fs.copyFileSync(source, target);
+      },
+    },
   ],
   resolve: {
     alias: {
@@ -27,10 +43,10 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
-        'react', 
-        'react-dom', 
+        'react',
+        'react-dom',
         'react/jsx-runtime',
-        ...Object.keys(require('./package.json').dependencies || {})
+        ...Object.keys(require('./package.json').dependencies || {}),
       ],
       output: {
         globals: {

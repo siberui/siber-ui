@@ -3,8 +3,7 @@ import { ComponentPage } from '@/components/docs/layout/ComponentPage';
 import { ComponentHeader } from '@/components/docs/core/ComponentHeader';
 import { ContentSection } from '@/components/docs/core/ContentSection';
 import { Playground } from '@/components/docs/core/Playground';
-import { ApiTable } from '@/components/docs/core/ApiTable';
-import { Container, Grid, Col, Stack, Row, Spacer, LayoutDivider } from '@siberui/react';
+import { Container, Grid, Col, Stack, Row, LayoutDivider } from '@siberui/react';
 
 const headings = [
   { id: 'grid', text: 'Grid', level: 2 },

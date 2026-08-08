@@ -41,7 +41,7 @@ export default function ScrollAreaDocsPage() {
                     <p>AUTHENTICATING USER CREDENTIALS...</p>
                     <p className="text-emerald-400">ACCESS GRANTED.</p>
                     <p>WELCOME TO SIBER-UI TERMINAL V2.4</p>
-                    <p>TYPE 'help' FOR A LIST OF COMMANDS.</p>
+                    <p>TYPE &apos;help&apos; FOR A LIST OF COMMANDS.</p>
                   </div>
                 </ScrollArea>
               </div>

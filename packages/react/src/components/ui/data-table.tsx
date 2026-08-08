@@ -181,7 +181,6 @@ export function DataTable<TData>({
         .rows.map((r: Row<TData>) => r.original);
       onSelectionChange(selectedRows);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rowSelection]);
 
   // ── rows ──

@@ -53,7 +53,7 @@ export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
 
     return (
       <Component
-        ref={ref as any}
+        ref={ref as unknown as React.Ref<never>}
         className={cn(
           'font-bold tracking-wider font-mono transition-colors duration-75',
           active && 'animate-neon-flicker',

@@ -4,7 +4,7 @@ import { ComponentHeader } from '@/components/docs/core/ComponentHeader';
 import { ContentSection } from '@/components/docs/core/ContentSection';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator, Button } from '@siberui/react';
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut, CommandSeparator } from '@siberui/react';
 import { Settings, User, Terminal, CreditCard } from 'lucide-react';
 
 const headings = [

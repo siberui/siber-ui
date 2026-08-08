@@ -5,7 +5,7 @@ import { ContentSection } from '@/components/docs/core/ContentSection';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
 import { TreeView } from '@siberui/react';
-import { FileCode, FileImage, Folder, FolderOpen } from 'lucide-react';
+import { FileCode, FileImage } from 'lucide-react';
 
 const headings = [
   { id: 'examples', text: 'Examples', level: 2 },

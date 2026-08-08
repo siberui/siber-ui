@@ -193,15 +193,15 @@ export default function ButtonDocsPage() {
         <ul className="list-disc pl-5 space-y-2 text-slate-400">
           <li>Uses the native <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">{'<button>'}</code> element.</li>
           <li>Keyboard focus is clearly visible with an emerald ring to comply with WCAG 2.2 AA.</li>
-          <li>When <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">isLoading</code> is true, the button adds <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">aria-disabled="true"</code> to prevent interaction while remaining readable.</li>
+          <li>When <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">isLoading</code> is true, the button adds <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">{'aria-disabled="true"'}</code> to prevent interaction while remaining readable.</li>
           <li>Icon-only buttons should always include an <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">aria-label</code> or <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">{'<span className="sr-only">'}</code> text for screen readers.</li>
         </ul>
       </ContentSection>
 
       <ContentSection title="Best Practices" id="best-practices">
         <ul className="list-disc pl-5 space-y-2 text-slate-400">
-          <li><strong>Hierarchy:</strong> Use only one primary button per screen or section to guide the user's primary action.</li>
-          <li><strong>Clarity:</strong> Button text should be clear, concise, and action-oriented (e.g., "Deploy Protocol" instead of "Submit").</li>
+          <li><strong>Hierarchy:</strong> Use only one primary button per screen or section to guide the user&apos;s primary action.</li>
+          <li><strong>Clarity:</strong> Button text should be clear, concise, and action-oriented (e.g., &quot;Deploy Protocol&quot; instead of &quot;Submit&quot;).</li>
           <li><strong>Destructive Actions:</strong> Always use the <code className="text-cyan-400 font-mono text-sm bg-cyan-950/50 px-1 rounded">destructive</code> variant for actions that cannot be undone (e.g., deleting data, terminating sessions). Consider pairing with a confirmation dialog.</li>
         </ul>
       </ContentSection>
