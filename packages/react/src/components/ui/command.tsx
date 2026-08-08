@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Dialog, DialogContent } from '@radix-ui/react-dialog';
+import { Dialog, DialogPortal, DialogOverlay, DialogContent } from '@radix-ui/react-dialog';
 import { cn } from '../../utils/cn';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -25,7 +25,7 @@ const commandVariants = cva(
     variants: {
       variant: {
         default: 'bg-slate-950 border border-white/[0.08]',
-        neon: 'bg-[#050d14] border border-cyan-500/30 shadow-[0_0_30px_rgba(0,240,255,0.05)]',
+        neon: 'bg-[#050d14] border border-cyan-500/30 shadow-[0_0_30px_rgba(0,240,255,0.15)]',
         glass: 'bg-white/[0.03] backdrop-blur-2xl border border-white/[0.1] shadow-2xl',
       },
     },
@@ -70,20 +70,23 @@ const CommandDialog = ({
 }: CommandDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent
-        className={cn(
-          'fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%] w-full max-w-2xl',
-          'duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]'
-        )}
-      >
-        <Command
-          variant={variant || 'default'}
-          className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-slate-400 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
-          {...props}
+      <DialogPortal>
+        <DialogOverlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <DialogContent
+          className={cn(
+            'fixed left-[50%] top-[12vh] z-50 translate-x-[-50%] w-[90vw] max-w-2xl outline-none',
+            'duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95'
+          )}
         >
-          {children}
-        </Command>
-      </DialogContent>
+          <Command
+            variant={variant || 'default'}
+            className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-slate-400 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
+            {...props}
+          >
+            {children}
+          </Command>
+        </DialogContent>
+      </DialogPortal>
     </Dialog>
   );
 };

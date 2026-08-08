@@ -2,23 +2,27 @@
 
 import { useState } from 'react';
 import {
-  GlitchText,
-  TerminalBlock,
-  Button,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  BorderBeam,
-  RadarProgress,
-  ThreatIndicator,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
   Alert,
   Badge,
+  BorderBeam,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  GlitchText,
   Input,
-  Switch,
-  Slider,
   Progress,
+  RadarProgress,
+  Slider,
+  Switch,
+  TerminalBlock,
+  ThreatIndicator,
   useToast,
 } from '@siberui/react';
 import { motion } from 'framer-motion';
@@ -36,32 +40,21 @@ import {
   Radio,
   Cpu,
   Lock,
+  HelpCircle,
+  Terminal,
+  Check,
+  Globe,
+  Activity,
+  ShieldCheck,
 } from 'lucide-react';
 import Link from 'next/link';
+import { DocSearchModal } from '@/components/docs/DocSearchModal';
 
-const featureCards = [
-  {
-    title: 'Elevated motion',
-    description:
-      'Subtle transitions and live states that feel premium without losing clarity.',
-    icon: Zap,
-  },
-  {
-    title: 'Minimal surfaces',
-    description:
-      'Clean spacing, refined borders, and reduced noise for a modern product look.',
-    icon: Layers,
-  },
-  {
-    title: 'Cyber-ready UI',
-    description:
-      'Built for dashboards, launch pages, and interfaces that need instant personality.',
-    icon: Sparkles,
-  },
-];
 
 export default function Home() {
-  const installCode = `pnpm add @siberui/react`;
+  const [accentColor, setAccentColor] = useState<'cyan' | 'purple' | 'emerald' | 'rose'>('cyan');
+  const [pkgManager, setPkgManager] = useState<'pnpm' | 'npm' | 'yarn' | 'bun'>('pnpm');
+  const [searchOpen, setSearchOpen] = useState(false);
 
   // Interactive component demo states
   const [btnSize, setBtnSize] = useState<'sm' | 'md' | 'lg'>('md');
@@ -73,22 +66,86 @@ export default function Home() {
   const [threatLevel, setThreatLevel] = useState<number>(14);
   const { toast } = useToast();
 
+  const getInstallCmd = (pkg: string) => {
+    switch (pkg) {
+      case 'npm': return 'npm i @siberui/react';
+      case 'yarn': return 'yarn add @siberui/react';
+      case 'bun': return 'bun add @siberui/react';
+      case 'pnpm':
+      default: return 'pnpm add @siberui/react';
+    }
+  };
+
+  const getAccentGradient = () => {
+    switch (accentColor) {
+      case 'purple':
+        return 'bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(244,63,94,0.14),transparent_35%)]';
+      case 'emerald':
+        return 'bg-[radial-gradient(circle_at_top_left,rgba(52,211,153,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.14),transparent_35%)]';
+      case 'rose':
+        return 'bg-[radial-gradient(circle_at_top_left,rgba(244,63,94,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.14),transparent_35%)]';
+      case 'cyan':
+      default:
+        return 'bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(244,63,94,0.14),transparent_35%)]';
+    }
+  };
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#06090e] text-slate-100">
-      {/* Background ambient radial glows: top-left Cyan, bottom-right Subtle Red (Crimson) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(244,63,94,0.14),transparent_35%)]" />
+      {/* Background ambient radial glows */}
+      <div className={`pointer-events-none absolute inset-0 transition-all duration-500 ${getAccentGradient()}`} />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.05)_0%,transparent_45%,rgba(255,255,255,0.03)_100%)] opacity-80" />
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/25 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div className="flex items-center gap-2 group cursor-default">
-            <img src="/logo.svg" alt="Siber UI" className="h-8 w-8 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
-            <span className="text-lg font-semibold tracking-[0.25em] text-slate-100 transition-colors duration-300 group-hover:text-cyan-400">
-              SIBER UI
-            </span>
-          </div>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 group cursor-default">
+              <img src="/logo.svg" alt="Siber UI" className="h-8 w-8 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
+              <span className="text-lg font-semibold tracking-[0.25em] text-slate-100 transition-colors duration-300 group-hover:text-cyan-400">
+                SIBER UI
+              </span>
+            </div>
+          </div>
+
+          {/* Interactive Accent Switcher */}
+          <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 backdrop-blur-md sm:flex">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">ACCENT:</span>
+            {(['cyan', 'purple', 'emerald', 'rose'] as const).map((color) => (
+              <button
+                key={color}
+                onClick={() => {
+                  setAccentColor(color);
+                  toast({
+                    title: `Accent Set: ${color.toUpperCase()}`,
+                    description: `Theme preset updated to ${color}.`,
+                  });
+                }}
+                className={`h-4 w-4 rounded-full transition-all duration-200 cursor-pointer ${
+                  color === 'cyan' ? 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]' :
+                  color === 'purple' ? 'bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.8)]' :
+                  color === 'emerald' ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]' :
+                  'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]'
+                } ${accentColor === color ? 'scale-125 ring-2 ring-white/80' : 'opacity-50 hover:opacity-100 hover:scale-110'}`}
+                title={`Set accent color to ${color}`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            {/* Quick Search Button */}
+            <Button
+              variant="outline"
+              onClick={() => setSearchOpen(true)}
+              className="hidden justify-start text-slate-400 border-white/10 bg-white/5 h-9 hover:border-cyan-500/40 hover:text-slate-200 cursor-pointer sm:inline-flex"
+              leftIcon={<Search className="h-4 w-4 text-cyan-400" />}
+            >
+              Search...
+              <kbd className="ml-2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-400">
+                ⌘K
+              </kbd>
+            </Button>
+
             <Link href="https://github.com/siberui/siber-ui" target="_blank">
               <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white">
                 <Code className="h-5 w-5" />
@@ -101,6 +158,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <DocSearchModal open={searchOpen} onOpenChange={setSearchOpen} />
       </nav>
 
       {/* Hero Section */}
@@ -179,47 +237,37 @@ export default function Home() {
               />
               <CardHeader className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                    Quick start
-                  </span>
-                  <div className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-1 text-[11px] font-mono text-cyan-200">
-                    npm
+                  <div className="flex items-center gap-2">
+                    <Terminal className="h-4 w-4 text-cyan-400" />
+                    <CardTitle className="font-mono text-sm tracking-wider uppercase text-slate-300">Quick Installation</CardTitle>
+                  </div>
+                  {/* Package Manager Selector Tabs */}
+                  <div className="flex rounded-md border border-white/10 bg-black/40 p-0.5 font-mono text-[10px]">
+                    {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((pm) => (
+                      <button
+                        key={pm}
+                        onClick={() => setPkgManager(pm)}
+                        className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
+                          pkgManager === pm
+                            ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold'
+                            : 'text-slate-500 hover:text-slate-300'
+                        }`}
+                      >
+                        {pm}
+                      </button>
+                    ))}
                   </div>
                 </div>
-                <CardTitle className="text-2xl">
-                  Install and build in seconds
-                </CardTitle>
                 <CardDescription>
-                  The kit is designed to feel premium from day one, with modern
-                  primitives and refined utility patterns.
+                  Import design tokens and start building immediately.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent>
                 <TerminalBlock
-                  code={installCode}
+                  title={`install.${pkgManager}`}
+                  code={getInstallCmd(pkgManager)}
                   language="bash"
-                  title="Install"
                 />
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 p-4">
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">
-                      Signal
-                    </p>
-                    <p className="mt-2 text-sm text-slate-300">
-                      Clean primitives for launch pages, dashboards, and product
-                      stories.
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-4">
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-rose-300">
-                      Tone
-                    </p>
-                    <p className="mt-2 text-sm text-slate-300">
-                      Minimal, sharp, and unmistakably futuristic without
-                      becoming noisy.
-                    </p>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </motion.div>
@@ -227,8 +275,12 @@ export default function Home() {
       </section>
 
       {/* MODERN INTERACTIVE COMPONENT SHOWCASE SECTION */}
-      <section className="mx-auto w-full max-w-7xl px-6 py-16">
-        <div className="mb-12 text-center">
+      <section className="relative mx-auto w-full max-w-7xl px-6 py-16">
+        {/* HUD Cyber Grid Sub-layer background */}
+        <div className="pointer-events-none absolute inset-0 rounded-3xl border border-white/5 bg-gradient-to-b from-cyan-950/[0.04] via-transparent to-rose-950/[0.03] backdrop-blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(#22d3ee_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" />
+
+        <div className="relative mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-mono tracking-[0.2em] text-cyan-300">
             <Sparkles className="h-3.5 w-3.5" />
             LIVE COMPONENT SHOWCASE
@@ -326,8 +378,12 @@ export default function Home() {
                       size="sm"
                       isLoading={isLoadingDemo}
                       onClick={() => {
+                        console.log("Async Button Clicked! Current state:", isLoadingDemo);
                         setIsLoadingDemo(true);
-                        setTimeout(() => setIsLoadingDemo(false), 2000);
+                        setTimeout(() => {
+                          console.log("Timeout fired! Resetting state.");
+                          setIsLoadingDemo(false);
+                        }, 2000);
                       }}
                       className="w-full border-cyan-500/40"
                     >
@@ -555,54 +611,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Feature Cards Section */}
+      {/* Architecture & Philosophy Section (Card-less Modern Layout) */}
       <section className="mx-auto w-full max-w-7xl px-6 py-12 md:py-20">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">
-              Feature set
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-400">
+              // Architecture &amp; Philosophy
             </p>
-            <h2 className="mt-2 text-3xl font-semibold text-white">
-              Designed for modern product teams
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Built for Speed. Styled for Impact.
             </h2>
           </div>
-          <Link href="/docs/components/accordion">
+          <Link href="/docs/installation">
             <Button variant="outline" className="w-fit border-white/10 text-slate-300">
-              Browse library
+              Browse Library &rarr;
             </Button>
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {featureCards.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <Card
-                key={feature.title}
-                variant="interactive"
-                className="relative overflow-hidden"
-              >
-                <BorderBeam
-                  variant="neon"
-                  size={130}
-                  duration={9}
-                />
-                <CardHeader>
-                  <Icon className="mb-3 h-6 w-6 text-cyan-400" />
-                  <CardTitle>{feature.title}</CardTitle>
-                  <CardDescription>{feature.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-2">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-400">
-                    Refined patterns that keep interfaces looking intentional
-                    and lightweight.
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+        <div className="grid gap-10 md:grid-cols-3">
+          <div className="group relative border-l-2 border-cyan-500/40 pl-6 transition-all duration-300 hover:border-cyan-400">
+            <Zap className="mb-3 h-6 w-6 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+            <h3 className="text-lg font-bold text-white">Elevated Motion</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-400 font-sans">
+              Subtle 60fps transitions and live state feedback that feel premium without cluttering your DOM trees.
+            </p>
+          </div>
+
+          <div className="group relative border-l-2 border-purple-500/40 pl-6 transition-all duration-300 hover:border-purple-400">
+            <Layers className="mb-3 h-6 w-6 text-purple-400 transition-transform duration-300 group-hover:scale-110" />
+            <h3 className="text-lg font-bold text-white">Minimal Surfaces</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-400 font-sans">
+              Restrained geometry, refined borders, and reduced noise designed for high-contrast product dashboards.
+            </p>
+          </div>
+
+          <div className="group relative border-l-2 border-rose-500/40 pl-6 transition-all duration-300 hover:border-rose-400">
+            <Sparkles className="mb-3 h-6 w-6 text-rose-400 transition-transform duration-300 group-hover:scale-110" />
+            <h3 className="text-lg font-bold text-white">Cyber-ready Primitives</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-400 font-sans">
+              Built-in neon presets, animated border beams, radar meters, and glitch text ready for immediate production use.
+            </p>
+          </div>
         </div>
       </section>
+
 
       {/* Bottom CTA / Highlight Section (UPDATED: Bottom Right accent changed to subtle Crimson Red) */}
       <section className="mx-auto w-full max-w-7xl px-6 pb-20">
@@ -670,9 +723,97 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="mt-10 w-full border-t border-white/10 py-10 text-center text-sm text-slate-500">
-        <p>It was designed and built by volkanozbek.</p>
-        <p className="mt-2">MIT License &copy; 2026 Siber UI.</p>
+      {/* Cyberpunk FAQ Section (Showcasing Siber UI Accordion Component) */}
+      <section className="mx-auto w-full max-w-7xl px-6 pb-24">
+        <div className="mb-10 text-center">
+          <div className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-mono tracking-widest text-cyan-400 uppercase">
+            <HelpCircle className="h-3.5 w-3.5" />
+            Knowledge Base
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-2 text-sm font-mono text-slate-400">
+            Everything you need to know about integrating Siber UI into your workflow.
+          </p>
+        </div>
+
+        <div className="mx-auto max-w-3xl">
+          <Card variant="default" className="p-6 border-white/10">
+            <Accordion type="single" collapsible variant="neon" defaultValue="item-1">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>What makes Siber UI different from standard UI libraries?</AccordionTrigger>
+                <AccordionContent>
+                  Siber UI is purpose-built for dark-mode interfaces requiring an uncompromising, high-tech cyberpunk aesthetic. Unlike generic libraries, Siber UI comes out-of-the-box with neon glow presets, animated border beams, radar progress meters, glitch text, and terminal elements—all designed for zero-config visual impact.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Is Siber UI compatible with Next.js App Router and Tailwind CSS v4?</AccordionTrigger>
+                <AccordionContent>
+                  Yes! Siber UI is built on top of Tailwind CSS v4 and fully supports Next.js 14/15/16 App Router, React Server Components (RSC), and Vite. You simply import `@siberui/react/globals.css` into your root layout and start using components.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-3">
+                <AccordionTrigger>Is Siber UI accessible and screen-reader friendly?</AccordionTrigger>
+                <AccordionContent>
+                  Absolutely. All interactive primitives (Accordions, Dialogs, Tooltips, Tabs, Toggles) are built on top of WAI-ARIA compliant Radix UI primitives. Full keyboard navigation and screen-reader compatibility are baked into every component.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="item-4">
+                <AccordionTrigger>Can I customize the neon accent colors?</AccordionTrigger>
+                <AccordionContent>
+                  Yes. Every component accepts variant props such as `cyan`, `purple`, `emerald`, and `rose/destructive`. You can also override any Tailwind CSS class using standard `className` prop overrides powered by `tailwind-merge`.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </Card>
+        </div>
+      </section>
+
+      <footer className="mt-20 w-full border-t border-white/10 py-8">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col items-center justify-between gap-4 md:flex-row text-xs font-mono text-slate-500">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="uppercase tracking-widest text-[10px] text-emerald-500/80 font-bold">sys.status: online</span>
+            </div>
+            <span className="text-white/10">|</span>
+            <span>
+              Designed &amp; built by{" "}
+              <a
+                href="https://github.com/volkanozbek"
+                target="_blank"
+                rel="noreferrer"
+                className="text-slate-400 hover:text-cyan-400 transition-colors duration-200"
+              >
+                @volkanozbek
+              </a>
+            </span>
+          </div>
+          <div className="flex items-center gap-6">
+            <span>MIT License &copy; 2026 Siber UI</span>
+            <span className="text-white/10">|</span>
+            <a
+              href="https://github.com/siberui/siber-ui"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-cyan-400 transition-colors duration-200"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.npmjs.com/package/@siberui/react"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-cyan-400 transition-colors duration-200"
+            >
+              NPM
+            </a>
+          </div>
+        </div>
       </footer>
     </main>
   );

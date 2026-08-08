@@ -14,17 +14,18 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Siber UI | Minimalist Cyberpunk React Kit",
+  description: "Build the future with Siber UI. A minimalist cyberpunk React UI kit.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark`}>
-      <head>
-        <title>Siber UI | Minimalist Cyberpunk React Kit</title>
-        <meta name="description" content="Build the future with Siber UI. A minimalist cyberpunk React UI kit." />
-      </head>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark`} suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col bg-[#06090e] text-[#ededed]">
         <ToastProvider>
           {children}

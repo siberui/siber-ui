@@ -1,10 +1,14 @@
 'use client';
 
+import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@siberui/react';
 import { Code, GitBranch, Search, Moon, Monitor } from 'lucide-react';
+import { DocSearchModal } from '../DocSearchModal';
 
 export function TopNav() {
+  const [searchOpen, setSearchOpen] = React.useState(false);
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/25 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
@@ -23,12 +27,18 @@ export function TopNav() {
         </div>
 
         <div className="flex flex-1 items-center justify-center px-6 max-w-md hidden md:flex">
-          <Button variant="outline" className="w-full justify-start text-slate-400 border-white/10 bg-white/5 h-9" leftIcon={<Search className="h-4 w-4" />}>
+          <Button
+            variant="outline"
+            onClick={() => setSearchOpen(true)}
+            className="w-full justify-start text-slate-400 border-white/10 bg-white/5 h-9 hover:border-cyan-500/40 hover:text-slate-200 cursor-pointer"
+            leftIcon={<Search className="h-4 w-4 text-cyan-400" />}
+          >
             Search documentation...
             <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-400">
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
+          <DocSearchModal open={searchOpen} onOpenChange={setSearchOpen} />
         </div>
 
         <div className="flex items-center gap-2">
