@@ -46,4 +46,11 @@ export * from './components/ui/toggle-group';
 export * from './components/ui/separator';
 export * from './components/ui/scroll-area';
 export * from './components/ui/marquee';
+export * from './components/ui/timeline';
+export * from './components/ui/skill-matrix';
+export * from './components/ui/profile-hero';
+export * from './components/ui/project-card';
+export * from './components/ui/stat-card';
+export * from './components/ui/achievement-badge';
 export * from './utils/cn';
+

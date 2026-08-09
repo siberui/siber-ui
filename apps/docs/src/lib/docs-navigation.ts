@@ -87,4 +87,15 @@ export const docsNavigation: DocNavGroup[] = [
       { title: 'Toast', href: '/docs/components/toast' },
     ],
   },
+  {
+    title: 'Profile & Bio',
+    items: [
+      { title: 'Achievement Badge', href: '/docs/components/achievement-badge', isNew: true },
+      { title: 'Profile Hero', href: '/docs/components/profile-hero', isNew: true },
+      { title: 'Project Card', href: '/docs/components/project-card', isNew: true },
+      { title: 'Skill Matrix', href: '/docs/components/skill-matrix', isNew: true },
+      { title: 'Stat Card', href: '/docs/components/stat-card', isNew: true },
+      { title: 'Timeline', href: '/docs/components/timeline', isNew: true },
+    ],
+  },
 ];
