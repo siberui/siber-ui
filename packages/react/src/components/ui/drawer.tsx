@@ -55,9 +55,9 @@ const drawerContentVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-slate-950 border-white/[0.08]',
+        default: 'bg-slate-950 border-border-hairline',
         neon: 'bg-cyan-950/95 border-cyan-500/40 shadow-[0_0_40px_rgba(0,240,255,0.15)] backdrop-blur-xl',
-        glass: 'bg-[#0d121d]/70 border-white/[0.08] backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.5)]',
+        glass: 'bg-[#0d121d]/70 border-border-hairline backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.5)]',
       },
       direction: {
         bottom: 'inset-x-0 bottom-0 mt-24 h-auto rounded-t-[10px]',

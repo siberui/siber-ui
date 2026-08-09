@@ -6,29 +6,43 @@ import { cn } from '../../utils/cn';
 const selectVariants = cva(
   [
     'flex w-full text-slate-100 font-sans appearance-none cursor-pointer',
-    'bg-white/[0.03] backdrop-blur-sm',
+    'bg-surface-1',
     'transition-all duration-300 ease-out',
-    'focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus/70 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
     'selection:bg-cyan-500/30 selection:text-cyan-200',
   ].join(' '),
   {
     variants: {
       variant: {
-        default: [
-          'border border-white/[0.08] hover:border-white/[0.15]',
-          'focus-visible:border-cyan-500/50 focus-visible:ring-1 focus-visible:ring-cyan-500/30',
-          'focus-visible:shadow-[0_0_20px_rgba(0,240,255,0.1),0_0_50px_rgba(0,240,255,0.04)]',
+        primary: [
+          'border border-primary-600 bg-primary text-primary-foreground',
+          'hover:bg-primary-600 hover:border-primary-500',
+          'focus-visible:border-primary-500',
+        ].join(' '),
+        'primary-subtle': [
+          'border border-primary-border bg-primary-subtle text-primary',
+          'hover:bg-primary-hover hover:border-primary-400',
+          'focus-visible:border-primary-500',
+        ].join(' '),
+        'primary-outline': [
+          'border border-primary-border bg-transparent text-primary',
+          'hover:bg-primary-subtle hover:border-primary-400',
+          'focus-visible:bg-primary-subtle focus-visible:border-primary-500',
         ].join(' '),
         neon: [
-          'border border-cyan-500/20 bg-cyan-950/[0.06] text-cyan-100',
-          'hover:border-cyan-500/35 font-mono',
-          'focus-visible:border-cyan-400/60 focus-visible:ring-1 focus-visible:ring-cyan-400/30',
-          'focus-visible:shadow-[0_0_25px_rgba(0,240,255,0.15),0_0_60px_rgba(0,240,255,0.06)]',
+          'border border-primary-border bg-surface-1 text-primary font-mono shadow-glow-cyan',
+          'hover:bg-surface-2 hover:border-primary-400',
+          'focus-visible:border-primary-500',
+        ].join(' '),
+        default: [
+          'border border-primary-border bg-transparent text-primary',
+          'hover:bg-primary-subtle hover:border-primary-400',
+          'focus-visible:bg-primary-subtle focus-visible:border-primary-500',
         ].join(' '),
         ghost: [
           'border border-transparent bg-white/[0.02]',
           'hover:bg-white/[0.05]',
-          'focus-visible:bg-white/[0.04] focus-visible:border-white/[0.1]',
+          'focus-visible:bg-white/[0.04] focus-visible:border-border-hairline',
         ].join(' '),
       },
       selectSize: {
@@ -39,14 +53,12 @@ const selectVariants = cva(
       state: {
         normal: '',
         error: [
-          'border-rose-500/40 text-rose-200',
-          'focus-visible:border-rose-500/60 focus-visible:ring-rose-500/25',
-          'focus-visible:shadow-[0_0_20px_rgba(244,63,94,0.12),0_0_50px_rgba(244,63,94,0.05)]',
+          'border-danger-border text-danger',
+          'focus-visible:border-danger-500 focus-visible:ring-danger-focus/70',
         ].join(' '),
         success: [
-          'border-emerald-500/40 text-emerald-200',
-          'focus-visible:border-emerald-400/60 focus-visible:ring-emerald-400/25',
-          'focus-visible:shadow-[0_0_20px_rgba(57,255,20,0.12),0_0_50px_rgba(57,255,20,0.05)]',
+          'border-success-border text-success',
+          'focus-visible:border-success-500 focus-visible:ring-success-focus/70',
         ].join(' '),
       },
     },
@@ -55,7 +67,7 @@ const selectVariants = cva(
       selectSize: 'md',
       state: 'normal',
     },
-  }
+  },
 );
 
 export interface SelectOption {
@@ -70,7 +82,8 @@ export interface SelectOptionGroup {
 }
 
 export interface SelectProps
-  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'>,
+  extends
+    Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'>,
     VariantProps<typeof selectVariants> {
   options?: (SelectOption | SelectOptionGroup)[];
   error?: string | boolean;
@@ -81,7 +94,7 @@ export interface SelectProps
 }
 
 function isOptionGroup(
-  option: SelectOption | SelectOptionGroup
+  option: SelectOption | SelectOptionGroup,
 ): option is SelectOptionGroup {
   return 'options' in option;
 }
@@ -103,19 +116,19 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const selectId = id || React.useId();
     const computedState = error ? 'error' : success ? 'success' : state;
 
     const chevronColor =
       computedState === 'error'
-        ? 'text-rose-400/60'
+        ? 'text-danger'
         : computedState === 'success'
-          ? 'text-emerald-400/60'
+          ? 'text-success'
           : variant === 'neon'
-            ? 'text-cyan-500/50'
-            : 'text-slate-500';
+            ? 'text-primary'
+            : 'text-fg-subtle';
 
     return (
       <div className="flex flex-col gap-1.5 w-full">
@@ -126,7 +139,9 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           >
             <span>{label}</span>
             {error && typeof error === 'string' && (
-              <span className="text-[10px] text-rose-400/80 normal-case font-sans">{error}</span>
+              <span className="text-[10px] text-danger normal-case font-sans">
+                {error}
+              </span>
             )}
           </label>
         )}
@@ -136,13 +151,17 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             id={selectId}
             className={cn(
               selectVariants({ variant, selectSize, state: computedState }),
-              className
+              className,
             )}
             ref={ref}
             {...props}
           >
             {placeholder && (
-              <option value="" disabled className="text-slate-600 bg-[#0d121d]">
+              <option
+                value=""
+                disabled
+                className="text-fg-subtle bg-surface-1"
+              >
                 {placeholder}
               </option>
             )}
@@ -152,14 +171,14 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                   <optgroup
                     key={option.label}
                     label={option.label}
-                    className="bg-[#0d121d] text-slate-300 font-mono"
+                    className="bg-surface-1 text-fg-muted font-mono"
                   >
                     {option.options.map((opt) => (
                       <option
                         key={opt.value}
                         value={opt.value}
                         disabled={opt.disabled}
-                        className="bg-[#0d121d] text-slate-200"
+                        className="bg-surface-1 text-fg"
                       >
                         {opt.label}
                       </option>
@@ -170,21 +189,24 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                     key={option.value}
                     value={option.value}
                     disabled={option.disabled}
-                    className="bg-[#0d121d] text-slate-200"
+                    className="bg-surface-1 text-fg"
                   >
                     {option.label}
                   </option>
-                )
+                ),
               )}
           </select>
 
           <div
             className={cn(
               'absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none z-10 transition-colors duration-300',
-              chevronColor
+              chevronColor,
             )}
           >
-            <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
+            <ChevronDown
+              className="h-4 w-4"
+              strokeWidth={1.5}
+            />
           </div>
         </div>
 
@@ -193,7 +215,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Select.displayName = 'Select';

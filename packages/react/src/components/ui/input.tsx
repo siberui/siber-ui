@@ -1,33 +1,48 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Loader2, X } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 const inputVariants = cva(
   [
-    'flex w-full text-slate-100 placeholder:text-slate-600 font-sans',
-    'bg-white/[0.03] backdrop-blur-sm',
-    'transition-all duration-300 ease-out',
-    'focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
+    'flex w-full text-fg placeholder:text-fg-subtle font-sans',
+    'bg-surface-1',
+    'transition-colors duration-200 ease-out',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus/70 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
     'selection:bg-cyan-500/30 selection:text-cyan-200',
   ].join(' '),
   {
     variants: {
       variant: {
-        default: [
-          'border border-white/[0.08] hover:border-white/[0.15]',
-          'focus-visible:border-cyan-500/50 focus-visible:ring-1 focus-visible:ring-cyan-500/30',
-          'focus-visible:shadow-[0_0_8px_rgba(0,240,255,0.15)]',
+        primary: [
+          'border border-primary-600 bg-primary text-primary-foreground placeholder:text-primary-foreground/70',
+          'hover:bg-primary-600 hover:border-primary-500',
+          'focus-visible:border-primary-500',
+        ].join(' '),
+        'primary-subtle': [
+          'border border-primary-border bg-primary-subtle text-primary placeholder:text-primary/70',
+          'hover:bg-primary-hover hover:border-primary-400',
+          'focus-visible:border-primary-500',
+        ].join(' '),
+        'primary-outline': [
+          'border border-primary-border bg-transparent text-primary placeholder:text-primary/60',
+          'hover:bg-primary-subtle hover:border-primary-400',
+          'focus-visible:bg-primary-subtle focus-visible:border-primary-500',
         ].join(' '),
         neon: [
-          'border border-cyan-500/20 bg-cyan-950/[0.06] text-cyan-100 placeholder:text-cyan-800/50',
-          'hover:border-cyan-500/35 font-mono',
-          'focus-visible:border-cyan-400/60 focus-visible:ring-1 focus-visible:ring-cyan-400/30',
-          'focus-visible:shadow-[0_0_8px_rgba(0,240,255,0.15)]',
+          'border border-primary-border bg-surface-1 text-primary placeholder:text-primary/60 font-mono shadow-glow-cyan',
+          'hover:bg-surface-2 hover:border-primary-400',
+          'focus-visible:border-primary-500',
+        ].join(' '),
+        default: [
+          'border border-primary-border bg-transparent text-primary placeholder:text-primary/60',
+          'hover:bg-primary-subtle hover:border-primary-400',
+          'focus-visible:bg-primary-subtle focus-visible:border-primary-500',
         ].join(' '),
         ghost: [
-          'border border-transparent bg-white/[0.02]',
-          'hover:bg-white/[0.05]',
-          'focus-visible:bg-white/[0.04] focus-visible:border-white/[0.1]',
+          'border border-transparent bg-surface-1/60',
+          'hover:bg-surface-2',
+          'focus-visible:bg-surface-2 focus-visible:border-border-strong',
         ].join(' '),
       },
       inputSize: {
@@ -38,14 +53,12 @@ const inputVariants = cva(
       state: {
         normal: '',
         error: [
-          'border-rose-500/40 text-rose-200 placeholder:text-rose-500/30',
-          'focus-visible:border-rose-500/60 focus-visible:ring-rose-500/25',
-          'focus-visible:shadow-[0_0_8px_rgba(244,63,94,0.15)]',
+          'border-danger-border text-danger placeholder:text-danger/60',
+          'focus-visible:border-danger-500 focus-visible:ring-danger-focus/70',
         ].join(' '),
         success: [
-          'border-emerald-500/40 text-emerald-200 placeholder:text-emerald-500/30',
-          'focus-visible:border-emerald-400/60 focus-visible:ring-emerald-400/25',
-          'focus-visible:shadow-[0_0_8px_rgba(57,255,20,0.15)]',
+          'border-success-border text-success placeholder:text-success/60',
+          'focus-visible:border-success-500 focus-visible:ring-success-focus/70',
         ].join(' '),
       },
     },
@@ -54,11 +67,12 @@ const inputVariants = cva(
       inputSize: 'md',
       state: 'normal',
     },
-  }
+  },
 );
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -68,6 +82,11 @@ export interface InputProps
   success?: boolean;
   label?: string;
   helperText?: string;
+  /** Shows an inline spinner and disables interaction, without losing layout. */
+  isLoading?: boolean;
+  /** Shows a clear (×) button when the (controlled) value is non-empty. */
+  clearable?: boolean;
+  onClear?: () => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -87,37 +106,63 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       helperText,
       id,
+      isLoading = false,
+      clearable = false,
+      onClear,
+      value,
+      disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputId = id || React.useId();
     const computedState = error ? 'error' : success ? 'success' : state;
+    const showClear =
+      clearable && !isLoading && typeof value === 'string' && value.length > 0;
+    const trailingSlot = isLoading ? (
+      <Loader2
+        className="h-4 w-4 animate-spin text-fg-subtle"
+        aria-hidden="true"
+      />
+    ) : showClear ? (
+      <button
+        type="button"
+        onClick={onClear}
+        aria-label="Clear input"
+        className="pointer-events-auto text-fg-subtle hover:text-fg transition-colors"
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    ) : (
+      rightIcon
+    );
 
     return (
       <div className="flex flex-col gap-1.5 w-full">
         {label && (
           <label
             htmlFor={inputId}
-            className="text-[11px] font-mono tracking-wider text-slate-500 uppercase flex items-center justify-between"
+            className="text-caption text-fg-subtle flex items-center justify-between"
           >
             <span>{label}</span>
             {error && typeof error === 'string' && (
-              <span className="text-[10px] text-rose-400/80 normal-case font-sans">{error}</span>
+              <span className="text-[10px] text-danger normal-case tracking-normal font-sans">
+                {error}
+              </span>
             )}
           </label>
         )}
 
         <div className="relative flex items-center w-full rounded-md">
           {leftAddon && (
-            <div className="inline-flex items-center px-3 h-full border border-r-0 border-white/[0.08] bg-white/[0.04] text-slate-500 text-xs font-mono rounded-l-md shrink-0">
+            <div className="inline-flex items-center px-3 h-full border border-r-0 border-border-default bg-surface-2 text-fg-subtle text-xs font-mono rounded-l-md shrink-0">
               {leftAddon}
             </div>
           )}
 
           <div className="relative flex-1 flex items-center">
             {leftIcon && (
-              <div className="absolute left-3 z-10 text-slate-500 pointer-events-none flex items-center justify-center transition-colors duration-300">
+              <div className="absolute left-3 z-10 text-fg-subtle pointer-events-none flex items-center justify-center transition-colors duration-200">
                 {leftIcon}
               </div>
             )}
@@ -125,39 +170,43 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <input
               id={inputId}
               type={type}
+              value={value}
+              disabled={disabled || isLoading}
               className={cn(
                 inputVariants({ variant, inputSize, state: computedState }),
                 leftIcon && 'pl-9',
-                rightIcon && 'pr-9',
+                (rightIcon || isLoading || showClear) && 'pr-9',
                 leftAddon && 'rounded-l-none',
                 rightAddon && 'rounded-r-none',
-                className
+                className,
               )}
               ref={ref}
               aria-invalid={!!error}
               {...props}
             />
 
-            {rightIcon && (
-              <div className="absolute right-3 z-10 text-slate-500 flex items-center justify-center transition-colors duration-300">
-                {rightIcon}
+            {trailingSlot && (
+              <div className="absolute right-3 z-10 flex items-center justify-center">
+                {trailingSlot}
               </div>
             )}
           </div>
 
           {rightAddon && (
-            <div className="inline-flex items-center px-3 h-full border border-l-0 border-white/[0.08] bg-white/[0.04] text-slate-500 text-xs font-mono rounded-r-md shrink-0">
+            <div className="inline-flex items-center px-3 h-full border border-l-0 border-border-default bg-surface-2 text-fg-subtle text-xs font-mono rounded-r-md shrink-0">
               {rightAddon}
             </div>
           )}
         </div>
 
         {helperText && !error && (
-          <p className="text-[11px] text-slate-600 font-mono">{helperText}</p>
+          <p className="text-caption text-fg-subtle normal-case tracking-normal">
+            {helperText}
+          </p>
         )}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = 'Input';

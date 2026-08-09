@@ -16,7 +16,7 @@ const textareaVariants = cva(
     variants: {
       variant: {
         default: [
-          'border border-white/[0.08] hover:border-white/[0.15]',
+          'border border-border-hairline hover:border-border-subtle',
           'focus-visible:border-cyan-500/50 focus-visible:ring-1 focus-visible:ring-cyan-500/30',
           'focus-visible:shadow-[0_0_20px_rgba(0,240,255,0.1),0_0_50px_rgba(0,240,255,0.04)]',
         ].join(' '),
@@ -29,7 +29,7 @@ const textareaVariants = cva(
         ghost: [
           'border border-transparent bg-white/[0.02]',
           'hover:bg-white/[0.05]',
-          'focus-visible:bg-white/[0.04] focus-visible:border-white/[0.1]',
+          'focus-visible:bg-white/[0.04] focus-visible:border-border-subtle',
         ].join(' '),
       },
       textareaSize: {

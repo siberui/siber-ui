@@ -25,13 +25,13 @@ export default function FormFieldDocsPage() {
             <h3 className="mb-4 text-lg font-medium text-slate-200">Basic Usage</h3>
             <p className="text-sm text-slate-400 mb-4">Note: SiberUI components like <code>Input</code> and <code>Select</code> already have this built-in via the <code>label</code> and <code>error</code> props. Use <code>FormField</code> when you need to wrap custom components.</p>
             <Playground code={`<FormField label="Custom Component" helperText="Wraps any child element.">
-  <div className="h-10 w-full rounded border border-white/10 bg-white/5 p-2 text-sm text-slate-300">
+  <div className="h-10 w-full rounded border border-border-hairline bg-white/5 p-2 text-sm text-slate-300">
     Custom Input Area
   </div>
 </FormField>`}>
               <div className="flex items-center justify-center p-8 w-full max-w-sm mx-auto">
                 <FormField label="Custom Component" helperText="Wraps any child element.">
-                  <div className="h-10 w-full rounded border border-white/10 bg-white/5 p-2 text-sm text-slate-300 flex items-center">
+                  <div className="h-10 w-full rounded border border-border-hairline bg-white/5 p-2 text-sm text-slate-300 flex items-center">
                     Custom Input Area
                   </div>
                 </FormField>

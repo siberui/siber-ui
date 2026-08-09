@@ -14,7 +14,7 @@ interface ApiTableProps {
 
 export function ApiTable({ props }: ApiTableProps) {
   return (
-    <div className="my-6 w-full overflow-hidden rounded-lg border border-white/10 bg-[#06090e]">
+    <div className="my-6 w-full overflow-hidden rounded-lg border border-border-hairline bg-[#06090e]">
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm text-slate-300">
           <thead className="bg-white/5 text-xs uppercase tracking-wider text-slate-400">
@@ -25,7 +25,7 @@ export function ApiTable({ props }: ApiTableProps) {
               <th className="px-4 py-3 font-medium">Default</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/10">
+          <tbody className="divide-y divide-border-hairline">
             {props.map((prop) => (
               <tr key={prop.property} className="hover:bg-white/[0.02] transition-colors">
                 <td className="whitespace-nowrap px-4 py-3 font-mono text-[13px] text-cyan-300">

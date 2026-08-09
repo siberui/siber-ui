@@ -53,7 +53,7 @@ const SkillItem = React.forwardRef<HTMLDivElement, SkillItemProps>(
       <div
         ref={ref}
         className={cn(
-          'p-4 rounded-xl bg-slate-950/60 border border-white/[0.06] hover:border-cyan-500/30 transition-colors duration-300 backdrop-blur-md group',
+          'p-4 rounded-xl bg-slate-950/60 border border-border-hairline hover:border-cyan-500/30 transition-colors duration-300 backdrop-blur-md group',
           className
         )}
         {...props}
@@ -72,7 +72,7 @@ const SkillItem = React.forwardRef<HTMLDivElement, SkillItemProps>(
             )}
             <span className="text-xs font-semibold text-slate-100 font-sans tracking-wide">{name}</span>
             {category && (
-              <span className="text-[10px] font-mono text-slate-500 bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/5">
+              <span className="text-[10px] font-mono text-slate-500 bg-white/[0.04] px-1.5 py-0.5 rounded border border-border-hairline">
                 {category}
               </span>
             )}
@@ -96,7 +96,7 @@ const SkillItem = React.forwardRef<HTMLDivElement, SkillItemProps>(
                 key={i}
                 className={cn(
                   'flex-1 h-full rounded-xs transition-opacity duration-300',
-                  isActive ? skillBarColorVariants[color] : 'bg-slate-900 border border-white/[0.04] opacity-40'
+                  isActive ? skillBarColorVariants[color] : 'bg-slate-900 border border-border-hairline opacity-40'
                 )}
               />
             );

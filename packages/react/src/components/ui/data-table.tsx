@@ -201,10 +201,10 @@ export function DataTable<TData>({
   // ── variant styles ──
   const variantStyles = {
     default: {
-      container: 'border border-white/[0.08] bg-slate-950 rounded-xl',
+      container: 'border border-border-hairline bg-slate-950 rounded-xl',
       header: 'bg-slate-900/80',
       headerCell: 'text-slate-400 font-semibold text-xs uppercase tracking-wider',
-      row: 'border-b border-white/[0.04] hover:bg-white/[0.03] transition-colors',
+      row: 'border-b border-border-hairline hover:bg-white/[0.03] transition-colors',
       cell: 'text-slate-300 text-sm',
       activeRow: 'bg-white/[0.05]',
     },
@@ -217,10 +217,10 @@ export function DataTable<TData>({
       activeRow: 'bg-cyan-500/[0.08] shadow-[inset_0_0_20px_rgba(0,240,255,0.03)]',
     },
     glass: {
-      container: 'border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl rounded-xl shadow-xl',
+      container: 'border border-border-hairline bg-white/[0.02] backdrop-blur-xl rounded-xl shadow-xl',
       header: 'bg-white/[0.04]',
       headerCell: 'text-slate-300 font-semibold text-xs uppercase tracking-wider',
-      row: 'border-b border-white/[0.04] hover:bg-white/[0.04] transition-colors',
+      row: 'border-b border-border-hairline hover:bg-white/[0.04] transition-colors',
       cell: 'text-slate-200 text-sm',
       activeRow: 'bg-white/[0.06]',
     },
@@ -252,8 +252,8 @@ export function DataTable<TData>({
                     variant === 'neon'
                       ? 'bg-cyan-950/30 border-cyan-500/20 text-cyan-300 placeholder:text-cyan-500/30 font-mono focus:border-cyan-500/50 focus:shadow-[0_0_15px_rgba(0,240,255,0.1)]'
                       : variant === 'glass'
-                      ? 'bg-white/[0.03] border-white/[0.1] text-white placeholder:text-slate-500 focus:border-white/20'
-                      : 'bg-slate-900/60 border-white/10 text-white placeholder:text-slate-600 focus:border-white/20'
+                      ? 'bg-white/[0.03] border-border-hairline text-white placeholder:text-slate-500 focus:border-border-strong'
+                      : 'bg-slate-900/60 border-border-hairline text-white placeholder:text-slate-600 focus:border-border-strong'
                   )}
                 />
               </div>
@@ -269,7 +269,7 @@ export function DataTable<TData>({
               'flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono',
               variant === 'neon'
                 ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                : 'bg-white/[0.05] text-slate-300 border border-white/10'
+                : 'bg-white/[0.05] text-slate-300 border border-border-hairline'
             )}
           >
             <Check className="h-3.5 w-3.5" />
@@ -508,10 +508,10 @@ function DataTableCheckbox({
         checked || indeterminate
           ? variant === 'neon'
             ? 'bg-cyan-500/80 border-cyan-400 text-white shadow-[0_0_8px_rgba(0,240,255,0.4)]'
-            : 'bg-white/80 border-white text-slate-950'
+            : 'bg-signal-cyan/80 border-signal-cyan text-slate-950'
           : variant === 'neon'
           ? 'border-cyan-500/30 hover:border-cyan-400/60'
-          : 'border-white/20 hover:border-white/40'
+          : 'border-border-hairline hover:border-border-subtle'
       )}
       {...props}
     >
@@ -542,15 +542,15 @@ function DataTablePagination<TData>({
     variant === 'neon'
       ? 'border-cyan-500/20 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500/40'
       : variant === 'glass'
-      ? 'border-white/10 text-white/70 hover:bg-white/10'
-      : 'border-white/10 text-slate-400 hover:bg-white/10 hover:text-white';
+      ? 'border-border-hairline text-white/70 hover:bg-white/10'
+      : 'border-border-hairline text-slate-400 hover:bg-white/10 hover:text-white';
 
   const selectStyle =
     variant === 'neon'
       ? 'bg-cyan-950/40 border-cyan-500/20 text-cyan-400 font-mono'
       : variant === 'glass'
-      ? 'bg-white/[0.04] border-white/10 text-white'
-      : 'bg-slate-900 border-white/10 text-slate-300';
+      ? 'bg-white/[0.04] border-border-hairline text-white'
+      : 'bg-slate-900 border-border-hairline text-slate-300';
 
   return (
     <div className="flex items-center justify-between px-1">

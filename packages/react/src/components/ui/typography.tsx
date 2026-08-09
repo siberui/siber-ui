@@ -134,7 +134,7 @@ const Code = React.forwardRef<HTMLElement, CodeProps>(
         <pre
           className={cn(
             'w-full overflow-x-auto rounded-lg p-4',
-            'bg-white/[0.03] backdrop-blur-sm border border-white/[0.07]',
+            'bg-white/[0.03] backdrop-blur-sm border border-border-hairline',
             'font-mono text-sm text-cyan-200 leading-relaxed',
             'shadow-[0_4px_20px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)]',
             // top accent
@@ -153,7 +153,7 @@ const Code = React.forwardRef<HTMLElement, CodeProps>(
         ref={ref as React.Ref<HTMLElement>}
         className={cn(
           'inline-flex items-center px-1.5 py-0.5 rounded-md',
-          'bg-white/[0.06] border border-white/[0.08]',
+          'bg-white/[0.06] border border-border-hairline',
           'font-mono text-[0.82em] text-cyan-300',
           className
         )}

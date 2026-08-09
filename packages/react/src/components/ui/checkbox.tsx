@@ -9,41 +9,61 @@ const checkboxVariants = cva(
   [
     'inline-flex items-center justify-center shrink-0 cursor-pointer',
     'border rounded transition-all duration-300 ease-out',
-    'bg-white/[0.03] backdrop-blur-sm',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950',
+    'bg-surface-1',
+    'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-bg',
     'disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
-    'peer',
   ].join(' '),
   {
     variants: {
       variant: {
-        default: [
-          'border-white/[0.15] hover:border-white/[0.25]',
-          'focus-visible:ring-cyan-400/50',
-          'data-[state=checked]:bg-slate-800 data-[state=checked]:border-cyan-500/50',
-          'data-[state=checked]:shadow-[0_0_12px_rgba(0,240,255,0.15)]',
-          'data-[state=indeterminate]:bg-slate-800 data-[state=indeterminate]:border-cyan-500/50',
+        primary: [
+          'border-primary-600 bg-primary',
+          'hover:border-primary-500 hover:bg-primary-600',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-700 data-[state=checked]:border-primary-500',
+          'data-[state=indeterminate]:bg-primary-700 data-[state=indeterminate]:border-primary-500',
+        ].join(' '),
+        'primary-subtle': [
+          'border-primary-border bg-primary-subtle',
+          'hover:border-primary-400 hover:bg-primary-hover',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-active data-[state=checked]:border-primary-500',
+          'data-[state=indeterminate]:bg-primary-active data-[state=indeterminate]:border-primary-500',
+        ].join(' '),
+        'primary-outline': [
+          'border-primary-border bg-transparent',
+          'hover:border-primary-400 hover:bg-primary-subtle',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-subtle data-[state=checked]:border-primary-500',
+          'data-[state=indeterminate]:bg-primary-subtle data-[state=indeterminate]:border-primary-500',
         ].join(' '),
         neon: [
-          'border-cyan-500/25 hover:border-cyan-500/40',
-          'focus-visible:ring-cyan-400/50',
-          'data-[state=checked]:bg-cyan-500/20 data-[state=checked]:border-cyan-400/60',
-          'data-[state=checked]:shadow-[0_0_18px_rgba(0,240,255,0.25)]',
-          'data-[state=indeterminate]:bg-cyan-500/20 data-[state=indeterminate]:border-cyan-400/60',
+          'border-primary-border bg-surface-1 shadow-glow-cyan',
+          'hover:border-primary-400 hover:bg-surface-2',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-surface-3 data-[state=checked]:border-primary-500 data-[state=checked]:shadow-glow-cyan-hover',
+          'data-[state=indeterminate]:bg-surface-3 data-[state=indeterminate]:border-primary-500 data-[state=indeterminate]:shadow-glow-cyan-hover',
+        ].join(' '),
+        default: [
+          'border-primary-border bg-transparent',
+          'hover:border-primary-400 hover:bg-primary-subtle',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-subtle data-[state=checked]:border-primary-500',
+          'data-[state=indeterminate]:bg-primary-subtle data-[state=indeterminate]:border-primary-500',
         ].join(' '),
         neonPurple: [
-          'border-purple-500/25 hover:border-purple-500/40',
-          'focus-visible:ring-purple-400/50',
-          'data-[state=checked]:bg-purple-500/20 data-[state=checked]:border-purple-400/60',
-          'data-[state=checked]:shadow-[0_0_18px_rgba(168,85,247,0.25)]',
-          'data-[state=indeterminate]:bg-purple-500/20 data-[state=indeterminate]:border-purple-400/60',
+          'border-secondary-border hover:border-secondary-400',
+          'peer-focus-visible:ring-secondary-focus/70',
+          'data-[state=checked]:bg-secondary-subtle data-[state=checked]:border-secondary-500',
+          'data-[state=checked]:shadow-glow-purple',
+          'data-[state=indeterminate]:bg-secondary-subtle data-[state=indeterminate]:border-secondary-500',
         ].join(' '),
         neonGreen: [
-          'border-emerald-500/25 hover:border-emerald-500/40',
-          'focus-visible:ring-emerald-400/50',
-          'data-[state=checked]:bg-emerald-500/20 data-[state=checked]:border-emerald-400/60',
-          'data-[state=checked]:shadow-[0_0_18px_rgba(57,255,20,0.25)]',
-          'data-[state=indeterminate]:bg-emerald-500/20 data-[state=indeterminate]:border-emerald-400/60',
+          'border-success-border hover:border-success-400',
+          'peer-focus-visible:ring-success-focus/70',
+          'data-[state=checked]:bg-success-subtle data-[state=checked]:border-success-500',
+          'data-[state=checked]:shadow-glow-green',
+          'data-[state=indeterminate]:bg-success-subtle data-[state=indeterminate]:border-success-500',
         ].join(' '),
       },
       checkboxSize: {
@@ -56,14 +76,17 @@ const checkboxVariants = cva(
       variant: 'default',
       checkboxSize: 'md',
     },
-  }
+  },
 );
 
 const iconColorMap: Record<string, string> = {
-  default: 'text-cyan-400',
-  neon: 'text-cyan-300',
-  neonPurple: 'text-purple-300',
-  neonGreen: 'text-emerald-300',
+  primary: 'text-primary-foreground',
+  'primary-subtle': 'text-primary',
+  'primary-outline': 'text-primary',
+  default: 'text-primary',
+  neon: 'text-primary',
+  neonPurple: 'text-secondary',
+  neonGreen: 'text-success',
 };
 
 const iconSizeMap: Record<string, string> = {
@@ -73,7 +96,8 @@ const iconSizeMap: Record<string, string> = {
 };
 
 export interface CheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>,
     VariantProps<typeof checkboxVariants> {
   label?: string;
   description?: string;
@@ -98,7 +122,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const checkboxId = id || React.useId();
     const [isChecked, setIsChecked] = React.useState(defaultChecked ?? false);
@@ -119,10 +143,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         if (typeof ref === 'function') {
           ref(node);
         } else if (ref) {
-          (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+          (ref as React.MutableRefObject<HTMLInputElement | null>).current =
+            node;
         }
       },
-      [ref]
+      [ref],
     );
 
     const handleChange = React.useCallback(
@@ -133,10 +158,14 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         onChange?.(e);
         onCheckedChange?.(e.target.checked);
       },
-      [controlled, onChange, onCheckedChange]
+      [controlled, onChange, onCheckedChange],
     );
 
-    const state = indeterminate ? 'indeterminate' : currentChecked ? 'checked' : 'unchecked';
+    const state = indeterminate
+      ? 'indeterminate'
+      : currentChecked
+        ? 'checked'
+        : 'unchecked';
     const iconColor = iconColorMap[variant || 'default'];
     const iconSize = iconSizeMap[checkboxSize || 'md'];
 
@@ -145,7 +174,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         htmlFor={checkboxId}
         className={cn(
           'inline-flex items-start gap-2.5 cursor-pointer group select-none',
-          disabled && 'cursor-not-allowed opacity-40'
+          disabled && 'cursor-not-allowed opacity-40',
         )}
       >
         <div className="relative flex items-center justify-center pt-0.5">
@@ -157,14 +186,14 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             defaultChecked={!controlled ? defaultChecked : undefined}
             onChange={handleChange}
             disabled={disabled}
-            className="sr-only"
+            className="peer sr-only"
             {...props}
           />
           <div
             data-state={state}
             className={cn(
               checkboxVariants({ variant, checkboxSize }),
-              className
+              className,
             )}
           >
             {state === 'checked' && (
@@ -175,7 +204,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             )}
             {state === 'indeterminate' && (
               <Minus
-                className={cn(iconSize, iconColor, 'animate-indeterminate-dash')}
+                className={cn(
+                  iconSize,
+                  iconColor,
+                  'animate-indeterminate-dash',
+                )}
                 strokeWidth={2.5}
               />
             )}
@@ -185,12 +218,12 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         {(label || description) && (
           <div className="flex flex-col gap-0.5">
             {label && (
-              <span className="text-sm text-slate-200 font-sans leading-none transition-colors duration-200 group-hover:text-white">
+              <span className="text-sm text-fg font-sans leading-none transition-colors duration-200 group-hover:text-fg">
                 {label}
               </span>
             )}
             {description && (
-              <span className="text-[11px] text-slate-500 font-mono">
+              <span className="text-[11px] text-fg-subtle font-mono">
                 {description}
               </span>
             )}
@@ -198,7 +231,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         )}
       </label>
     );
-  }
+  },
 );
 
 Checkbox.displayName = 'Checkbox';

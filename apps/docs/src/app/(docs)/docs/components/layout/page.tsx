@@ -34,10 +34,10 @@ export default function LayoutDocsPage() {
 </Grid>`}>
               <div className="w-full p-8 font-mono text-xs text-white">
                 <Grid cols={12} gap="md">
-                  <Col span={4} className="bg-slate-800/80 border border-white/10 p-4 rounded text-center">Col 4</Col>
-                  <Col span={8} className="bg-slate-800/80 border border-white/10 p-4 rounded text-center">Col 8</Col>
-                  <Col span={6} className="bg-slate-800/80 border border-white/10 p-4 rounded text-center">Col 6</Col>
-                  <Col span={6} className="bg-slate-800/80 border border-white/10 p-4 rounded text-center">Col 6</Col>
+                  <Col span={4} className="bg-slate-800/80 border border-border-hairline p-4 rounded text-center">Col 4</Col>
+                  <Col span={8} className="bg-slate-800/80 border border-border-hairline p-4 rounded text-center">Col 8</Col>
+                  <Col span={6} className="bg-slate-800/80 border border-border-hairline p-4 rounded text-center">Col 6</Col>
+                  <Col span={6} className="bg-slate-800/80 border border-border-hairline p-4 rounded text-center">Col 6</Col>
                 </Grid>
               </div>
             </Playground>
@@ -61,10 +61,10 @@ export default function LayoutDocsPage() {
 </Stack>`}>
               <div className="w-full p-8 font-mono text-xs text-white">
                 <Stack gap="lg">
-                  <div className="bg-slate-800/80 border border-white/10 p-4 rounded">Vertical Item 1</div>
+                  <div className="bg-slate-800/80 border border-border-hairline p-4 rounded">Vertical Item 1</div>
                   <Row gap="md" justify="between">
-                    <div className="bg-slate-800/80 border border-white/10 p-4 rounded">Horizontal Left</div>
-                    <div className="bg-slate-800/80 border border-white/10 p-4 rounded">Horizontal Right</div>
+                    <div className="bg-slate-800/80 border border-border-hairline p-4 rounded">Horizontal Left</div>
+                    <div className="bg-slate-800/80 border border-border-hairline p-4 rounded">Horizontal Right</div>
                   </Row>
                 </Stack>
               </div>
@@ -77,13 +77,13 @@ export default function LayoutDocsPage() {
         <div className="flex flex-col gap-12">
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Structural Primitives</h3>
-            <Playground code={`<Container size="sm" className="border border-white/10 p-6 rounded-lg bg-slate-900">
+            <Playground code={`<Container size="sm" className="border border-border-hairline p-6 rounded-lg bg-slate-900">
   <div className="text-center text-slate-300">Constrained Container Content</div>
   <LayoutDivider className="my-6" />
   <div className="text-center text-slate-400">Section below divider</div>
 </Container>`}>
               <div className="w-full p-8">
-                <Container size="sm" className="border border-white/10 p-6 rounded-lg bg-slate-900">
+                <Container size="sm" className="border border-border-hairline p-6 rounded-lg bg-slate-900">
                   <div className="text-center text-slate-300 text-sm">Constrained Container Content</div>
                   <LayoutDivider className="my-6" />
                   <div className="text-center text-slate-400 text-sm">Section below divider</div>

@@ -69,7 +69,7 @@ export default function SkeletonDocsPage() {
   <SkeletonText animation="pulse" lines={2} />
   <SkeletonText animation="none" lines={2} />
 </div>`}>
-              <div className="flex flex-col gap-8 w-full max-w-sm mx-auto p-8 border border-white/5 rounded-xl bg-slate-900/20">
+              <div className="flex flex-col gap-8 w-full max-w-sm mx-auto p-8 border border-border-hairline rounded-xl bg-slate-900/20">
                 <div>
                   <div className="text-xs text-slate-500 mb-2">Shimmer (Default)</div>
                   <SkeletonText animation="shimmer" lines={2} />

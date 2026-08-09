@@ -5,12 +5,19 @@ import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../utils/cn';
 
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Context: shared variant + active value awareness for animated indicators
 // ─────────────────────────────────────────────────────────────────────────────
 interface TabsContextValue {
-  variant?: 'default' | 'neon' | 'ghost' | 'underline' | null;
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'primary-subtle'
+    | 'primary-outline'
+    | 'neon'
+    | 'ghost'
+    | 'underline'
+    | null;
   activeValue?: string;
   setActiveValue?: (v: string) => void;
 }
@@ -24,10 +31,15 @@ const tabsListVariants = cva(
   {
     variants: {
       variant: {
+        primary:
+          'h-11 rounded-lg p-1.5 gap-1 bg-primary border border-primary-600',
+        'primary-subtle':
+          'h-11 rounded-lg p-1.5 gap-1 bg-primary-subtle border border-primary-border',
+        'primary-outline':
+          'h-11 rounded-lg p-1.5 gap-1 bg-transparent border border-primary-border',
         default:
-          'h-11 rounded-lg p-1.5 gap-1 bg-slate-950/60 backdrop-blur-md border border-white/10',
-        neon:
-          'h-11 rounded-lg p-1.5 gap-1 bg-cyan-950/30 backdrop-blur-md border border-cyan-500/30 shadow-[0_0_15px_rgba(0,240,255,0.05)]',
+          'h-11 rounded-lg p-1.5 gap-1 bg-transparent border border-primary-border',
+        neon: 'h-11 rounded-lg p-1.5 gap-1 bg-surface-1 border border-primary-border shadow-glow-cyan',
         ghost: 'h-auto p-0 gap-2 bg-transparent border-none',
         underline:
           'w-full h-auto p-0 gap-1 bg-transparent justify-start rounded-none',
@@ -36,27 +48,35 @@ const tabsListVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  }
+  },
 );
 
 interface TabsListProps
-  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>,
+  extends
+    React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>,
     VariantProps<typeof tabsListVariants> {}
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   TabsListProps
->(({ className, variant, ...props }, ref) => {
+>(({ className, variant = 'default', ...props }, ref) => {
   const listRef = React.useRef<HTMLDivElement>(null);
   const { activeValue } = React.useContext(TabsContext);
-  const [indicator, setIndicator] = React.useState({ left: 0, width: 0, height: 0, top: 0 });
+  const [indicator, setIndicator] = React.useState({
+    left: 0,
+    width: 0,
+    height: 0,
+    top: 0,
+  });
   const [mounted, setMounted] = React.useState(false);
 
   // Measure the active trigger and update the indicator position
   const updateIndicator = React.useCallback(() => {
     const list = listRef.current;
     if (!list) return;
-    const activeTrigger = list.querySelector('[data-state="active"]') as HTMLElement | null;
+    const activeTrigger = list.querySelector(
+      '[data-state="active"]',
+    ) as HTMLElement | null;
     if (!activeTrigger) return;
     const listRect = list.getBoundingClientRect();
     const triggerRect = activeTrigger.getBoundingClientRect();
@@ -97,29 +117,34 @@ const TabsList = React.forwardRef<
       {props.children}
 
       {/* ── Neon / Default: sliding pill ── */}
-      {(variant === 'neon' || variant === 'default') && mounted && (
-        <span
-          aria-hidden
-          className={cn(
-            'absolute rounded-md pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
-            variant === 'neon'
-              ? 'bg-cyan-500/15 border border-cyan-400 shadow-[0_0_12px_rgba(0,240,255,0.25)]'
-              : 'bg-white/10 shadow-sm',
-          )}
-          style={{
-            left: indicator.left,
-            top: indicator.top,
-            width: indicator.width,
-            height: indicator.height,
-          }}
-        />
-      )}
+      {(variant === 'neon' ||
+        variant === 'default' ||
+        variant === 'primary' ||
+        variant === 'primary-subtle' ||
+        variant === 'primary-outline') &&
+        mounted && (
+          <span
+            aria-hidden
+            className={cn(
+              'absolute rounded-md pointer-events-none transition-all duration-300 ease-in-out',
+              variant === 'neon'
+                ? 'bg-surface-3 border border-primary-400 shadow-glow-cyan'
+                : 'bg-primary-subtle border border-primary-border',
+            )}
+            style={{
+              left: indicator.left,
+              top: indicator.top,
+              width: indicator.width,
+              height: indicator.height,
+            }}
+          />
+        )}
 
       {/* ── Underline: sliding bottom indicator bar (no static base border) ── */}
       {variant === 'underline' && mounted && (
         <span
           aria-hidden
-          className="absolute bottom-0 h-[2px] rounded-full pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] bg-cyan-400 shadow-[0_0_12px_rgba(0,240,255,0.8)]"
+          className="absolute bottom-0 h-0.5 rounded-full pointer-events-none transition-all duration-300 ease-in-out bg-primary shadow-glow-cyan"
           style={{
             left: indicator.left,
             width: indicator.width,
@@ -137,25 +162,37 @@ TabsList.displayName = 'TabsList';
 const tabsTriggerVariants = cva(
   [
     'relative z-10 inline-flex h-8 items-center justify-center whitespace-nowrap rounded-md px-3.5 text-xs font-medium transition-colors duration-200',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus/70 focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
     'disabled:pointer-events-none disabled:opacity-40',
   ].join(' '),
   {
     variants: {
       variant: {
+        primary: [
+          'text-primary-foreground/80 hover:text-primary-foreground',
+          'data-[state=active]:text-primary-foreground',
+        ].join(' '),
+        'primary-subtle': [
+          'text-primary/80 hover:text-primary',
+          'data-[state=active]:text-primary',
+        ].join(' '),
+        'primary-outline': [
+          'text-primary/80 hover:text-primary',
+          'data-[state=active]:text-primary',
+        ].join(' '),
         default: [
-          'text-slate-400 hover:text-slate-200',
-          'data-[state=active]:text-white',
+          'text-primary/80 hover:text-primary',
+          'data-[state=active]:text-primary',
         ].join(' '),
         neon: [
-          'font-mono uppercase tracking-wider text-cyan-500/60',
-          'hover:text-cyan-300',
-          'data-[state=active]:text-cyan-200',
+          'font-mono uppercase tracking-wider text-primary/70',
+          'hover:text-primary',
+          'data-[state=active]:text-primary',
         ].join(' '),
         underline: [
-          'h-10 px-4 font-mono text-xs uppercase tracking-widest text-slate-400 rounded-none transition-colors duration-200',
-          'hover:text-cyan-300',
-          'data-[state=active]:text-cyan-300 data-[state=active]:bg-gradient-to-t data-[state=active]:from-cyan-500/[0.12] data-[state=active]:to-transparent',
+          'h-10 px-4 font-mono text-xs uppercase tracking-widest text-fg-muted rounded-none transition-colors duration-200',
+          'hover:text-primary',
+          'data-[state=active]:text-primary data-[state=active]:bg-gradient-to-t data-[state=active]:from-primary-subtle data-[state=active]:to-transparent',
         ].join(' '),
         ghost: [
           'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]',
@@ -166,7 +203,7 @@ const tabsTriggerVariants = cva(
     defaultVariants: {
       variant: 'default',
     },
-  }
+  },
 );
 
 const TabsTrigger = React.forwardRef<
@@ -181,7 +218,8 @@ const TabsTrigger = React.forwardRef<
       ref={ref}
       className={cn(tabsTriggerVariants({ variant }), className)}
       onMouseDown={() => {
-        if (props.value && setActiveValue) setActiveValue(props.value as string);
+        if (props.value && setActiveValue)
+          setActiveValue(props.value as string);
       }}
       {...props}
     />
@@ -199,9 +237,9 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      'mt-3 ring-offset-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2',
+      'mt-3 ring-offset-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus/70 focus-visible:ring-offset-2',
       'animate-in fade-in-50 slide-in-from-bottom-1.5 duration-200 ease-out',
-      className
+      className,
     )}
     {...props}
   />
@@ -211,46 +249,59 @@ TabsContent.displayName = TabsPrimitive.Content.displayName;
 // ─────────────────────────────────────────────────────────────────────────────
 // TabsRoot — provides context for animated indicators
 // ─────────────────────────────────────────────────────────────────────────────
-interface TabsRootProps
-  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
-  variant?: 'default' | 'neon' | 'ghost' | 'underline';
+interface TabsRootProps extends React.ComponentPropsWithoutRef<
+  typeof TabsPrimitive.Root
+> {
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'primary-subtle'
+    | 'primary-outline'
+    | 'neon'
+    | 'ghost'
+    | 'underline';
 }
 
 const TabsRoot = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Root>,
   TabsRootProps
->(({ variant, defaultValue, value, onValueChange, children, ...props }, ref) => {
-  const [activeValue, setActiveValue] = React.useState<string>(
-    value ?? defaultValue ?? ''
-  );
+>(
+  (
+    { variant, defaultValue, value, onValueChange, children, ...props },
+    ref,
+  ) => {
+    const [activeValue, setActiveValue] = React.useState<string>(
+      value ?? defaultValue ?? '',
+    );
 
-  const handleValueChange = React.useCallback(
-    (val: string) => {
-      setActiveValue(val);
-      onValueChange?.(val);
-    },
-    [onValueChange]
-  );
+    const handleValueChange = React.useCallback(
+      (val: string) => {
+        setActiveValue(val);
+        onValueChange?.(val);
+      },
+      [onValueChange],
+    );
 
-  // sync when controlled
-  React.useEffect(() => {
-    if (value !== undefined) setActiveValue(value);
-  }, [value]);
+    // sync when controlled
+    React.useEffect(() => {
+      if (value !== undefined) setActiveValue(value);
+    }, [value]);
 
-  return (
-    <TabsContext.Provider value={{ variant, activeValue, setActiveValue }}>
-      <TabsPrimitive.Root
-        ref={ref}
-        value={value}
-        defaultValue={defaultValue}
-        onValueChange={handleValueChange}
-        {...props}
-      >
-        {children}
-      </TabsPrimitive.Root>
-    </TabsContext.Provider>
-  );
-});
+    return (
+      <TabsContext.Provider value={{ variant, activeValue, setActiveValue }}>
+        <TabsPrimitive.Root
+          ref={ref}
+          value={value}
+          defaultValue={defaultValue}
+          onValueChange={handleValueChange}
+          {...props}
+        >
+          {children}
+        </TabsPrimitive.Root>
+      </TabsContext.Provider>
+    );
+  },
+);
 TabsRoot.displayName = 'Tabs';
 
 export { TabsRoot as Tabs, TabsList, TabsTrigger, TabsContent };

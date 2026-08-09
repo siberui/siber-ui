@@ -90,7 +90,7 @@ export default function DrawerDocsPage() {
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Glass Variant</h3>
             <Playground code={`<Drawer variant="glass" direction="bottom">...</Drawer>`}>
-              <div className="flex items-center justify-center p-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-slate-900 rounded-xl h-48 border border-white/5">
+              <div className="flex items-center justify-center p-8 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-slate-900 rounded-xl h-48 border border-border-hairline">
                 <Drawer variant="glass" direction="bottom">
                   <DrawerTrigger asChild><Button variant="ghost">Open Drawer</Button></DrawerTrigger>
                   <DrawerContent>

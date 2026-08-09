@@ -13,10 +13,11 @@ export function DocSidebar() {
       <div className="h-full py-6 pr-6 lg:py-8">
         <div className="flex flex-col gap-6">
           {docsNavigation.map((group) => (
-            <div key={group.title} className="flex flex-col gap-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                {group.title}
-              </h4>
+            <div
+              key={group.title}
+              className="flex flex-col gap-2"
+            >
+              <h4 className="text-caption text-fg-subtle">{group.title}</h4>
               <ul className="flex flex-col gap-1">
                 {group.items.map((item) => {
                   const isActive = pathname === item.href;
@@ -25,20 +26,20 @@ export function DocSidebar() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'flex items-center justify-between rounded-md px-3 py-1.5 text-sm transition-colors',
+                          'flex items-center justify-between rounded-md border-l-2 px-3 py-1.5 text-sm transition-colors',
                           isActive
-                            ? 'bg-cyan-500/10 text-cyan-400 font-medium'
-                            : 'text-slate-400 hover:bg-white/5 hover:text-slate-100'
+                            ? 'border-signal-cyan bg-signal-cyan/[0.06] text-signal-cyan font-medium'
+                            : 'border-transparent text-fg-muted hover:bg-surface-1 hover:text-fg',
                         )}
                       >
                         {item.title}
                         {item.isNew && (
-                          <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 uppercase tracking-widest leading-none">
+                          <span className="rounded bg-signal-green/15 px-1.5 py-0.5 text-caption text-signal-green leading-none">
                             New
                           </span>
                         )}
                         {item.isExperimental && (
-                          <span className="rounded bg-amber-500/20 px-1.5 py-0.5 text-[10px] font-medium text-amber-400 uppercase tracking-widest leading-none">
+                          <span className="rounded bg-signal-amber/15 px-1.5 py-0.5 text-caption text-signal-amber leading-none">
                             Exp
                           </span>
                         )}

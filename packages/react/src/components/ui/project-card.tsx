@@ -57,7 +57,7 @@ const ProjectCardMedia = React.forwardRef<HTMLDivElement, ProjectCardMediaProps>
   ({ className, src, alt, children, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('relative w-full h-44 bg-slate-900/90 overflow-hidden border-b border-white/[0.06]', className)}
+      className={cn('relative w-full h-44 bg-slate-900/90 overflow-hidden border-b border-border-hairline', className)}
       {...props}
     >
       {src ? (
@@ -107,7 +107,7 @@ const ProjectCardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('p-5 pt-3 border-t border-white/[0.06] flex items-center justify-between gap-3 mt-auto', className)}
+      className={cn('p-5 pt-3 border-t border-border-hairline flex items-center justify-between gap-3 mt-auto', className)}
       {...props}
     />
   )

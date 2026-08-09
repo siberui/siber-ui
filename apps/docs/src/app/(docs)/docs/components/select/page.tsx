@@ -85,7 +85,7 @@ export default function SelectDocsPage() {
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Neon Variant</h3>
             <Playground code={`<Select variant="neon" label="Model" options={...} />`}>
-              <div className="flex items-center justify-center p-8 w-full max-w-sm mx-auto bg-slate-900/40 rounded-xl border border-white/5">
+              <div className="flex items-center justify-center p-8 w-full max-w-sm mx-auto bg-slate-900/40 rounded-xl border border-border-hairline">
                 <Select 
                   variant="neon"
                   label="AI Model" 

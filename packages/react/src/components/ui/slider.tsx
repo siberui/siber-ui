@@ -42,7 +42,7 @@ const rangeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-white',
+        default: 'bg-signal-cyan',
         neon: 'bg-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.5)]',
         neonPurple: 'bg-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.5)]',
         neonGreen: 'bg-emerald-400 shadow-[0_0_10px_rgba(57,255,20,0.5)]',
@@ -63,7 +63,7 @@ const thumbVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-white bg-white focus-visible:ring-slate-300',
+        default: 'border-signal-cyan bg-signal-cyan focus-visible:ring-cyan-300/50',
         neon: 'border-cyan-400 bg-cyan-950 focus-visible:ring-cyan-400/50 shadow-[0_0_15px_rgba(0,240,255,0.6)]',
         neonPurple: 'border-purple-400 bg-purple-950 focus-visible:ring-purple-400/50 shadow-[0_0_15px_rgba(168,85,247,0.6)]',
         neonGreen: 'border-emerald-400 bg-emerald-950 focus-visible:ring-emerald-400/50 shadow-[0_0_15px_rgba(57,255,20,0.6)]',

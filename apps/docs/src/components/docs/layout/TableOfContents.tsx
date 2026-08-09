@@ -49,7 +49,7 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
         <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
           On this page
         </h4>
-        <ul className="flex flex-col gap-2 border-l border-white/10 pl-3">
+        <ul className="flex flex-col gap-2 border-l border-border-hairline pl-3">
           {headings.map((heading) => {
             const isActive = activeId === heading.id;
             return (

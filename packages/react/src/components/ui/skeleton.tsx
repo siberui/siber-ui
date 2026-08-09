@@ -11,11 +11,11 @@ const skeletonVariants = cva(
     variants: {
       variant: {
         /** Subtle grey shimmer — neutral contexts */
-        default: 'bg-slate-900/40 border border-white/[0.04] backdrop-blur-[2px]',
+        default: 'bg-slate-900/40 border border-border-hairline backdrop-blur-[2px]',
         /** Cyan-tinted shimmer — neon / highlighted contexts */
         neon: 'bg-cyan-950/20 border border-cyan-500/20 backdrop-blur-[2px] shadow-[0_0_15px_rgba(0,240,255,0.05)]',
         /** Glassy effect */
-        glass: 'bg-white/[0.02] border border-white/[0.08] backdrop-blur-md',
+        glass: 'bg-white/[0.02] border border-border-hairline backdrop-blur-md',
       },
       animation: {
         pulse: '',
@@ -146,8 +146,8 @@ const SkeletonCard = ({
         variant === 'neon'
         ? 'border-cyan-500/20 bg-cyan-950/10 shadow-[0_0_20px_rgba(0,240,255,0.05)]'
         : variant === 'glass'
-        ? 'border-white/[0.08] bg-white/[0.02] backdrop-blur-xl'
-        : 'border-white/[0.04] bg-slate-900/40',
+        ? 'border-border-hairline bg-white/[0.02] backdrop-blur-xl'
+        : 'border-border-hairline bg-slate-900/40',
       className
     )}
     {...props}

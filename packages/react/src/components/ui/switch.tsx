@@ -8,36 +8,54 @@ const switchTrackVariants = cva(
   [
     'relative inline-flex items-center shrink-0 cursor-pointer rounded-full p-0.5',
     'border transition-all duration-300 ease-out',
-    'bg-white/[0.05] backdrop-blur-sm',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950',
+    'bg-surface-1',
+    'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-bg',
     'disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
   ].join(' '),
   {
     variants: {
       variant: {
-        default: [
-          'border-white/[0.12]',
-          'data-[state=checked]:bg-slate-800/80 data-[state=checked]:border-cyan-500/40',
-          'data-[state=checked]:shadow-[0_0_15px_rgba(0,240,255,0.12)]',
-          'hover:border-white/[0.2]',
+        primary: [
+          'border-primary-600 bg-primary',
+          'hover:border-primary-500 hover:bg-primary-600',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-700 data-[state=checked]:border-primary-500',
+        ].join(' '),
+        'primary-subtle': [
+          'border-primary-border bg-primary-subtle',
+          'hover:border-primary-400 hover:bg-primary-hover',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-active data-[state=checked]:border-primary-500',
+        ].join(' '),
+        'primary-outline': [
+          'border-primary-border bg-transparent',
+          'hover:border-primary-400 hover:bg-primary-subtle',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-subtle data-[state=checked]:border-primary-500',
         ].join(' '),
         neon: [
-          'border-cyan-500/20',
-          'data-[state=checked]:bg-cyan-950/40 data-[state=checked]:border-cyan-400/50',
-          'data-[state=checked]:shadow-[0_0_20px_rgba(0,240,255,0.2)]',
-          'hover:border-cyan-500/35',
+          'border-primary-border bg-surface-1 shadow-glow-cyan',
+          'hover:border-primary-400 hover:bg-surface-2',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-surface-3 data-[state=checked]:border-primary-500 data-[state=checked]:shadow-glow-cyan-hover',
+        ].join(' '),
+        default: [
+          'border-primary-border bg-transparent',
+          'hover:border-primary-400 hover:bg-primary-subtle',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:bg-primary-subtle data-[state=checked]:border-primary-500',
         ].join(' '),
         neonPurple: [
-          'border-purple-500/20',
-          'data-[state=checked]:bg-purple-950/40 data-[state=checked]:border-purple-400/50',
-          'data-[state=checked]:shadow-[0_0_20px_rgba(168,85,247,0.2)]',
-          'hover:border-purple-500/35',
+          'border-secondary-border',
+          'data-[state=checked]:bg-secondary-subtle data-[state=checked]:border-secondary-500',
+          'data-[state=checked]:shadow-glow-purple',
+          'hover:border-secondary-400',
         ].join(' '),
         neonGreen: [
-          'border-emerald-500/20',
-          'data-[state=checked]:bg-emerald-950/40 data-[state=checked]:border-emerald-400/50',
-          'data-[state=checked]:shadow-[0_0_20px_rgba(57,255,20,0.2)]',
-          'hover:border-emerald-500/35',
+          'border-success-border',
+          'data-[state=checked]:bg-success-subtle data-[state=checked]:border-success-500',
+          'data-[state=checked]:shadow-glow-green',
+          'hover:border-success-400',
         ].join(' '),
       },
       switchSize: {
@@ -50,25 +68,37 @@ const switchTrackVariants = cva(
       variant: 'default',
       switchSize: 'md',
     },
-  }
+  },
 );
 
 const thumbColorMap: Record<string, { off: string; on: string }> = {
+  primary: {
+    off: 'bg-primary-foreground/70',
+    on: 'bg-primary-foreground',
+  },
+  'primary-subtle': {
+    off: 'bg-primary/35',
+    on: 'bg-primary',
+  },
+  'primary-outline': {
+    off: 'bg-primary/35',
+    on: 'bg-primary',
+  },
   default: {
-    off: 'bg-slate-400',
-    on: 'bg-cyan-400 shadow-[0_0_8px_rgba(0,240,255,0.4)]',
+    off: 'bg-primary/35',
+    on: 'bg-primary',
   },
   neon: {
-    off: 'bg-cyan-800/60',
-    on: 'bg-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.5)]',
+    off: 'bg-primary/40',
+    on: 'bg-primary shadow-glow-cyan',
   },
   neonPurple: {
-    off: 'bg-purple-800/60',
-    on: 'bg-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.5)]',
+    off: 'bg-secondary/40',
+    on: 'bg-secondary shadow-glow-purple',
   },
   neonGreen: {
-    off: 'bg-emerald-800/60',
-    on: 'bg-emerald-300 shadow-[0_0_10px_rgba(57,255,20,0.5)]',
+    off: 'bg-success/40',
+    on: 'bg-success shadow-glow-green',
   },
 };
 
@@ -79,7 +109,8 @@ const thumbSizeMap: Record<string, { size: string; translate: string }> = {
 };
 
 export interface SwitchProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>,
     VariantProps<typeof switchTrackVariants> {
   label?: string;
   description?: string;
@@ -104,7 +135,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const switchId = id || React.useId();
     const [isChecked, setIsChecked] = React.useState(defaultChecked ?? false);
@@ -119,7 +150,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         onChange?.(e);
         onCheckedChange?.(e.target.checked);
       },
-      [controlled, onChange, onCheckedChange]
+      [controlled, onChange, onCheckedChange],
     );
 
     const thumb = thumbColorMap[variant || 'default'];
@@ -128,12 +159,12 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     const labelContent = (label || description) && (
       <div className="flex flex-col gap-0.5">
         {label && (
-          <span className="text-sm text-slate-200 font-sans leading-none transition-colors duration-200 group-hover:text-white">
+          <span className="text-sm text-fg font-sans leading-none transition-colors duration-200 group-hover:text-fg">
             {label}
           </span>
         )}
         {description && (
-          <span className="text-[11px] text-slate-500 font-mono">
+          <span className="text-[11px] text-fg-subtle font-mono">
             {description}
           </span>
         )}
@@ -145,7 +176,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         htmlFor={switchId}
         className={cn(
           'inline-flex items-center gap-2.5 cursor-pointer group select-none',
-          disabled && 'cursor-not-allowed opacity-40'
+          disabled && 'cursor-not-allowed opacity-40',
         )}
       >
         {labelPosition === 'left' && labelContent}
@@ -160,14 +191,14 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
             defaultChecked={!controlled ? defaultChecked : undefined}
             onChange={handleChange}
             disabled={disabled}
-            className="sr-only"
+            className="peer sr-only"
             {...props}
           />
           <div
             data-state={currentChecked ? 'checked' : 'unchecked'}
             className={cn(
               switchTrackVariants({ variant, switchSize }),
-              className
+              className,
             )}
           >
             <span
@@ -175,7 +206,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
                 'pointer-events-none block rounded-full transition-transform duration-300 ease-out shrink-0',
                 thumbSize.size,
                 currentChecked ? thumb.on : thumb.off,
-                currentChecked ? thumbSize.translate : 'translate-x-0'
+                currentChecked ? thumbSize.translate : 'translate-x-0',
               )}
             />
           </div>
@@ -184,7 +215,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         {labelPosition === 'right' && labelContent}
       </label>
     );
-  }
+  },
 );
 
 Switch.displayName = 'Switch';

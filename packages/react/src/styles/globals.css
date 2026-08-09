@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+/* ==========================================================================
+   SIBER UI — DESIGN TOKEN FOUNDATION
+   "An operating system for futuristic interfaces."
+   Tokens drive every component. Signal colors carry meaning, not decoration:
+     cyan = primary interaction · green = operational · amber = warning
+     rose = critical/destructive · violet = special/system
+   ========================================================================== */
+
 @layer base {
   :root {
     --font-sans:
@@ -7,54 +15,431 @@
       sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    /* Cyber Ambient Colors */
-    --cyber-black: #06090e;
-    --cyber-dark: #0d121d;
-    --cyber-surface: #141c2c;
-    --cyber-surface-hover: #1e293b;
+    /* ---- Surface system — near-black levels, not pure black ---- */
+    --sb-bg: #05070a;
+    --sb-surface-1: #080b10;
+    --sb-surface-2: #0b1017;
+    --sb-surface-3: #101620;
+    --sb-surface-4: #141a26;
 
-    /* Neon Accents */
-    --neon-cyan: #00f0ff;
-    --neon-purple: #a855f7;
-    --neon-green: #39ff14;
-    --neon-pink: #ff007f;
+    /* ---- Foreground ---- */
+    --sb-fg: #eceef2;
+    --sb-fg-muted: rgba(236, 238, 242, 0.64);
+    --sb-fg-subtle: rgba(236, 238, 242, 0.38);
 
-    /* Soft Aura Glows — wider spread, lower opacity for premium diffusion */
+    /* ---- Border — hairline-first hierarchy. Strong is reserved for real
+       emphasis (selected/focus/error), never a baseline default. ---- */
+    --sb-border-hairline: rgba(236, 238, 242, 0.05);
+    --sb-border-subtle: rgba(236, 238, 242, 0.08);
+    --sb-border: var(--sb-border-subtle);
+    --sb-border-strong: rgba(255, 255, 255, 0.16);
+
+    /* ---- Signal colors — semantic, not decorative ---- */
+    --sb-signal-cyan: #00d9e8;
+    --sb-signal-violet: #a78bfa;
+    --sb-signal-green: #34d399;
+    --sb-signal-amber: #f5a524;
+    --sb-signal-rose: #fb5a7e;
+
+    /* ---- Semantic role mapping ---- */
+    --sb-primary: var(--sb-signal-cyan);
+    --sb-secondary: var(--sb-signal-violet);
+    --sb-success: var(--sb-signal-green);
+    --sb-warning: var(--sb-signal-amber);
+    --sb-danger: var(--sb-signal-rose);
+    --sb-info: var(--sb-signal-cyan);
+
+    /* ---- Semantic intensity scale + state tokens ---- */
+    --sb-primary-50: color-mix(in srgb, var(--sb-primary) 8%, white);
+    --sb-primary-100: color-mix(in srgb, var(--sb-primary) 14%, white);
+    --sb-primary-200: color-mix(in srgb, var(--sb-primary) 24%, white);
+    --sb-primary-300: color-mix(in srgb, var(--sb-primary) 36%, white);
+    --sb-primary-400: color-mix(in srgb, var(--sb-primary) 52%, white);
+    --sb-primary-500: var(--sb-primary);
+    --sb-primary-600: color-mix(in srgb, var(--sb-primary) 86%, black);
+    --sb-primary-700: color-mix(in srgb, var(--sb-primary) 72%, black);
+    --sb-primary-800: color-mix(in srgb, var(--sb-primary) 58%, black);
+    --sb-primary-900: color-mix(in srgb, var(--sb-primary) 44%, black);
+    --sb-primary-foreground: var(--sb-bg);
+    --sb-primary-subtle: color-mix(in srgb, var(--sb-primary) 12%, transparent);
+    --sb-primary-border: color-mix(in srgb, var(--sb-primary) 34%, transparent);
+    --sb-primary-hover: color-mix(in srgb, var(--sb-primary) 16%, transparent);
+    --sb-primary-active: color-mix(in srgb, var(--sb-primary) 24%, transparent);
+    --sb-primary-disabled: color-mix(
+      in srgb,
+      var(--sb-primary) 18%,
+      transparent
+    );
+    --sb-primary-focus: color-mix(in srgb, var(--sb-primary) 38%, transparent);
+
+    --sb-secondary-50: color-mix(in srgb, var(--sb-secondary) 8%, white);
+    --sb-secondary-100: color-mix(in srgb, var(--sb-secondary) 14%, white);
+    --sb-secondary-200: color-mix(in srgb, var(--sb-secondary) 24%, white);
+    --sb-secondary-300: color-mix(in srgb, var(--sb-secondary) 36%, white);
+    --sb-secondary-400: color-mix(in srgb, var(--sb-secondary) 52%, white);
+    --sb-secondary-500: var(--sb-secondary);
+    --sb-secondary-600: color-mix(in srgb, var(--sb-secondary) 86%, black);
+    --sb-secondary-700: color-mix(in srgb, var(--sb-secondary) 72%, black);
+    --sb-secondary-800: color-mix(in srgb, var(--sb-secondary) 58%, black);
+    --sb-secondary-900: color-mix(in srgb, var(--sb-secondary) 44%, black);
+    --sb-secondary-foreground: var(--sb-bg);
+    --sb-secondary-subtle: color-mix(
+      in srgb,
+      var(--sb-secondary) 12%,
+      transparent
+    );
+    --sb-secondary-border: color-mix(
+      in srgb,
+      var(--sb-secondary) 34%,
+      transparent
+    );
+    --sb-secondary-hover: color-mix(
+      in srgb,
+      var(--sb-secondary) 16%,
+      transparent
+    );
+    --sb-secondary-active: color-mix(
+      in srgb,
+      var(--sb-secondary) 24%,
+      transparent
+    );
+    --sb-secondary-disabled: color-mix(
+      in srgb,
+      var(--sb-secondary) 18%,
+      transparent
+    );
+    --sb-secondary-focus: color-mix(
+      in srgb,
+      var(--sb-secondary) 38%,
+      transparent
+    );
+
+    --sb-success-50: color-mix(in srgb, var(--sb-success) 8%, white);
+    --sb-success-100: color-mix(in srgb, var(--sb-success) 14%, white);
+    --sb-success-200: color-mix(in srgb, var(--sb-success) 24%, white);
+    --sb-success-300: color-mix(in srgb, var(--sb-success) 36%, white);
+    --sb-success-400: color-mix(in srgb, var(--sb-success) 52%, white);
+    --sb-success-500: var(--sb-success);
+    --sb-success-600: color-mix(in srgb, var(--sb-success) 86%, black);
+    --sb-success-700: color-mix(in srgb, var(--sb-success) 72%, black);
+    --sb-success-800: color-mix(in srgb, var(--sb-success) 58%, black);
+    --sb-success-900: color-mix(in srgb, var(--sb-success) 44%, black);
+    --sb-success-foreground: var(--sb-bg);
+    --sb-success-subtle: color-mix(in srgb, var(--sb-success) 12%, transparent);
+    --sb-success-border: color-mix(in srgb, var(--sb-success) 34%, transparent);
+    --sb-success-hover: color-mix(in srgb, var(--sb-success) 16%, transparent);
+    --sb-success-active: color-mix(in srgb, var(--sb-success) 24%, transparent);
+    --sb-success-disabled: color-mix(
+      in srgb,
+      var(--sb-success) 18%,
+      transparent
+    );
+    --sb-success-focus: color-mix(in srgb, var(--sb-success) 38%, transparent);
+
+    --sb-warning-50: color-mix(in srgb, var(--sb-warning) 8%, white);
+    --sb-warning-100: color-mix(in srgb, var(--sb-warning) 14%, white);
+    --sb-warning-200: color-mix(in srgb, var(--sb-warning) 24%, white);
+    --sb-warning-300: color-mix(in srgb, var(--sb-warning) 36%, white);
+    --sb-warning-400: color-mix(in srgb, var(--sb-warning) 52%, white);
+    --sb-warning-500: var(--sb-warning);
+    --sb-warning-600: color-mix(in srgb, var(--sb-warning) 86%, black);
+    --sb-warning-700: color-mix(in srgb, var(--sb-warning) 72%, black);
+    --sb-warning-800: color-mix(in srgb, var(--sb-warning) 58%, black);
+    --sb-warning-900: color-mix(in srgb, var(--sb-warning) 44%, black);
+    --sb-warning-foreground: var(--sb-bg);
+    --sb-warning-subtle: color-mix(in srgb, var(--sb-warning) 12%, transparent);
+    --sb-warning-border: color-mix(in srgb, var(--sb-warning) 34%, transparent);
+    --sb-warning-hover: color-mix(in srgb, var(--sb-warning) 16%, transparent);
+    --sb-warning-active: color-mix(in srgb, var(--sb-warning) 24%, transparent);
+    --sb-warning-disabled: color-mix(
+      in srgb,
+      var(--sb-warning) 18%,
+      transparent
+    );
+    --sb-warning-focus: color-mix(in srgb, var(--sb-warning) 38%, transparent);
+
+    --sb-danger-50: color-mix(in srgb, var(--sb-danger) 8%, white);
+    --sb-danger-100: color-mix(in srgb, var(--sb-danger) 14%, white);
+    --sb-danger-200: color-mix(in srgb, var(--sb-danger) 24%, white);
+    --sb-danger-300: color-mix(in srgb, var(--sb-danger) 36%, white);
+    --sb-danger-400: color-mix(in srgb, var(--sb-danger) 52%, white);
+    --sb-danger-500: var(--sb-danger);
+    --sb-danger-600: color-mix(in srgb, var(--sb-danger) 86%, black);
+    --sb-danger-700: color-mix(in srgb, var(--sb-danger) 72%, black);
+    --sb-danger-800: color-mix(in srgb, var(--sb-danger) 58%, black);
+    --sb-danger-900: color-mix(in srgb, var(--sb-danger) 44%, black);
+    --sb-danger-foreground: var(--sb-bg);
+    --sb-danger-subtle: color-mix(in srgb, var(--sb-danger) 12%, transparent);
+    --sb-danger-border: color-mix(in srgb, var(--sb-danger) 34%, transparent);
+    --sb-danger-hover: color-mix(in srgb, var(--sb-danger) 16%, transparent);
+    --sb-danger-active: color-mix(in srgb, var(--sb-danger) 24%, transparent);
+    --sb-danger-disabled: color-mix(in srgb, var(--sb-danger) 18%, transparent);
+    --sb-danger-focus: color-mix(in srgb, var(--sb-danger) 38%, transparent);
+
+    /* ---- Legacy aliases (kept for existing usages) ---- */
+    --cyber-black: var(--sb-bg);
+    --cyber-dark: var(--sb-surface-1);
+    --cyber-surface: var(--sb-surface-2);
+    --cyber-surface-hover: var(--sb-surface-3);
+    --neon-cyan: var(--sb-signal-cyan);
+    --neon-purple: var(--sb-signal-violet);
+    --neon-green: var(--sb-signal-green);
+    --neon-pink: var(--sb-signal-rose);
+
+    /* ---- Radius scale ---- */
+    --sb-radius-sm: 0.25rem;
+    --sb-radius-md: 0.5rem;
+    --sb-radius-lg: 0.75rem;
+    --sb-radius-xl: 1rem;
+
+    /* ---- Motion tokens ---- */
+    --sb-motion-instant: 100ms;
+    --sb-motion-fast: 150ms;
+    --sb-motion-normal: 220ms;
+    --sb-motion-slow: 400ms;
+    --sb-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --sb-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --sb-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+
+    /* ---- Z-index layers ---- */
+    --sb-z-base: 0;
+    --sb-z-raised: 10;
+    --sb-z-overlay: 40;
+    --sb-z-modal: 50;
+    --sb-z-popover: 60;
+    --sb-z-toast: 70;
+    --sb-z-tooltip: 80;
+
+    /* ---- Restrained signal glows — used sparingly, as a system ---- */
     --glow-cyan:
-      0 0 20px rgba(0, 240, 255, 0.15), 0 0 50px rgba(0, 240, 255, 0.08),
-      0 0 80px rgba(0, 240, 255, 0.04);
-
+      0 0 0 1px rgba(0, 217, 232, 0.15), 0 0 16px rgba(0, 217, 232, 0.12);
     --glow-purple:
-      0 0 20px rgba(168, 85, 247, 0.15), 0 0 50px rgba(168, 85, 247, 0.08),
-      0 0 80px rgba(168, 85, 247, 0.04);
-
+      0 0 0 1px rgba(167, 139, 250, 0.15), 0 0 16px rgba(167, 139, 250, 0.12);
     --glow-green:
-      0 0 20px rgba(57, 255, 20, 0.15), 0 0 50px rgba(57, 255, 20, 0.08),
-      0 0 80px rgba(57, 255, 20, 0.04);
-
+      0 0 0 1px rgba(52, 211, 153, 0.15), 0 0 16px rgba(52, 211, 153, 0.12);
     --glow-rose:
-      0 0 20px rgba(244, 63, 94, 0.15), 0 0 50px rgba(244, 63, 94, 0.08),
-      0 0 80px rgba(244, 63, 94, 0.04);
+      0 0 0 1px rgba(251, 90, 126, 0.15), 0 0 16px rgba(251, 90, 126, 0.12);
 
-    /* Hover Aura Intensified — still soft, slightly brighter */
     --glow-cyan-hover:
-      0 0 25px rgba(0, 240, 255, 0.22), 0 0 60px rgba(0, 240, 255, 0.12),
-      0 0 100px rgba(0, 240, 255, 0.05);
-
+      0 0 0 1px rgba(0, 217, 232, 0.25), 0 0 22px rgba(0, 217, 232, 0.16);
     --glow-purple-hover:
-      0 0 25px rgba(168, 85, 247, 0.22), 0 0 60px rgba(168, 85, 247, 0.12),
-      0 0 100px rgba(168, 85, 247, 0.05);
-
+      0 0 0 1px rgba(167, 139, 250, 0.25), 0 0 22px rgba(167, 139, 250, 0.16);
     --glow-green-hover:
-      0 0 25px rgba(57, 255, 20, 0.22), 0 0 60px rgba(57, 255, 20, 0.12),
-      0 0 100px rgba(57, 255, 20, 0.05);
+      0 0 0 1px rgba(52, 211, 153, 0.25), 0 0 22px rgba(52, 211, 153, 0.16);
 
     /* Cyber Icon Stroke Width — thinner for hi-tech precision */
     --icon-stroke: 1.5;
   }
 }
 
-/* Soft Aura Glow Utilities */
+/* Bind tokens to Tailwind v4 utilities: bg-surface-1, text-fg-muted, border-signal-cyan, etc. */
+@theme inline {
+  --color-bg: var(--sb-bg);
+  --color-surface-1: var(--sb-surface-1);
+  --color-surface-2: var(--sb-surface-2);
+  --color-surface-3: var(--sb-surface-3);
+  --color-surface-4: var(--sb-surface-4);
+
+  --color-fg: var(--sb-fg);
+  --color-fg-muted: var(--sb-fg-muted);
+  --color-fg-subtle: var(--sb-fg-subtle);
+
+  --color-border-default: var(--sb-border);
+  --color-border-hairline: var(--sb-border-hairline);
+  --color-border-subtle: var(--sb-border-subtle);
+  --color-border-strong: var(--sb-border-strong);
+
+  --color-signal-cyan: var(--sb-signal-cyan);
+  --color-signal-violet: var(--sb-signal-violet);
+  --color-signal-green: var(--sb-signal-green);
+  --color-signal-amber: var(--sb-signal-amber);
+  --color-signal-rose: var(--sb-signal-rose);
+
+  --color-primary: var(--sb-primary);
+  --color-primary-50: var(--sb-primary-50);
+  --color-primary-100: var(--sb-primary-100);
+  --color-primary-200: var(--sb-primary-200);
+  --color-primary-300: var(--sb-primary-300);
+  --color-primary-400: var(--sb-primary-400);
+  --color-primary-500: var(--sb-primary-500);
+  --color-primary-600: var(--sb-primary-600);
+  --color-primary-700: var(--sb-primary-700);
+  --color-primary-800: var(--sb-primary-800);
+  --color-primary-900: var(--sb-primary-900);
+  --color-primary-foreground: var(--sb-primary-foreground);
+  --color-primary-subtle: var(--sb-primary-subtle);
+  --color-primary-border: var(--sb-primary-border);
+  --color-primary-hover: var(--sb-primary-hover);
+  --color-primary-active: var(--sb-primary-active);
+  --color-primary-disabled: var(--sb-primary-disabled);
+  --color-primary-focus: var(--sb-primary-focus);
+  --color-secondary: var(--sb-secondary);
+  --color-secondary-50: var(--sb-secondary-50);
+  --color-secondary-100: var(--sb-secondary-100);
+  --color-secondary-200: var(--sb-secondary-200);
+  --color-secondary-300: var(--sb-secondary-300);
+  --color-secondary-400: var(--sb-secondary-400);
+  --color-secondary-500: var(--sb-secondary-500);
+  --color-secondary-600: var(--sb-secondary-600);
+  --color-secondary-700: var(--sb-secondary-700);
+  --color-secondary-800: var(--sb-secondary-800);
+  --color-secondary-900: var(--sb-secondary-900);
+  --color-secondary-foreground: var(--sb-secondary-foreground);
+  --color-secondary-subtle: var(--sb-secondary-subtle);
+  --color-secondary-border: var(--sb-secondary-border);
+  --color-secondary-hover: var(--sb-secondary-hover);
+  --color-secondary-active: var(--sb-secondary-active);
+  --color-secondary-disabled: var(--sb-secondary-disabled);
+  --color-secondary-focus: var(--sb-secondary-focus);
+  --color-success: var(--sb-success);
+  --color-success-50: var(--sb-success-50);
+  --color-success-100: var(--sb-success-100);
+  --color-success-200: var(--sb-success-200);
+  --color-success-300: var(--sb-success-300);
+  --color-success-400: var(--sb-success-400);
+  --color-success-500: var(--sb-success-500);
+  --color-success-600: var(--sb-success-600);
+  --color-success-700: var(--sb-success-700);
+  --color-success-800: var(--sb-success-800);
+  --color-success-900: var(--sb-success-900);
+  --color-success-foreground: var(--sb-success-foreground);
+  --color-success-subtle: var(--sb-success-subtle);
+  --color-success-border: var(--sb-success-border);
+  --color-success-hover: var(--sb-success-hover);
+  --color-success-active: var(--sb-success-active);
+  --color-success-disabled: var(--sb-success-disabled);
+  --color-success-focus: var(--sb-success-focus);
+  --color-warning: var(--sb-warning);
+  --color-warning-50: var(--sb-warning-50);
+  --color-warning-100: var(--sb-warning-100);
+  --color-warning-200: var(--sb-warning-200);
+  --color-warning-300: var(--sb-warning-300);
+  --color-warning-400: var(--sb-warning-400);
+  --color-warning-500: var(--sb-warning-500);
+  --color-warning-600: var(--sb-warning-600);
+  --color-warning-700: var(--sb-warning-700);
+  --color-warning-800: var(--sb-warning-800);
+  --color-warning-900: var(--sb-warning-900);
+  --color-warning-foreground: var(--sb-warning-foreground);
+  --color-warning-subtle: var(--sb-warning-subtle);
+  --color-warning-border: var(--sb-warning-border);
+  --color-warning-hover: var(--sb-warning-hover);
+  --color-warning-active: var(--sb-warning-active);
+  --color-warning-disabled: var(--sb-warning-disabled);
+  --color-warning-focus: var(--sb-warning-focus);
+  --color-danger: var(--sb-danger);
+  --color-danger-50: var(--sb-danger-50);
+  --color-danger-100: var(--sb-danger-100);
+  --color-danger-200: var(--sb-danger-200);
+  --color-danger-300: var(--sb-danger-300);
+  --color-danger-400: var(--sb-danger-400);
+  --color-danger-500: var(--sb-danger-500);
+  --color-danger-600: var(--sb-danger-600);
+  --color-danger-700: var(--sb-danger-700);
+  --color-danger-800: var(--sb-danger-800);
+  --color-danger-900: var(--sb-danger-900);
+  --color-danger-foreground: var(--sb-danger-foreground);
+  --color-danger-subtle: var(--sb-danger-subtle);
+  --color-danger-border: var(--sb-danger-border);
+  --color-danger-hover: var(--sb-danger-hover);
+  --color-danger-active: var(--sb-danger-active);
+  --color-danger-disabled: var(--sb-danger-disabled);
+  --color-danger-focus: var(--sb-danger-focus);
+  --color-info: var(--sb-info);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY ROLES — a small, deliberate set of text roles.
+   Uppercase/mono are tools for metadata, not the default voice of the UI.
+   ========================================================================== */
+
+.text-display {
+  font-family: var(--font-sans);
+  font-size: 2.75rem;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.text-heading {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.text-title {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.text-body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+.text-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.text-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.text-code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   SURFACE SYSTEM — layered elevation communicated through luminance,
+   border intensity and shadow depth rather than glow.
+   ========================================================================== */
+
+.surface-0 {
+  background-color: var(--sb-bg);
+  border: 1px solid transparent;
+}
+.surface-1 {
+  background-color: var(--sb-surface-1);
+  border: 1px solid var(--sb-border);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+.surface-2 {
+  background-color: var(--sb-surface-2);
+  border: 1px solid var(--sb-border);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 8px 24px rgba(0, 0, 0, 0.28);
+}
+.surface-3 {
+  background-color: var(--sb-surface-3);
+  border: 1px solid var(--sb-border-strong);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 16px 40px rgba(0, 0, 0, 0.4);
+}
+.surface-4 {
+  background-color: var(--sb-surface-4);
+  border: 1px solid var(--sb-border-strong);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 24px 64px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+/* Soft Aura Glow Utilities — apply deliberately, not by default */
 .shadow-glow-cyan {
   box-shadow: var(--glow-cyan);
 }
@@ -77,67 +462,62 @@
   box-shadow: var(--glow-rose);
 }
 
-/* Subtle Glassmorphism Utility */
+/* Subtle Glassmorphism Utility — reserved for overlay/modal surfaces */
 .glass-surface {
-  background: rgba(13, 18, 29, 0.7);
+  background: rgba(11, 16, 23, 0.72);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
-/* Gradient Border via mask-composite technique (reusable) */
+/* ==========================================================================
+   GEOMETRY PRIMITIVES — SiberUI's signature technical vocabulary.
+   Used by CornerFrame, SignalBorder, Scanline, TechLabel, StatusDot.
+   ========================================================================== */
+
+/* SignalBorder: a thin 1px gradient edge fading top -> transparent */
+.signal-border {
+  position: relative;
+}
+.signal-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--sb-signal-color, var(--sb-signal-cyan)) 0%,
+    transparent 55%
+  );
+  opacity: 0.5;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Legacy gradient-border-* aliases */
 .gradient-border-cyan {
-  position: relative;
+  --sb-signal-color: var(--sb-signal-cyan);
 }
-.gradient-border-cyan::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 240, 255, 0.5) 0%,
-    rgba(0, 240, 255, 0) 50%
-  );
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  pointer-events: none;
-}
-
-.gradient-border-purple {
-  position: relative;
-}
-.gradient-border-purple::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    180deg,
-    rgba(168, 85, 247, 0.5) 0%,
-    rgba(168, 85, 247, 0) 50%
-  );
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  pointer-events: none;
-}
-
+.gradient-border-cyan,
+.gradient-border-purple,
 .gradient-border-green {
   position: relative;
 }
+.gradient-border-purple {
+  --sb-signal-color: var(--sb-signal-violet);
+}
+.gradient-border-green {
+  --sb-signal-color: var(--sb-signal-green);
+}
+.gradient-border-cyan::before,
+.gradient-border-purple::before,
 .gradient-border-green::before {
   content: '';
   position: absolute;
@@ -146,9 +526,10 @@
   padding: 1px;
   background: linear-gradient(
     180deg,
-    rgba(57, 255, 20, 0.5) 0%,
-    rgba(57, 255, 20, 0) 50%
+    var(--sb-signal-color) 0%,
+    transparent 50%
   );
+  opacity: 0.5;
   mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -160,16 +541,219 @@
   pointer-events: none;
 }
 
+/* CornerFrame: four small corner marks — a controlled, reusable angular accent */
+.corner-mark {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--sb-signal-color, rgba(0, 217, 232, 0.5));
+  pointer-events: none;
+}
+
+/* Terminal chrome — opt-in surface accent: three window-control dots
+   top-left + a monospace micro-label top-right (via data-chrome-label).
+   Pure CSS, no extra DOM nodes: apply the `.chrome` class and optionally
+   set `data-chrome-label="COMPONENT / 01"` on any Card/Panel-like surface. */
+.chrome {
+  position: relative;
+  padding-top: 1.75rem;
+}
+.chrome::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  width: 20px;
+  height: 6px;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      circle at 3px 3px,
+      var(--sb-border-strong) 1.4px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle at 11px 3px,
+      var(--sb-border-strong) 1.4px,
+      transparent 1.6px
+    ),
+    radial-gradient(
+      circle at 19px 3px,
+      var(--sb-border-strong) 1.4px,
+      transparent 1.6px
+    );
+}
+.chrome::after {
+  content: attr(data-chrome-label);
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sb-fg-subtle);
+  pointer-events: none;
+}
+
+/* Numbered row — monospace index column for list-style content
+   (e.g. "01 React"). Apply `.numbered-list` to the container and
+   `.numbered-row` to each row; no JS index prop required. */
+.numbered-list {
+  counter-reset: sb-row;
+}
+.numbered-row {
+  counter-increment: sb-row;
+  position: relative;
+  padding-left: 2rem;
+}
+.numbered-row::before {
+  content: counter(sb-row, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--sb-fg-subtle);
+}
+
+/* Controlled clipped-corner geometry — used sparingly, never on every card */
+.clip-tab {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.clip-corner {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
+    0 100%
+  );
+}
+
+/* Scanline overlay — a signature effect, applied deliberately via <Scanline /> */
+.scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@keyframes scanline-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.animate-scanline-sweep {
+  animation: scanline-sweep 4s linear infinite;
+}
+
+/* System backdrop — subtle grid, film grain and vignette. Fixed, inert. */
+.system-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: grid-drift 60s linear infinite;
+  mask-image: radial-gradient(
+    ellipse 90% 70% at 50% 0%,
+    black 40%,
+    transparent 90%
+  );
+}
+
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 64px 128px;
+  }
+}
+
+.system-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.system-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 120% 60% at 50% -10%,
+    rgba(0, 217, 232, 0.05),
+    transparent 60%
+  );
+}
+
+/* Cursor-proximity glow — updated via inline custom properties */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--glow-opacity, 0);
+  background: radial-gradient(
+    380px circle at var(--x, 50%) var(--y, 50%),
+    rgba(0, 217, 232, 0.06),
+    transparent 70%
+  );
+  transition: opacity 0.4s ease;
+}
+
+/* Status pulse — meaningful animation only, ties to Status/StatusDot */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 var(--sb-status-glow, rgba(52, 211, 153, 0.45));
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 0 3px transparent;
+  }
+}
+.status-dot {
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: caret-blink 1s step-end infinite;
+}
+
 /* Cyber Pulse — softer, more atmospheric */
 @keyframes cyber-pulse {
   0%,
   100% {
     opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6));
+    filter: drop-shadow(0 0 8px rgba(0, 217, 232, 0.6));
   }
   50% {
     opacity: 0.6;
-    filter: drop-shadow(0 0 3px rgba(0, 240, 255, 0.2));
+    filter: drop-shadow(0 0 3px rgba(0, 217, 232, 0.2));
   }
 }
 
@@ -182,13 +766,13 @@
   0%,
   100% {
     box-shadow:
-      0 0 20px rgba(0, 240, 255, 0.1),
-      0 0 40px rgba(0, 240, 255, 0.05);
+      0 0 20px rgba(0, 217, 232, 0.1),
+      0 0 40px rgba(0, 217, 232, 0.05);
   }
   50% {
     box-shadow:
-      0 0 30px rgba(0, 240, 255, 0.18),
-      0 0 60px rgba(0, 240, 255, 0.08);
+      0 0 30px rgba(0, 217, 232, 0.18),
+      0 0 60px rgba(0, 217, 232, 0.08);
   }
 }
 
@@ -394,6 +978,99 @@
   }
 }
 
+/* GlitchText HUD slice — periodic chromatic-split glitch burst. Two duplicate
+   text layers (red/cyan channel) punch through via clip-path for a fraction
+   of a long cycle, then settle — reads as a signal hiccup, not constant noise.
+   Applied via [data-glitch="slice"] + data-text (see <GlitchText variant="rgb|both">). */
+[data-glitch='slice']::before,
+[data-glitch='slice']::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  clip-path: inset(50% 0 50% 0);
+}
+
+[data-glitch='slice']::before {
+  color: var(--sb-signal-rose);
+  mix-blend-mode: screen;
+  animation: glitch-slice-a 7s steps(1, jump-none) infinite;
+}
+
+[data-glitch='slice']::after {
+  color: var(--sb-signal-cyan);
+  mix-blend-mode: screen;
+  animation: glitch-slice-b 7s steps(1, jump-none) infinite;
+}
+
+@keyframes glitch-slice-a {
+  0%,
+  91%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(50% 0 50% 0);
+  }
+  92% {
+    opacity: 0.85;
+    transform: translate3d(-3px, 0, 0);
+    clip-path: inset(12% 0 64% 0);
+  }
+  93% {
+    opacity: 0.85;
+    transform: translate3d(2px, 0, 0);
+    clip-path: inset(48% 0 22% 0);
+  }
+  94% {
+    opacity: 0.7;
+    transform: translate3d(-2px, 0, 0);
+    clip-path: inset(76% 0 4% 0);
+  }
+  95% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes glitch-slice-b {
+  0%,
+  91%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(50% 0 50% 0);
+  }
+  92% {
+    opacity: 0.85;
+    transform: translate3d(3px, 0, 0);
+    clip-path: inset(18% 0 56% 0);
+  }
+  93% {
+    opacity: 0.85;
+    transform: translate3d(-2px, 0, 0);
+    clip-path: inset(52% 0 18% 0);
+  }
+  94% {
+    opacity: 0.7;
+    transform: translate3d(2px, 0, 0);
+    clip-path: inset(80% 0 2% 0);
+  }
+  95% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-glitch='slice']::before,
+  [data-glitch='slice']::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
 /* Radar Scan Animation */
 @keyframes radar-spin {
   from {
@@ -452,4 +1129,32 @@
 }
 .animate-marquee-down {
   animation: marquee-down var(--marquee-duration, 30s) linear infinite;
+}
+
+/* Reserve space for JS-driven markers so layout never shifts */
+.marker-rail {
+  width: 2px;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY — decorative motion is a system, and it must be able to
+   step aside entirely for users who ask for reduced motion.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-cyber-pulse,
+  .animate-aura-breathe,
+  .animate-neon-flicker,
+  .animate-radar-spin,
+  .animate-shimmer-sweep,
+  .animate-border-beam-spin,
+  .animate-scanline-sweep,
+  .animate-marquee-left,
+  .animate-marquee-right,
+  .animate-marquee-up,
+  .animate-marquee-down,
+  .status-dot,
+  .caret,
+  .system-grid {
+    animation: none !important;
+  }
 }

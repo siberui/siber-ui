@@ -101,10 +101,10 @@ export default function TabsDocsPage() {
                     <TabsTrigger value="tab3" disabled>Logs</TabsTrigger>
                   </TabsList>
                   <TabsContent value="tab1">
-                    <div className="p-4 text-sm text-slate-400 border border-white/5 bg-white/[0.02] mt-4">Overview Content</div>
+                    <div className="p-4 text-sm text-slate-400 border border-border-hairline bg-white/[0.02] mt-4">Overview Content</div>
                   </TabsContent>
                   <TabsContent value="tab2">
-                    <div className="p-4 text-sm text-slate-400 border border-white/5 bg-white/[0.02] mt-4">Analytics Content</div>
+                    <div className="p-4 text-sm text-slate-400 border border-border-hairline bg-white/[0.02] mt-4">Analytics Content</div>
                   </TabsContent>
                 </Tabs>
               </div>

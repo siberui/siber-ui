@@ -17,8 +17,8 @@ export function InstallCommand() {
   const [activeTab, setActiveTab] = useState<PackageManager>('pnpm');
 
   return (
-    <div className="mb-10 w-full overflow-hidden rounded-lg border border-white/10 bg-[#121212]">
-      <div className="flex border-b border-white/10 bg-white/5 px-2">
+    <div className="mb-10 w-full overflow-hidden rounded-lg border border-border-hairline bg-[#121212]">
+      <div className="flex border-b border-border-hairline bg-white/5 px-2">
         {(Object.keys(commands) as PackageManager[]).map((pm) => (
           <button
             key={pm}

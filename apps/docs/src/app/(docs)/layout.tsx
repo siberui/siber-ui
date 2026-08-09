@@ -7,7 +7,7 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#06090e] text-slate-100">
+    <div className="flex min-h-screen flex-col bg-bg text-fg">
       <TopNav />
       <div className="mx-auto flex w-full max-w-7xl flex-1 items-start px-6">
         <DocSidebar />

@@ -24,7 +24,7 @@ export function CopyButton({ text, className }: { text: string; className?: stri
         'inline-flex h-6 w-6 items-center justify-center rounded-md border transition-colors',
         copied
           ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400'
-          : 'border-white/10 bg-white/5 text-slate-400 hover:bg-white/10 hover:text-slate-100',
+          : 'border-border-hairline bg-white/5 text-slate-400 hover:bg-white/10 hover:text-slate-100',
         className
       )}
       aria-label="Copy to clipboard"

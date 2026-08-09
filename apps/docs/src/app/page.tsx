@@ -139,6 +139,11 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#06090e] text-slate-100">
+      {/* Subtle background grid/noise/vignette texture — CSS-only, shared token from @siberui/react */}
+      <div className="system-grid" />
+      <div className="system-noise" />
+      <div className="system-vignette" />
+
       {/* Background ambient radial glows */}
       <div
         className={`pointer-events-none absolute inset-0 transition-all duration-500 ${getAccentGradient()}`}
@@ -146,7 +151,7 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.05)_0%,transparent_45%,rgba(255,255,255,0.03)_100%)] opacity-80" />
 
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/25 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 w-full border-b border-border-hairline bg-black/25 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 group cursor-default">
@@ -155,7 +160,7 @@ export default function Home() {
                 alt="Siber UI"
                 width={32}
                 height={32}
-                className="h-8 w-8 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50"
+                className="h-8 w-8 rounded-sm border border-border-hairline transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50"
               />
               <span className="text-lg font-semibold tracking-[0.25em] text-slate-100 transition-colors duration-300 group-hover:text-cyan-400">
                 SIBER UI
@@ -164,7 +169,7 @@ export default function Home() {
           </div>
 
           {/* Interactive Accent Switcher */}
-          <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 backdrop-blur-md sm:flex">
+          <div className="hidden items-center gap-2 rounded-full border border-border-hairline bg-white/[0.03] px-3 py-1.5 backdrop-blur-md sm:flex">
             <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
               ACCENT:
             </span>
@@ -178,15 +183,14 @@ export default function Home() {
                     description: `Theme preset updated to ${color}.`,
                   });
                 }}
-                className={`h-4 w-4 rounded-full transition-all duration-200 cursor-pointer ${
-                  color === 'cyan'
-                    ? 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]'
-                    : color === 'purple'
-                      ? 'bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.8)]'
-                      : color === 'emerald'
-                        ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]'
-                        : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]'
-                } ${accentColor === color ? 'scale-125 ring-2 ring-white/80' : 'opacity-50 hover:opacity-100 hover:scale-110'}`}
+                className={`h-4 w-4 rounded-full transition-all duration-200 cursor-pointer ${color === 'cyan'
+                  ? 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]'
+                  : color === 'purple'
+                    ? 'bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.8)]'
+                    : color === 'emerald'
+                      ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+                      : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]'
+                  } ${accentColor === color ? 'scale-125 ring-2 ring-white/80' : 'opacity-50 hover:opacity-100 hover:scale-110'}`}
                 title={`Set accent color to ${color}`}
               />
             ))}
@@ -197,11 +201,11 @@ export default function Home() {
             <Button
               variant="outline"
               onClick={() => setSearchOpen(true)}
-              className="hidden justify-start text-slate-400 border-white/10 bg-white/5 h-9 hover:border-cyan-500/40 hover:text-slate-200 cursor-pointer sm:inline-flex"
+              className="hidden justify-start text-slate-400 border-border-hairline bg-white/5 h-9 hover:border-cyan-500/40 hover:text-slate-200 cursor-pointer sm:inline-flex"
               leftIcon={<Search className="h-4 w-4 text-cyan-400" />}
             >
               Search...
-              <kbd className="ml-2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-400">
+              <kbd className="ml-2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border-hairline bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-400">
                 ⌘K
               </kbd>
             </Button>
@@ -250,7 +254,7 @@ export default function Home() {
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-sm font-mono tracking-[0.2em] text-cyan-300">
               <span className="h-2 w-2 motion-safe:animate-pulse motion-reduce:animate-none rounded-full bg-cyan-400" />
-              v1.0.2 is now live
+              v1.2.0 is now live
             </div>
 
             <GlitchText
@@ -281,7 +285,7 @@ export default function Home() {
                 <Button
                   variant="ghost"
                   size="lg"
-                  className="border-white/10 px-8 text-base text-slate-300"
+                  className="border-border-hairline px-8 text-base text-slate-300"
                 >
                   View Components
                 </Button>
@@ -296,7 +300,7 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 backdrop-blur"
+                  className="rounded-2xl border border-border-hairline bg-white/5 px-4 py-4 backdrop-blur"
                 >
                   <p className="text-xl font-semibold text-slate-100">
                     {item.value}
@@ -318,7 +322,8 @@ export default function Home() {
           >
             <Card
               variant="neon"
-              className="relative overflow-hidden border-white/10"
+              className="chrome relative overflow-hidden border-border-hairline"
+              data-chrome-label="INSTALL / 01"
             >
               <BorderBeam
                 variant="neon"
@@ -335,16 +340,15 @@ export default function Home() {
                     </CardTitle>
                   </div>
                   {/* Package Manager Selector Tabs */}
-                  <div className="flex rounded-md border border-white/10 bg-black/40 p-0.5 font-mono text-[10px]">
+                  <div className="flex rounded-md border border-border-hairline bg-black/40 p-0.5 font-mono text-[10px]">
                     {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((pm) => (
                       <button
                         key={pm}
                         onClick={() => setPkgManager(pm)}
-                        className={`px-2 py-0.5 rounded transition-all cursor-pointer ${
-                          pkgManager === pm
-                            ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold'
-                            : 'text-slate-500 hover:text-slate-300'
-                        }`}
+                        className={`px-2 py-0.5 rounded transition-all cursor-pointer ${pkgManager === pm
+                          ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold'
+                          : 'text-slate-500 hover:text-slate-300'
+                          }`}
                       >
                         {pm}
                       </button>
@@ -370,7 +374,7 @@ export default function Home() {
       {/* MODERN INTERACTIVE COMPONENT SHOWCASE SECTION */}
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16">
         {/* HUD Cyber Grid Sub-layer background */}
-        <div className="pointer-events-none absolute inset-0 rounded-3xl border border-white/5 bg-gradient-to-b from-cyan-950/[0.04] via-transparent to-rose-950/[0.03] backdrop-blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 rounded-3xl border border-border-hairline bg-gradient-to-b from-cyan-950/[0.04] via-transparent to-rose-950/[0.03] backdrop-blur-3xl" />
         <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(#22d3ee_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" />
 
         <div className="relative mb-12 text-center">
@@ -393,11 +397,10 @@ export default function Home() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 aria-pressed={activeTab === tab.id}
-                className={`rounded-full px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_12px_rgba(0,240,255,0.2)] font-semibold'
-                    : 'bg-white/5 text-slate-400 border border-white/10 hover:border-white/20 hover:text-slate-200'
-                }`}
+                className={`rounded-full px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all duration-200 ${activeTab === tab.id
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_12px_rgba(0,240,255,0.2)] font-semibold'
+                  : 'bg-white/5 text-slate-400 border border-border-hairline hover:border-border-subtle hover:text-slate-200'
+                  }`}
               >
                 {tab.label}
               </button>
@@ -411,7 +414,8 @@ export default function Home() {
           {(activeTab === 'all' || activeTab === 'controls') && (
             <Card
               variant="interactive"
-              className="relative flex flex-col justify-between overflow-hidden"
+              className="chrome relative flex flex-col justify-between overflow-hidden"
+              data-chrome-label="BUTTON_MATRIX / 01"
             >
               <div>
                 <CardHeader className="pb-3">
@@ -421,16 +425,15 @@ export default function Home() {
                       Button Matrix
                     </CardTitle>
                     {/* Size Selector */}
-                    <div className="flex rounded-md border border-white/10 bg-black/40 p-0.5">
+                    <div className="flex rounded-md border border-border-hairline bg-black/40 p-0.5">
                       {(['sm', 'md', 'lg'] as const).map((sz) => (
                         <button
                           key={sz}
                           onClick={() => setBtnSize(sz)}
-                          className={`px-2 py-0.5 text-[10px] font-mono uppercase transition-colors rounded ${
-                            btnSize === sz
-                              ? 'bg-cyan-500/30 text-cyan-200'
-                              : 'text-slate-500 hover:text-slate-300'
-                          }`}
+                          className={`px-2 py-0.5 text-[10px] font-mono uppercase transition-colors rounded ${btnSize === sz
+                            ? 'bg-cyan-500/30 text-cyan-200'
+                            : 'text-slate-500 hover:text-slate-300'
+                            }`}
                         >
                           {sz}
                         </button>
@@ -537,7 +540,7 @@ export default function Home() {
                     variant="neon"
                   />
 
-                  <div className="space-y-3 rounded-xl border border-white/10 bg-black/30 p-3.5">
+                  <div className="space-y-3 rounded-xl border border-border-hairline bg-black/30 p-3.5">
                     <Switch
                       label="Overclock Engine"
                       description="Boost clock speed to 4.8 GHz"
@@ -601,7 +604,7 @@ export default function Home() {
                 </CardHeader>
 
                 <CardContent className="space-y-4 pt-2">
-                  <div className="flex items-center justify-around rounded-xl border border-white/10 bg-black/30 p-4">
+                  <div className="flex items-center justify-around rounded-xl border border-border-hairline bg-black/30 p-4">
                     <ThreatIndicator
                       value={threatLevel}
                       level={
@@ -636,7 +639,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs">
+                  <div className="flex items-center justify-between rounded-lg border border-border-hairline bg-white/5 px-3 py-2 text-xs">
                     <span className="font-mono text-slate-400">
                       Threat Simulation:
                     </span>
@@ -649,11 +652,10 @@ export default function Home() {
                         <button
                           key={t.label}
                           onClick={() => setThreatLevel(t.lvl)}
-                          className={`rounded px-2 py-1 font-mono text-[10px] uppercase border transition ${
-                            threatLevel === t.lvl
-                              ? `border-cyan-400 bg-cyan-500/20 ${t.color}`
-                              : 'border-white/10 text-slate-400 hover:border-white/20'
-                          }`}
+                          className={`rounded px-2 py-1 font-mono text-[10px] uppercase border transition ${threatLevel === t.lvl
+                            ? `border-cyan-400 bg-cyan-500/20 ${t.color}`
+                            : 'border-border-hairline text-slate-400 hover:border-border-subtle'
+                            }`}
                         >
                           {t.label}
                         </button>
@@ -713,96 +715,96 @@ export default function Home() {
           {(activeTab === 'all' ||
             activeTab === 'controls' ||
             activeTab === 'telemetry') && (
-            <Card
-              variant="interactive"
-              className="relative flex flex-col justify-between overflow-hidden"
-            >
-              <div>
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Cpu className="h-5 w-5 text-cyan-400" />
-                    Metrics & Sliders
-                  </CardTitle>
-                  <CardDescription>
-                    Responsive sliders and dynamic glowing progress bars.
-                  </CardDescription>
-                </CardHeader>
+              <Card
+                variant="interactive"
+                className="relative flex flex-col justify-between overflow-hidden"
+              >
+                <div>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Cpu className="h-5 w-5 text-cyan-400" />
+                      Metrics & Sliders
+                    </CardTitle>
+                    <CardDescription>
+                      Responsive sliders and dynamic glowing progress bars.
+                    </CardDescription>
+                  </CardHeader>
 
-                <CardContent className="space-y-5 pt-2">
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-mono">
-                      <span className="text-slate-400">Power Allocation</span>
-                      <span className="text-cyan-300 font-bold">
-                        {sliderVal[0]}%
-                      </span>
+                  <CardContent className="space-y-5 pt-2">
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-xs font-mono">
+                        <span className="text-slate-400">Power Allocation</span>
+                        <span className="text-cyan-300 font-bold">
+                          {sliderVal[0]}%
+                        </span>
+                      </div>
+                      <Slider
+                        value={sliderVal}
+                        onValueChange={setSliderVal}
+                        max={100}
+                        variant="neon"
+                      />
                     </div>
-                    <Slider
-                      value={sliderVal}
-                      onValueChange={setSliderVal}
-                      max={100}
-                      variant="neon"
-                    />
-                  </div>
 
-                  <div className="space-y-2 pt-1">
-                    <div className="flex justify-between text-xs font-mono">
-                      <span className="text-slate-400">Telemetry Stream</span>
-                      <span
-                        className={
-                          sliderVal[0] > 80
-                            ? 'text-rose-400 font-bold'
-                            : 'text-emerald-400 font-bold'
-                        }
-                      >
-                        {sliderVal[0] > 80 ? 'HIGH LOAD' : 'OPTIMAL'}
-                      </span>
+                    <div className="space-y-2 pt-1">
+                      <div className="flex justify-between text-xs font-mono">
+                        <span className="text-slate-400">Telemetry Stream</span>
+                        <span
+                          className={
+                            sliderVal[0] > 80
+                              ? 'text-rose-400 font-bold'
+                              : 'text-emerald-400 font-bold'
+                          }
+                        >
+                          {sliderVal[0] > 80 ? 'HIGH LOAD' : 'OPTIMAL'}
+                        </span>
+                      </div>
+                      <Progress
+                        value={sliderVal[0]}
+                        variant={sliderVal[0] > 80 ? 'destructive' : 'neon'}
+                        size="md"
+                      />
                     </div>
-                    <Progress
-                      value={sliderVal[0]}
-                      variant={sliderVal[0] > 80 ? 'destructive' : 'neon'}
-                      size="md"
-                    />
-                  </div>
-                </CardContent>
-              </div>
-            </Card>
-          )}
+                  </CardContent>
+                </div>
+              </Card>
+            )}
 
           {/* Card 6: Live Code Integration */}
           {(activeTab === 'all' ||
             activeTab === 'alerts' ||
             activeTab === 'telemetry') && (
-            <Card
-              variant="interactive"
-              className="relative flex flex-col justify-between overflow-hidden"
-            >
-              <div>
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Code className="h-5 w-5 text-cyan-400" />
-                    Developer DX
-                  </CardTitle>
-                  <CardDescription>
-                    Type-safe, fully customizable React components.
-                  </CardDescription>
-                </CardHeader>
+              <Card
+                variant="interactive"
+                className="relative flex flex-col justify-between overflow-hidden"
+              >
+                <div>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Code className="h-5 w-5 text-cyan-400" />
+                      Developer DX
+                    </CardTitle>
+                    <CardDescription>
+                      Type-safe, fully customizable React components.
+                    </CardDescription>
+                  </CardHeader>
 
-                <CardContent className="pt-1">
-                  <TerminalBlock
-                    code={`import { Button, ThreatIndicator } from '@siberui/react';\n\nexport function NodeCard() {\n  return (\n    <Card variant="neon">\n      <ThreatIndicator value={14} />\n      <Button variant="neon">Deploy</Button>\n    </Card>\n  );\n}`}
-                    language="tsx"
-                    title="ComponentUsage.tsx"
-                  />
-                </CardContent>
-              </div>
-            </Card>
-          )}
+                  <CardContent className="pt-1">
+                    <TerminalBlock
+                      code={`import { Button, ThreatIndicator } from '@siberui/react';\n\nexport function NodeCard() {\n  return (\n    <Card variant="neon">\n      <ThreatIndicator value={14} />\n      <Button variant="neon">Deploy</Button>\n    </Card>\n  );\n}`}
+                      language="tsx"
+                      title="ComponentUsage.tsx"
+                    />
+                  </CardContent>
+                </div>
+              </Card>
+            )}
         </div>
       </section>
 
       {/* Architecture & Philosophy Section (Card-less Modern Layout) */}
       <section className="mx-auto w-full max-w-7xl px-6 py-12 md:py-20">
-        <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-6 md:flex-row md:items-end md:justify-between">
+        <div className="mb-12 flex flex-col gap-4 border-b border-border-hairline pb-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-400">
               {'// Architecture & Philosophy'}
@@ -814,38 +816,44 @@ export default function Home() {
           <Link href="/docs/installation">
             <Button
               variant="outline"
-              className="w-fit border-white/10 text-slate-300"
+              className="w-fit border-border-hairline text-slate-300"
             >
               View Docs &rarr;
             </Button>
           </Link>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-3">
-          <div className="group relative border-l-2 border-cyan-500/40 pl-6 transition-all duration-300 hover:border-cyan-400">
-            <Zap className="mb-3 h-6 w-6 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
-            <h3 className="text-lg font-bold text-white">Elevated Motion</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-400 font-sans">
+        <div className="numbered-list grid gap-10 md:grid-cols-3">
+          <div className="numbered-row group relative border-l-2 border-border-hairline pl-8 transition-colors duration-300 hover:border-signal-cyan/50">
+            <div className="mb-3 flex items-center gap-2">
+              <Zap className="h-5 w-5 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
+              <h3 className="text-lg font-bold text-white">Elevated Motion</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-400 font-sans">
               Subtle 60fps transitions and live state feedback that feel premium
               without cluttering your DOM trees.
             </p>
           </div>
 
-          <div className="group relative border-l-2 border-purple-500/40 pl-6 transition-all duration-300 hover:border-purple-400">
-            <Layers className="mb-3 h-6 w-6 text-purple-400 transition-transform duration-300 group-hover:scale-110" />
-            <h3 className="text-lg font-bold text-white">Minimal Surfaces</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-400 font-sans">
+          <div className="numbered-row group relative border-l-2 border-border-hairline pl-8 transition-colors duration-300 hover:border-signal-cyan/50">
+            <div className="mb-3 flex items-center gap-2">
+              <Layers className="h-5 w-5 text-slate-400 transition-transform duration-300 group-hover:scale-110" />
+              <h3 className="text-lg font-bold text-white">Minimal Surfaces</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-400 font-sans">
               Restrained geometry, refined borders, and reduced noise designed
               for high-contrast product dashboards.
             </p>
           </div>
 
-          <div className="group relative border-l-2 border-rose-500/40 pl-6 transition-all duration-300 hover:border-rose-400">
-            <Sparkles className="mb-3 h-6 w-6 text-rose-400 transition-transform duration-300 group-hover:scale-110" />
-            <h3 className="text-lg font-bold text-white">
-              Cyber-ready Primitives
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-400 font-sans">
+          <div className="numbered-row group relative border-l-2 border-border-hairline pl-8 transition-colors duration-300 hover:border-signal-cyan/50">
+            <div className="mb-3 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-slate-400 transition-transform duration-300 group-hover:scale-110" />
+              <h3 className="text-lg font-bold text-white">
+                Cyber-ready Primitives
+              </h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-400 font-sans">
               Built-in neon presets, animated border beams, radar meters, and
               glitch text ready for immediate production use.
             </p>
@@ -958,7 +966,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-black/25 p-4">
+              <div className="rounded-xl border border-border-hairline bg-black/25 p-4">
                 <div className="space-y-3">
                   <div>
                     <div className="mb-1.5 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.12em]">
@@ -1019,25 +1027,24 @@ export default function Home() {
                     key={item.key}
                     onClick={() => setScenarioTab(item.key)}
                     aria-pressed={scenarioTab === item.key}
-                    className={`rounded-full border px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider transition-colors ${
-                      scenarioTab === item.key
-                        ? 'border-rose-400/60 bg-rose-500/15 text-rose-200'
-                        : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200'
-                    }`}
+                    className={`rounded-full border px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider transition-colors ${scenarioTab === item.key
+                      ? 'border-rose-400/60 bg-rose-500/15 text-rose-200'
+                      : 'border-border-hairline bg-white/5 text-slate-400 hover:border-border-subtle hover:text-slate-200'
+                      }`}
                   >
                     {item.label}
                   </button>
                 ))}
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-black/25 p-4">
+              <div className="rounded-xl border border-border-hairline bg-black/25 p-4">
                 <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500">
                   Layer 1 · Mini Screen Preview
                 </p>
                 <div className="mt-3">
                   {scenarioTab === 'dashboard' && (
                     <div className="space-y-3">
-                      <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2">
+                      <div className="flex items-center justify-between rounded-lg border border-border-hairline bg-white/5 px-3 py-2">
                         <span className="text-xs text-slate-400">
                           Traffic Health
                         </span>
@@ -1085,7 +1092,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+              <div className="rounded-xl border border-border-hairline bg-black/20 p-4">
                 <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500">
                   Layer 2 · Component Stack
                 </p>
@@ -1104,7 +1111,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-black/20 p-4">
+              <div className="rounded-xl border border-border-hairline bg-black/20 p-4">
                 <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500">
                   Layer 3 · Outcome Metric
                 </p>
@@ -1160,7 +1167,7 @@ export default function Home() {
         <div className="mx-auto max-w-3xl">
           <Card
             variant="default"
-            className="p-6 border-white/10"
+            className="p-6 border-border-hairline"
           >
             <Accordion
               type="single"
@@ -1224,7 +1231,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="mt-20 w-full border-t border-white/10 py-8">
+      <footer className="mt-20 w-full border-t border-border-hairline py-8">
         <div className="mx-auto max-w-7xl px-6 flex flex-col items-center justify-between gap-4 md:flex-row text-xs font-mono text-slate-500">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">

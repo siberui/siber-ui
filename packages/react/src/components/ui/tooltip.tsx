@@ -33,7 +33,7 @@ const tooltipContentVariants = cva(
     variants: {
       variant: {
         default: [
-          'bg-slate-900/95 text-slate-100 border border-white/[0.1] backdrop-blur-md',
+          'bg-slate-900/95 text-slate-100 border border-border-subtle backdrop-blur-md',
         ].join(' '),
         neon: [
           'bg-cyan-950/90 text-cyan-300 font-mono tracking-wide',

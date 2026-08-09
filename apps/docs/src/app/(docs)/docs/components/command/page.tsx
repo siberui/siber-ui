@@ -24,7 +24,7 @@ export default function CommandDocsPage() {
         <div className="flex flex-col gap-12">
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Basic Usage</h3>
-            <Playground code={`<Command className="rounded-lg border border-white/10 shadow-md">
+            <Playground code={`<Command className="rounded-lg border border-border-hairline shadow-md">
   <CommandInput placeholder="Type a command or search..." />
   <CommandList>
     <CommandEmpty>No results found.</CommandEmpty>
@@ -60,7 +60,7 @@ export default function CommandDocsPage() {
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Neon Variant</h3>
             <Playground code={`<Command variant="neon">...</Command>`}>
-              <div className="flex items-center justify-center p-8 bg-slate-900/30 rounded-xl border border-white/5">
+              <div className="flex items-center justify-center p-8 bg-slate-900/30 rounded-xl border border-border-hairline">
                 <Command variant="neon" className="max-w-[400px] h-[350px]">
                   <CommandInput placeholder="Search modules..." />
                   <CommandList>

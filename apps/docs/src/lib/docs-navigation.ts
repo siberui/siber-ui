@@ -98,4 +98,14 @@ export const docsNavigation: DocNavGroup[] = [
       { title: 'Timeline', href: '/docs/components/timeline', isNew: true },
     ],
   },
+  {
+    title: 'System Chrome',
+    items: [
+      { title: 'Corner Frame', href: '/docs/components/corner-frame', isNew: true },
+      { title: 'Signal Border', href: '/docs/components/signal-border', isNew: true },
+      { title: 'Scanline', href: '/docs/components/scanline', isNew: true },
+      { title: 'Tech Label', href: '/docs/components/tech-label', isNew: true },
+      { title: 'Status', href: '/docs/components/status', isNew: true },
+    ],
+  },
 ];

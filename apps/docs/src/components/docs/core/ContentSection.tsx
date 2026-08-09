@@ -11,7 +11,7 @@ interface ContentSectionProps {
 export function ContentSection({ title, id, children, className }: ContentSectionProps) {
   return (
     <section id={id} className={cn('mt-16 first:mt-0', className)}>
-      <h2 className="mb-6 text-2xl font-semibold tracking-tight text-slate-100 border-b border-white/10 pb-4">
+      <h2 className="mb-6 text-2xl font-semibold tracking-tight text-slate-100 border-b border-border-hairline pb-4">
         {title}
       </h2>
       <div className="space-y-4 text-slate-300 leading-relaxed">

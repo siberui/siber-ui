@@ -94,7 +94,7 @@ export default function DropdownMenuDocsPage() {
     </DropdownMenuSubContent>
   </DropdownMenuSub>
 </DropdownMenuContent>`}>
-              <div className="flex items-center justify-center p-8 bg-slate-900/30 rounded-xl h-64 border border-white/5">
+              <div className="flex items-center justify-center p-8 bg-slate-900/30 rounded-xl h-64 border border-border-hairline">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="neon"><Terminal className="mr-2 w-4 h-4" /> Action</Button>

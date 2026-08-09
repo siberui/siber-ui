@@ -20,15 +20,26 @@ export default function AlertDocsPage() {
         description="Displays a callout for user attention."
       />
 
-      <ContentSection title="Examples" id="examples">
+      <ContentSection
+        title="Examples"
+        id="examples"
+      >
         <div className="flex flex-col gap-12">
           <div>
-            <h3 className="mb-4 text-lg font-medium text-slate-200">Default (Primary)</h3>
-            <Playground code={`<Alert title="System Diagnostic" icon={<Terminal className="h-4.5 w-4.5 text-cyan-400" />}>
+            <h3 className="mb-4 text-lg font-medium text-slate-200">
+              Default (Primary)
+            </h3>
+            <Playground
+              code={`<Alert variant="primary" title="System Diagnostic" icon={<Terminal className="h-4.5 w-4.5 text-primary" />}>
   All systems are functioning within normal parameters.
-</Alert>`}>
+</Alert>`}
+            >
               <div className="w-full max-w-lg">
-                <Alert title="System Diagnostic" icon={<Terminal className="h-4.5 w-4.5 text-cyan-400" />}>
+                <Alert
+                  variant="primary"
+                  title="System Diagnostic"
+                  icon={<Terminal className="h-4.5 w-4.5 text-primary" />}
+                >
                   All systems are functioning within normal parameters.
                 </Alert>
               </div>
@@ -36,12 +47,60 @@ export default function AlertDocsPage() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-medium text-slate-200">Destructive</h3>
-            <Playground code={`<Alert variant="destructive" title="Security Breach">
+            <h3 className="mb-4 text-lg font-medium text-slate-200">
+              Hierarchy Variants
+            </h3>
+            <Playground
+              code={`<div className="space-y-3">
+  <Alert variant="primary" title="Primary">Strong semantic action surface.</Alert>
+  <Alert variant="primary-subtle" title="Primary Subtle">Lower emphasis action state.</Alert>
+  <Alert variant="primary-outline" title="Primary Outline">Transparent/tinted border treatment.</Alert>
+  <Alert variant="neon" title="Neon">Special expressive style, use sparingly.</Alert>
+</div>`}
+            >
+              <div className="w-full max-w-lg space-y-3">
+                <Alert
+                  variant="primary"
+                  title="Primary"
+                >
+                  Strong semantic action surface.
+                </Alert>
+                <Alert
+                  variant="primary-subtle"
+                  title="Primary Subtle"
+                >
+                  Lower emphasis action state.
+                </Alert>
+                <Alert
+                  variant="primary-outline"
+                  title="Primary Outline"
+                >
+                  Transparent/tinted border treatment.
+                </Alert>
+                <Alert
+                  variant="neon"
+                  title="Neon"
+                >
+                  Special expressive style, use sparingly.
+                </Alert>
+              </div>
+            </Playground>
+          </div>
+
+          <div>
+            <h3 className="mb-4 text-lg font-medium text-slate-200">
+              Destructive
+            </h3>
+            <Playground
+              code={`<Alert variant="destructive" title="Security Breach">
   Unauthorized access detected in sector 4.
-</Alert>`}>
+</Alert>`}
+            >
               <div className="w-full max-w-lg">
-                <Alert variant="destructive" title="Security Breach">
+                <Alert
+                  variant="destructive"
+                  title="Security Breach"
+                >
                   Unauthorized access detected in sector 4.
                 </Alert>
               </div>
@@ -50,11 +109,16 @@ export default function AlertDocsPage() {
 
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Warning</h3>
-            <Playground code={`<Alert variant="warning" title="High CPU Usage">
+            <Playground
+              code={`<Alert variant="warning" title="High CPU Usage">
   Node 7 is experiencing 98% CPU load.
-</Alert>`}>
+</Alert>`}
+            >
               <div className="w-full max-w-lg">
-                <Alert variant="warning" title="High CPU Usage">
+                <Alert
+                  variant="warning"
+                  title="High CPU Usage"
+                >
                   Node 7 is experiencing 98% CPU load.
                 </Alert>
               </div>
@@ -63,14 +127,17 @@ export default function AlertDocsPage() {
         </div>
       </ContentSection>
 
-      <ContentSection title="API Reference" id="api-reference">
+      <ContentSection
+        title="API Reference"
+        id="api-reference"
+      >
         <ApiTable
           props={[
             {
               property: 'variant',
               description: 'The visual style variant.',
-              type: '"info" | "success" | "warning" | "destructive"',
-              defaultValue: '"info"',
+              type: '"primary" | "primary-subtle" | "primary-outline" | "neon" | "info" | "success" | "warning" | "destructive"',
+              defaultValue: '"primary-subtle"',
             },
             {
               property: 'title',

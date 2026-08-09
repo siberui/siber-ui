@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '@siberui/react/globals.css';
 @source "../../../../packages/react/src";
 
 @theme inline {
@@ -11,8 +12,8 @@
 }
 
 body {
-  background-color: var(--cyber-black, #06090e);
-  color: #ededed;
+  background-color: var(--sb-bg, #05070a);
+  color: var(--sb-fg, #eceef2);
   font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
 }

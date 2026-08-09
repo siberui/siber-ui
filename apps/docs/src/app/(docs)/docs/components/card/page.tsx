@@ -74,21 +74,21 @@ export default function CardDocsPage() {
     <CardDescription>High throughput distributed compute module</CardDescription>
   </CardHeader>
   <CardContent className="space-y-0 font-mono text-xs">
-    <div className="flex justify-between py-3 border-b border-white/[0.05]">
+    <div className="flex justify-between py-3 border-b border-border-hairline">
       <span className="text-slate-500 flex items-center gap-2">
         <Gauge className="h-3.5 w-3.5" strokeWidth={1.5} />
         Load Level
       </span>
       <span className="text-cyan-400 font-semibold">42.8%</span>
     </div>
-    <div className="flex justify-between py-3 border-b border-white/[0.05]">
+    <div className="flex justify-between py-3 border-b border-border-hairline">
       <span className="text-slate-500 flex items-center gap-2">
         <HardDrive className="h-3.5 w-3.5" strokeWidth={1.5} />
         Memory Allocation
       </span>
       <span className="text-white">128 GB / 256 GB</span>
     </div>
-    <div className="flex justify-between py-3 border-b border-white/[0.05]">
+    <div className="flex justify-between py-3 border-b border-border-hairline">
       <span className="text-slate-500 flex items-center gap-2">
         <Wifi className="h-3.5 w-3.5" strokeWidth={1.5} />
         Latency
@@ -122,21 +122,21 @@ export default function CardDocsPage() {
                     <CardDescription>High throughput distributed compute module</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-0 font-mono text-xs">
-                    <div className="flex justify-between py-3 border-b border-white/[0.05]">
+                    <div className="flex justify-between py-3 border-b border-border-hairline">
                       <span className="text-slate-500 flex items-center gap-2">
                         <Gauge className="h-3.5 w-3.5" strokeWidth={1.5} />
                         Load Level
                       </span>
                       <span className="text-cyan-400 font-semibold">42.8%</span>
                     </div>
-                    <div className="flex justify-between py-3 border-b border-white/[0.05]">
+                    <div className="flex justify-between py-3 border-b border-border-hairline">
                       <span className="text-slate-500 flex items-center gap-2">
                         <HardDrive className="h-3.5 w-3.5" strokeWidth={1.5} />
                         Memory Allocation
                       </span>
                       <span className="text-white">128 GB / 256 GB</span>
                     </div>
-                    <div className="flex justify-between py-3 border-b border-white/[0.05]">
+                    <div className="flex justify-between py-3 border-b border-border-hairline">
                       <span className="text-slate-500 flex items-center gap-2">
                         <Wifi className="h-3.5 w-3.5" strokeWidth={1.5} />
                         Latency

@@ -52,5 +52,9 @@ export * from './components/ui/profile-hero';
 export * from './components/ui/project-card';
 export * from './components/ui/stat-card';
 export * from './components/ui/achievement-badge';
+export * from './components/ui/corner-frame';
+export * from './components/ui/signal-border';
+export * from './components/ui/scanline';
+export * from './components/ui/tech-label';
+export * from './components/ui/status';
 export * from './utils/cn';
-

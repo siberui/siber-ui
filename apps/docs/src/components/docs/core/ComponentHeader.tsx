@@ -17,7 +17,7 @@ const statusConfig: Record<Status, string> = {
 
 export function ComponentHeader({ title, description, status = 'Stable' }: ComponentHeaderProps) {
   return (
-    <div className="mb-10 flex flex-col gap-4 border-b border-white/10 pb-10">
+    <div className="mb-10 flex flex-col gap-4 border-b border-border-hairline pb-10">
       <div className="flex items-center gap-3">
         <h1 className="text-3xl font-bold tracking-tight text-slate-100 sm:text-4xl">
           {title}

@@ -8,24 +8,42 @@ const radioVariants = cva(
   [
     'inline-flex items-center justify-center shrink-0 cursor-pointer rounded-full',
     'border transition-all duration-300 ease-out',
-    'bg-white/[0.03] backdrop-blur-sm',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950',
+    'bg-surface-1',
+    'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-bg',
     'disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-0',
   ].join(' '),
   {
     variants: {
       variant: {
-        default: [
-          'border-white/[0.15] hover:border-white/[0.25]',
-          'focus-visible:ring-cyan-400/50',
-          'data-[state=checked]:border-cyan-500/50',
-          'data-[state=checked]:shadow-[0_0_12px_rgba(0,240,255,0.15)]',
+        primary: [
+          'border-primary-600 bg-primary',
+          'hover:border-primary-500 hover:bg-primary-600',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:border-primary-500 data-[state=checked]:bg-primary-700',
+        ].join(' '),
+        'primary-subtle': [
+          'border-primary-border bg-primary-subtle',
+          'hover:border-primary-400 hover:bg-primary-hover',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:border-primary-500 data-[state=checked]:bg-primary-active',
+        ].join(' '),
+        'primary-outline': [
+          'border-primary-border bg-transparent',
+          'hover:border-primary-400 hover:bg-primary-subtle',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:border-primary-500 data-[state=checked]:bg-primary-subtle',
         ].join(' '),
         neon: [
-          'border-cyan-500/25 hover:border-cyan-500/40',
-          'focus-visible:ring-cyan-400/50',
-          'data-[state=checked]:border-cyan-400/60 data-[state=checked]:bg-cyan-500/10',
-          'data-[state=checked]:shadow-[0_0_18px_rgba(0,240,255,0.25)]',
+          'border-primary-border bg-surface-1 shadow-glow-cyan',
+          'hover:border-primary-400 hover:bg-surface-2',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:border-primary-500 data-[state=checked]:bg-surface-3 data-[state=checked]:shadow-glow-cyan-hover',
+        ].join(' '),
+        default: [
+          'border-primary-border bg-transparent',
+          'hover:border-primary-400 hover:bg-primary-subtle',
+          'peer-focus-visible:ring-primary-focus/70',
+          'data-[state=checked]:border-primary-500 data-[state=checked]:bg-primary-subtle',
         ].join(' '),
       },
       radioSize: {
@@ -38,12 +56,15 @@ const radioVariants = cva(
       variant: 'default',
       radioSize: 'md',
     },
-  }
+  },
 );
 
 const dotColorMap: Record<string, string> = {
-  default: 'bg-cyan-400',
-  neon: 'bg-cyan-300',
+  primary: 'bg-primary-foreground',
+  'primary-subtle': 'bg-primary',
+  'primary-outline': 'bg-primary',
+  default: 'bg-primary',
+  neon: 'bg-primary',
 };
 
 const dotSizeMap: Record<string, string> = {
@@ -53,8 +74,11 @@ const dotSizeMap: Record<string, string> = {
 };
 
 const dotGlowMap: Record<string, string> = {
-  default: 'shadow-[0_0_6px_rgba(0,240,255,0.4)]',
-  neon: 'shadow-[0_0_8px_rgba(0,240,255,0.6)]',
+  primary: '',
+  'primary-subtle': '',
+  'primary-outline': '',
+  default: '',
+  neon: 'shadow-glow-cyan',
 };
 
 /* ─── RadioGroup ─── */
@@ -76,7 +100,9 @@ interface RadioGroupContextValue {
   disabled?: boolean;
 }
 
-const RadioGroupContext = React.createContext<RadioGroupContextValue | null>(null);
+const RadioGroupContext = React.createContext<RadioGroupContextValue | null>(
+  null,
+);
 
 function useRadioGroup() {
   const ctx = React.useContext(RadioGroupContext);
@@ -98,7 +124,7 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const generatedName = React.useId();
     const groupName = name || generatedName;
@@ -111,13 +137,13 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
         if (!controlled) setInternalValue(val);
         onValueChange?.(val);
       },
-      [controlled, onValueChange]
+      [controlled, onValueChange],
     );
 
     return (
       <div className="flex flex-col gap-1.5 w-full">
         {label && (
-          <span className="text-[11px] font-mono tracking-wider text-slate-500 uppercase">
+          <span className="text-[11px] font-mono tracking-wider text-fg-subtle uppercase">
             {label}
           </span>
         )}
@@ -136,7 +162,7 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
             className={cn(
               'flex gap-3',
               orientation === 'vertical' ? 'flex-col' : 'flex-row flex-wrap',
-              className
+              className,
             )}
             {...props}
           >
@@ -145,14 +171,15 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
         </RadioGroupContext.Provider>
       </div>
     );
-  }
+  },
 );
 RadioGroup.displayName = 'RadioGroup';
 
 /* ─── Radio ─── */
 
 export interface RadioProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'>,
     VariantProps<typeof radioVariants> {
   label?: string;
   description?: string;
@@ -172,7 +199,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const group = useRadioGroup();
     const radioId = id || React.useId();
@@ -188,7 +215,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
         htmlFor={radioId}
         className={cn(
           'inline-flex items-start gap-2.5 cursor-pointer group select-none',
-          isDisabled && 'cursor-not-allowed opacity-40'
+          isDisabled && 'cursor-not-allowed opacity-40',
         )}
       >
         <div className="relative flex items-center justify-center pt-0.5">
@@ -201,15 +228,12 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
             checked={isChecked}
             disabled={isDisabled}
             onChange={() => group.onValueChange(radioValue)}
-            className="sr-only"
+            className="peer sr-only"
             {...props}
           />
           <div
             data-state={isChecked ? 'checked' : 'unchecked'}
-            className={cn(
-              radioVariants({ variant, radioSize }),
-              className
-            )}
+            className={cn(radioVariants({ variant, radioSize }), className)}
           >
             {isChecked && (
               <div
@@ -217,7 +241,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
                   'rounded-full animate-radio-dot-in',
                   dotColor,
                   dotSize,
-                  dotGlow
+                  dotGlow,
                 )}
               />
             )}
@@ -227,12 +251,12 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
         {(label || description) && (
           <div className="flex flex-col gap-0.5">
             {label && (
-              <span className="text-sm text-slate-200 font-sans leading-none transition-colors duration-200 group-hover:text-white">
+              <span className="text-sm text-fg font-sans leading-none transition-colors duration-200 group-hover:text-fg">
                 {label}
               </span>
             )}
             {description && (
-              <span className="text-[11px] text-slate-500 font-mono">
+              <span className="text-[11px] text-fg-subtle font-mono">
                 {description}
               </span>
             )}
@@ -240,7 +264,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
         )}
       </label>
     );
-  }
+  },
 );
 Radio.displayName = 'Radio';
 

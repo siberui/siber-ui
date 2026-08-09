@@ -12,6 +12,12 @@ export interface GlitchTextProps extends React.HTMLAttributes<HTMLElement> {
   active?: boolean;
   color?: 'cyan' | 'white' | 'rose';
   speed?: number;
+  /**
+   * 'scramble' — character-noise only (original behavior).
+   * 'rgb' — periodic HUD-style chromatic-split slice glitch only, text stays readable.
+   * 'both' — combines both effects. Default, since it reads as the most "alive" HUD signal.
+   */
+  variant?: 'scramble' | 'rgb' | 'both';
 }
 
 export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
@@ -23,6 +29,7 @@ export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
       active = true,
       color = 'white',
       speed = 140,
+      variant = 'both',
       children,
       ...props
     },
@@ -32,9 +39,11 @@ export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
     const originalText = text || (typeof children === 'string' ? children : '');
     const [displayText, setDisplayText] = React.useState(originalText);
     const effectiveSpeed = Math.max(100, speed);
+    const scrambleEnabled = variant !== 'rgb';
+    const rgbGlitchEnabled = variant !== 'scramble';
 
     React.useEffect(() => {
-      if (!active) {
+      if (!active || !scrambleEnabled) {
         setDisplayText(originalText);
         return;
       }
@@ -59,7 +68,7 @@ export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
 
       const intervalId = setInterval(scramble, effectiveSpeed);
       return () => clearInterval(intervalId);
-    }, [active, originalText, effectiveSpeed]);
+    }, [active, originalText, effectiveSpeed, scrambleEnabled]);
 
     const baseColorClass = {
       cyan: 'text-cyan-300 drop-shadow-[0_0_4px_rgba(34,211,238,0.35)]',
@@ -73,8 +82,10 @@ export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
     return (
       <Component
         ref={ref as unknown as React.Ref<never>}
+        data-text={rgbGlitchEnabled ? originalText || undefined : undefined}
+        data-glitch={active && rgbGlitchEnabled ? 'slice' : undefined}
         className={cn(
-          'font-bold tracking-wider font-mono transition-colors duration-150',
+          'relative inline-block font-bold tracking-wider font-mono transition-colors duration-150',
           active &&
             'motion-safe:animate-neon-flicker motion-reduce:animate-none',
           baseColorClass,

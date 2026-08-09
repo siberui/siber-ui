@@ -28,11 +28,11 @@ export default function InstallationDocsPage() {
 
       <ContentSection title="Framework Guides" id="framework-guides">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="border border-white/10 bg-white/5 rounded-xl p-6 hover:border-cyan-500/30 transition-colors">
+          <div className="border border-border-hairline bg-white/5 rounded-xl p-6 hover:border-cyan-500/30 transition-colors">
             <h3 className="text-lg font-medium text-slate-200 mb-2">Next.js (App Router)</h3>
             <p className="text-sm text-slate-400">Guide for setting up SiberUI with Next.js Server Components and Turbopack.</p>
           </div>
-          <div className="border border-white/10 bg-white/5 rounded-xl p-6 hover:border-cyan-500/30 transition-colors">
+          <div className="border border-border-hairline bg-white/5 rounded-xl p-6 hover:border-cyan-500/30 transition-colors">
             <h3 className="text-lg font-medium text-slate-200 mb-2">Vite</h3>
             <p className="text-sm text-slate-400">Guide for Vite and standard React Single Page Applications.</p>
           </div>

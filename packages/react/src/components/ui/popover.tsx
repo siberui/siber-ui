@@ -43,11 +43,11 @@ const popoverVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-slate-900 border border-white/[0.08] text-slate-200 shadow-xl',
+          'bg-slate-900 border border-border-hairline text-slate-200 shadow-xl',
         neon:
           'bg-[#050d14] border border-cyan-500/30 text-cyan-50 shadow-[0_0_25px_rgba(0,240,255,0.15)]',
         glass:
-          'bg-white/[0.02] border border-white/[0.1] text-white backdrop-blur-xl shadow-xl',
+          'bg-white/[0.02] border border-border-subtle text-white backdrop-blur-xl shadow-xl',
       },
     },
     defaultVariants: {
@@ -125,7 +125,7 @@ const PopoverHeader = ({
     <div
       className={cn(
         'flex flex-col space-y-1.5 p-4 pb-3 border-b',
-        isNeon ? 'border-cyan-500/20' : 'border-white/[0.08]',
+        isNeon ? 'border-cyan-500/20' : 'border-border-hairline',
         className
       )}
       {...props}
@@ -145,7 +145,7 @@ const PopoverFooter = ({
     <div
       className={cn(
         'flex items-center justify-end p-4 pt-3 border-t',
-        isNeon ? 'border-cyan-500/20' : 'border-white/[0.08]',
+        isNeon ? 'border-cyan-500/20' : 'border-border-hairline',
         className
       )}
       {...props}

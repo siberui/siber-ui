@@ -24,9 +24,9 @@ const commandVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-slate-950 border border-white/[0.08]',
+        default: 'bg-slate-950 border border-border-hairline',
         neon: 'bg-[#050d14] border border-cyan-500/30 shadow-[0_0_30px_rgba(0,240,255,0.15)]',
-        glass: 'bg-white/[0.03] backdrop-blur-2xl border border-white/[0.1] shadow-2xl',
+        glass: 'bg-white/[0.03] backdrop-blur-2xl border border-border-subtle shadow-2xl',
       },
     },
     defaultVariants: {
@@ -104,7 +104,7 @@ const CommandInput = React.forwardRef<
     <div
       className={cn(
         'flex items-center border-b px-3',
-        variant === 'neon' ? 'border-cyan-500/20' : 'border-white/[0.08]',
+        variant === 'neon' ? 'border-cyan-500/20' : 'border-border-hairline',
         'cmdk-input-wrapper'
       )}
     >

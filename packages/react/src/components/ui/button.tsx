@@ -9,62 +9,85 @@ import { cn } from '../../utils/cn';
 const buttonVariants = cva(
   [
     'inline-flex items-center justify-center whitespace-nowrap text-sm font-medium tracking-wide cursor-pointer',
-    'transition-all duration-300 ease-out',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950',
+    'transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-focus/70 focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
     'disabled:pointer-events-none disabled:opacity-40 disabled:cursor-not-allowed disabled:saturate-0',
-    'active:scale-[0.97]',
+    'active:translate-y-px',
     'relative overflow-hidden selection:bg-cyan-500/30',
   ].join(' '),
   {
     variants: {
       variant: {
+        // Strongest semantic action.
         primary: [
-          'bg-slate-900/90 backdrop-blur-sm text-slate-100 border border-cyan-500/20',
-          'hover:bg-slate-800 hover:text-white hover:border-cyan-400/50',
-          'hover:shadow-[0_0_12px_rgba(0,240,255,0.15)]',
-          'hover:scale-[1.02]',
+          'bg-primary text-primary-foreground border border-primary-600',
+          'hover:bg-primary-600 hover:border-primary-500',
+          'active:bg-primary-700 active:border-primary-600',
+        ].join(' '),
+        'primary-subtle': [
+          'bg-primary-subtle text-primary border border-primary-border',
+          'hover:bg-primary-hover hover:border-primary-400',
+          'active:bg-primary-active active:border-primary-500',
+        ].join(' '),
+        'primary-outline': [
+          'bg-transparent text-primary border border-primary-border',
+          'hover:bg-primary-subtle hover:border-primary-400',
+          'active:bg-primary-active active:border-primary-500',
         ].join(' '),
         secondary: [
-          'bg-white/[0.03] backdrop-blur-md text-slate-300 border border-slate-800/60',
-          'hover:bg-white/[0.06] hover:text-cyan-300 hover:border-slate-700/80',
-          'hover:scale-[1.02]',
-        ].join(' '),
-        neon: [
-          'bg-cyan-500/[0.05] backdrop-blur-sm text-cyan-400 border border-cyan-500/30',
-          'font-mono uppercase tracking-wider',
-          'hover:bg-cyan-400/90 hover:text-slate-950 hover:border-cyan-400',
-          'hover:shadow-[0_0_12px_rgba(0,240,255,0.2)]',
-          'hover:scale-[1.02]',
-        ].join(' '),
-        neonPurple: [
-          'bg-purple-500/[0.05] backdrop-blur-sm text-purple-300 border border-purple-500/30',
-          'font-mono uppercase tracking-wider',
-          'hover:bg-purple-500/90 hover:text-white hover:border-purple-400',
-          'hover:shadow-[0_0_12px_rgba(168,85,247,0.2)]',
-          'hover:scale-[1.02]',
-        ].join(' '),
-        neonGreen: [
-          'bg-emerald-500/[0.05] backdrop-blur-sm text-emerald-400 border border-emerald-500/30',
-          'font-mono uppercase tracking-wider',
-          'hover:bg-emerald-400/90 hover:text-slate-950 hover:border-emerald-400',
-          'hover:shadow-[0_0_12px_rgba(57,255,20,0.2)]',
-          'hover:scale-[1.02]',
-        ].join(' '),
-        ghost: [
-          'text-slate-400 border border-transparent',
-          'hover:bg-white/[0.04] hover:text-slate-100',
-          'hover:scale-[1.02]',
-        ].join(' '),
-        destructive: [
-          'bg-rose-950/30 backdrop-blur-sm text-rose-400 border border-rose-800/40',
-          'hover:bg-rose-600/90 hover:text-white hover:border-rose-500',
-          'hover:shadow-[0_0_12px_rgba(244,63,94,0.2)]',
-          'hover:scale-[1.02]',
+          'bg-surface-1 text-fg-muted border border-border-hairline',
+          'hover:text-fg hover:border-border-subtle hover:bg-surface-2',
         ].join(' '),
         outline: [
-          'bg-transparent text-slate-200 border border-slate-700/60',
-          'hover:border-slate-500/80 hover:bg-white/[0.03]',
-          'hover:scale-[1.02]',
+          'bg-transparent text-fg-muted border border-border-hairline',
+          'hover:text-fg hover:border-signal-cyan/40 hover:bg-surface-1',
+        ].join(' '),
+        ghost: [
+          'text-fg-muted border border-transparent',
+          'hover:bg-surface-1 hover:text-fg',
+        ].join(' '),
+        // Semantic intent variants.
+        danger: [
+          'bg-danger-subtle text-danger border border-danger-border',
+          'hover:bg-danger-hover hover:border-danger-400',
+          'active:bg-danger-active active:border-danger-500',
+        ].join(' '),
+        success: [
+          'bg-success-subtle text-success border border-success-border',
+          'hover:bg-success-hover hover:border-success-400',
+          'active:bg-success-active active:border-success-500',
+        ].join(' '),
+        /** @deprecated use `danger` */
+        destructive: [
+          'bg-signal-rose/10 text-signal-rose border border-signal-rose/30',
+          'hover:bg-signal-rose/15 hover:border-signal-rose/50',
+        ].join(' '),
+        // Kept for API compatibility.
+        signal: [
+          'bg-primary-subtle text-primary border border-primary-border',
+          'hover:bg-primary-hover hover:border-primary-400',
+          'active:bg-primary-active active:border-primary-500',
+        ].join(' '),
+        // Expressive special variant, intentionally below primary action weight.
+        neon: [
+          'bg-surface-1 text-primary border border-primary-border font-mono uppercase tracking-wider shadow-glow-cyan',
+          'hover:bg-surface-2 hover:border-primary-400',
+          'active:bg-surface-3 active:border-primary-500',
+        ].join(' '),
+        /** @deprecated use `variant="signal"` with a violet className override */
+        neonPurple: [
+          'bg-signal-violet/[0.08] text-signal-violet border border-signal-violet/30 font-mono uppercase tracking-wider',
+          'hover:bg-signal-violet hover:text-bg hover:border-signal-violet hover:shadow-glow-purple-hover',
+        ].join(' '),
+        /** @deprecated use `success` */
+        neonGreen: [
+          'bg-signal-green/[0.08] text-signal-green border border-signal-green/30 font-mono uppercase tracking-wider',
+          'hover:bg-signal-green hover:text-bg hover:border-signal-green hover:shadow-glow-green-hover',
+        ].join(' '),
+        // Terminal — monospace, system-console voice.
+        terminal: [
+          'bg-surface-1 text-signal-green border border-border-default font-mono lowercase',
+          'hover:border-signal-green/40 hover:bg-surface-2',
         ].join(' '),
       },
       size: {
@@ -74,7 +97,7 @@ const buttonVariants = cva(
         icon: 'h-10 w-10 p-0 rounded-md justify-center items-center',
       },
       glow: {
-        true: 'shadow-[0_0_20px_rgba(0,240,255,0.15),0_0_50px_rgba(0,240,255,0.08)]',
+        true: 'shadow-glow-cyan',
         false: '',
       },
     },

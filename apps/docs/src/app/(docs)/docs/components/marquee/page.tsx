@@ -25,13 +25,13 @@ export default function MarqueeDocsPage() {
         <div className="flex flex-col gap-12">
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Basic Usage</h3>
-            <Playground code={`<Marquee speed="normal" pauseOnHover className="bg-slate-900 border-y border-white/10">
+            <Playground code={`<Marquee speed="normal" pauseOnHover className="bg-slate-900 border-y border-border-hairline">
   {words.map((w, i) => (
     <span key={i} className="text-xl font-bold text-slate-400 mx-4">{w}</span>
   ))}
 </Marquee>`}>
               <div className="flex items-center justify-center p-8 overflow-hidden w-full">
-                <Marquee speed="normal" pauseOnHover className="bg-slate-900 border-y border-white/10 w-full py-4">
+                <Marquee speed="normal" pauseOnHover className="bg-slate-900 border-y border-border-hairline w-full py-4">
                   {words.map((w, i) => (
                     <span key={i} className="text-xl font-bold text-slate-400 mx-4">{w}</span>
                   ))}

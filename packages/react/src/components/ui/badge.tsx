@@ -4,35 +4,34 @@ import { cn } from '../../utils/cn';
 
 const badgeVariants = cva(
   [
-    'inline-flex items-center justify-center font-mono font-medium tracking-wider uppercase select-none',
-    'transition-all duration-300 ease-out',
-    'border rounded-full backdrop-blur-sm',
+    'inline-flex items-center justify-center font-medium select-none',
+    'transition-colors duration-200 ease-out',
+    'border rounded-full',
   ].join(' '),
   {
     variants: {
       variant: {
-        primary:
-          'bg-white/[0.05] text-slate-200 border-white/[0.1] shadow-[0_2px_10px_rgba(0,0,0,0.3)]',
-        secondary:
-          'bg-white/[0.03] text-slate-400 border-white/[0.06]',
-        neon: [
-          'bg-cyan-500/[0.08] text-cyan-400 border-cyan-500/25',
-          'shadow-[0_0_8px_rgba(0,240,255,0.15)]',
-        ].join(' '),
-        neonPurple: [
-          'bg-purple-500/[0.08] text-purple-300 border-purple-500/25',
-          'shadow-[0_0_8px_rgba(168,85,247,0.15)]',
-        ].join(' '),
-        neonGreen: [
-          'bg-emerald-500/[0.08] text-emerald-400 border-emerald-500/25',
-          'shadow-[0_0_8px_rgba(57,255,20,0.15)]',
-        ].join(' '),
-        destructive: [
-          'bg-rose-950/20 text-rose-400 border-rose-800/30',
-          'shadow-[0_0_8px_rgba(244,63,94,0.15)]',
-        ].join(' '),
+        primary: 'bg-primary text-primary-foreground border-primary-600',
+        'primary-subtle':
+          'bg-primary-subtle text-primary border-primary-border',
+        'primary-outline': 'bg-transparent text-primary border-primary-border',
+        neon: 'font-mono uppercase tracking-wider bg-surface-1 text-primary border-primary-border shadow-glow-cyan',
+        secondary: 'bg-surface-1 text-fg-muted border-border-hairline',
         outline:
-          'bg-transparent text-slate-300 border-slate-700/50 hover:border-slate-500/60',
+          'bg-transparent text-fg-muted border-border-hairline hover:border-border-subtle',
+        success: 'bg-success-subtle text-success border-success-border',
+        warning: 'bg-warning-subtle text-warning border-warning-border',
+        danger: 'bg-danger-subtle text-danger border-danger-border',
+        signal: 'bg-primary-subtle text-primary border-primary-border',
+        /** @deprecated use `danger` */
+        destructive: 'bg-danger-subtle text-danger border-danger-border',
+        /** @deprecated use `neon` + className override */
+        /** @deprecated use a `className` override with signal-violet */
+        neonPurple:
+          'font-mono uppercase tracking-wider bg-surface-1 text-secondary border-secondary-border shadow-glow-purple',
+        /** @deprecated use `success` */
+        neonGreen:
+          'font-mono uppercase tracking-wider bg-surface-1 text-success border-success-border shadow-glow-green',
       },
       size: {
         sm: 'text-[10px] px-2 py-0.5 gap-1',
@@ -49,11 +48,12 @@ const badgeVariants = cva(
       size: 'md',
       pulse: false,
     },
-  }
+  },
 );
 
 export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   dot?: boolean;
   dotColor?: 'cyan' | 'purple' | 'green' | 'rose' | 'slate';
@@ -61,19 +61,28 @@ export interface BadgeProps
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   (
-    { className, variant, size, pulse, dot = false, dotColor, children, ...props },
-    ref
+    {
+      className,
+      variant,
+      size,
+      pulse,
+      dot = false,
+      dotColor,
+      children,
+      ...props
+    },
+    ref,
   ) => {
     const getDotColorClass = () => {
       switch (dotColor) {
         case 'cyan':
-          return 'bg-cyan-400 shadow-[0_0_8px_rgba(0,240,255,0.7)]';
+          return 'bg-primary shadow-glow-cyan';
         case 'purple':
-          return 'bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.7)]';
+          return 'bg-secondary shadow-glow-purple';
         case 'green':
-          return 'bg-emerald-400 shadow-[0_0_8px_rgba(57,255,20,0.7)]';
+          return 'bg-success shadow-glow-green';
         case 'rose':
-          return 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.7)]';
+          return 'bg-danger shadow-glow-rose';
         default:
           return 'bg-current shadow-[0_0_6px_currentColor]';
       }
@@ -90,16 +99,21 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
             <span
               className={cn(
                 'absolute inline-flex h-full w-full rounded-full opacity-60 animate-ping',
-                getDotColorClass()
+                getDotColorClass(),
               )}
             />
-            <span className={cn('relative inline-flex h-1.5 w-1.5 rounded-full', getDotColorClass())} />
+            <span
+              className={cn(
+                'relative inline-flex h-1.5 w-1.5 rounded-full',
+                getDotColorClass(),
+              )}
+            />
           </span>
         )}
         {children}
       </div>
     );
-  }
+  },
 );
 
 Badge.displayName = 'Badge';

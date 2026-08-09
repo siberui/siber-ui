@@ -16,8 +16,8 @@ export async function CodeBlock({ code, language = 'tsx', className }: CodeBlock
   });
 
   return (
-    <div className={`relative group rounded-lg overflow-hidden border border-white/10 bg-[#121212] ${className || ''}`}>
-      <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/10">
+    <div className={`relative group rounded-lg overflow-hidden border border-border-hairline bg-[#121212] ${className || ''}`}>
+      <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-border-hairline">
         <span className="text-xs font-mono text-slate-400">{language}</span>
         <CopyButton text={code} />
       </div>

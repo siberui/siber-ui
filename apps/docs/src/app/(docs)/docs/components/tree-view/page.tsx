@@ -56,7 +56,7 @@ export default function TreeViewDocsPage() {
   defaultSelectedId="button.tsx" 
 />`}>
               <div className="flex items-center justify-center p-8">
-                <div className="w-full max-w-xs h-64 border border-white/10 rounded-xl overflow-hidden shadow-xl">
+                <div className="w-full max-w-xs h-64 border border-border-hairline rounded-xl overflow-hidden shadow-xl">
                   <TreeView 
                     className="h-full w-full"
                     data={treeData} 

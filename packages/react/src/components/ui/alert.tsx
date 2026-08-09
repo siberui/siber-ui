@@ -12,8 +12,8 @@ import { cn } from '../../utils/cn';
 const alertVariants = cva(
   [
     'relative flex items-start gap-3.5 w-full rounded-xl p-4',
-    'bg-white/[0.03] backdrop-blur-md',
-    'border transition-all duration-300 ease-out',
+    'bg-surface-1',
+    'border transition-colors duration-200 ease-out',
     'overflow-hidden',
     // Top accent line
     'before:absolute before:top-0 before:left-0 before:right-0 before:h-[1px] before:bg-gradient-to-r',
@@ -22,46 +22,106 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
+        primary: [
+          'bg-primary-subtle border-primary-border/60',
+          'before:via-primary/70',
+        ].join(' '),
+        'primary-subtle': [
+          'bg-primary-subtle border-primary-border/60',
+          'before:via-primary/50',
+        ].join(' '),
+        'primary-outline': [
+          'bg-surface-1 border-primary-border/60',
+          'before:via-primary/45',
+        ].join(' '),
+        neon: [
+          'bg-surface-1 border-primary-border/60 shadow-glow-cyan',
+          'before:via-primary/60',
+        ].join(' '),
         info: [
-          'border-cyan-500/20',
-          'shadow-[0_4px_12px_rgba(0,0,0,0.3),0_0_4px_rgba(0,240,255,0.1)]',
-          'before:via-cyan-400/60',
+          'bg-primary-subtle border-primary-border/60',
+          'before:via-primary/60',
         ].join(' '),
         success: [
-          'border-emerald-500/20',
-          'shadow-[0_4px_12px_rgba(0,0,0,0.3),0_0_4px_rgba(57,255,20,0.1)]',
-          'before:via-emerald-400/60',
+          'bg-success-subtle border-success-border/60',
+          'before:via-success/60',
         ].join(' '),
         warning: [
-          'border-amber-500/25',
-          'shadow-[0_4px_12px_rgba(0,0,0,0.3),0_0_4px_rgba(245,158,11,0.1)]',
-          'before:via-amber-400/60',
+          'bg-warning-subtle border-warning-border/60',
+          'before:via-warning/60',
         ].join(' '),
         destructive: [
-          'border-rose-500/20',
-          'shadow-[0_4px_12px_rgba(0,0,0,0.3),0_0_4px_rgba(244,63,94,0.1)]',
-          'before:via-rose-500/60',
+          'bg-danger-subtle border-danger-border/60',
+          'before:via-danger/60',
         ].join(' '),
       },
     },
     defaultVariants: {
-      variant: 'info',
+      variant: 'primary-subtle',
     },
-  }
+  },
 );
 
 const iconVariantMap: Record<string, React.ReactNode> = {
-  info: <Info className="h-4.5 w-4.5 shrink-0 mt-0.5 text-cyan-400" strokeWidth={1.5} />,
-  success: <CheckCircle2 className="h-4.5 w-4.5 shrink-0 mt-0.5 text-emerald-400" strokeWidth={1.5} />,
-  warning: <AlertCircle className="h-4.5 w-4.5 shrink-0 mt-0.5 text-amber-400" strokeWidth={1.5} />,
-  destructive: <ShieldAlert className="h-4.5 w-4.5 shrink-0 mt-0.5 text-rose-400" strokeWidth={1.5} />,
+  primary: (
+    <Info
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-primary"
+      strokeWidth={1.5}
+    />
+  ),
+  'primary-subtle': (
+    <Info
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-primary"
+      strokeWidth={1.5}
+    />
+  ),
+  'primary-outline': (
+    <Info
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-primary"
+      strokeWidth={1.5}
+    />
+  ),
+  neon: (
+    <Info
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-primary"
+      strokeWidth={1.5}
+    />
+  ),
+  info: (
+    <Info
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-primary"
+      strokeWidth={1.5}
+    />
+  ),
+  success: (
+    <CheckCircle2
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-signal-green"
+      strokeWidth={1.5}
+    />
+  ),
+  warning: (
+    <AlertCircle
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-signal-amber"
+      strokeWidth={1.5}
+    />
+  ),
+  destructive: (
+    <ShieldAlert
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-signal-rose"
+      strokeWidth={1.5}
+    />
+  ),
 };
 
 const titleColorMap: Record<string, string> = {
-  info: 'text-cyan-300',
-  success: 'text-emerald-300',
-  warning: 'text-amber-300',
-  destructive: 'text-rose-300',
+  primary: 'text-primary',
+  'primary-subtle': 'text-primary',
+  'primary-outline': 'text-primary',
+  neon: 'text-primary',
+  info: 'text-primary',
+  success: 'text-success',
+  warning: 'text-warning',
+  destructive: 'text-danger',
 };
 
 /* ─────────────────────────────────────────────────────────
@@ -69,7 +129,8 @@ const titleColorMap: Record<string, string> = {
 ───────────────────────────────────────────────────────── */
 
 export interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof alertVariants> {
   title?: string;
   icon?: React.ReactNode;
@@ -81,7 +142,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       className,
-      variant = 'info',
+      variant = 'primary-subtle',
       title,
       icon,
       onClose,
@@ -89,9 +150,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const variantKey = variant ?? 'info';
+    const variantKey = variant ?? 'primary-subtle';
     const defaultIcon = iconVariantMap[variantKey];
     const titleColor = titleColorMap[variantKey];
 
@@ -103,17 +164,24 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         {...props}
       >
         {/* Icon */}
-        <div className="flex-shrink-0">{icon ?? defaultIcon}</div>
+        <div className="shrink-0">{icon ?? defaultIcon}</div>
 
         {/* Content */}
         <div className="flex-1 min-w-0 space-y-0.5">
           {title && (
-            <p className={cn('text-sm font-semibold font-sans leading-tight', titleColor)}>
+            <p
+              className={cn(
+                'text-sm font-semibold font-sans leading-tight',
+                titleColor,
+              )}
+            >
               {title}
             </p>
           )}
           {children && (
-            <p className="text-[13px] text-slate-400 font-sans leading-relaxed">{children}</p>
+            <p className="text-[13px] text-fg-muted font-sans leading-relaxed">
+              {children}
+            </p>
           )}
         </div>
 
@@ -123,14 +191,17 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
             type="button"
             aria-label="Dismiss alert"
             onClick={onClose}
-            className="ml-auto shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-md text-slate-400 hover:text-slate-100 bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.05] hover:border-white/[0.15] transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-500/50"
+            className="ml-auto shrink-0 inline-flex items-center justify-center h-6 w-6 rounded-md text-fg-subtle hover:text-fg bg-surface-2 hover:bg-surface-3 border border-border-default hover:border-border-strong transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-signal-cyan/50"
           >
-            <X className="h-3.5 w-3.5" strokeWidth={1.75} />
+            <X
+              className="h-3.5 w-3.5"
+              strokeWidth={1.75}
+            />
           </button>
         )}
       </div>
     );
-  }
+  },
 );
 
 Alert.displayName = 'Alert';

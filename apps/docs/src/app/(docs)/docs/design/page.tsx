@@ -33,7 +33,7 @@ export default function DesignDocsPage() {
             </div>
           </div>
           <div className="flex gap-4 items-center mt-4">
-            <div className="w-16 h-16 rounded-xl bg-slate-950 border border-white/20"></div>
+            <div className="w-16 h-16 rounded-xl bg-slate-950 border border-border-subtle"></div>
             <div>
               <h4 className="text-slate-200 font-medium">Background (Void)</h4>
               <p className="text-slate-400 text-sm">Deep slate-950 for backgrounds to ensure neon colors pop.</p>

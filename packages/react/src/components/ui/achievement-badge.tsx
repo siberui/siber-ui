@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../utils/cn';
 
 const achievementBadgeVariants = cva(
-  'flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-white/[0.06] backdrop-blur-md hover:border-cyan-500/30 transition-colors duration-300 group',
+  'flex items-center gap-3.5 p-3.5 rounded-xl bg-slate-950/60 border border-border-hairline backdrop-blur-md hover:border-cyan-500/30 transition-colors duration-300 group',
   {
     variants: {
       status: {

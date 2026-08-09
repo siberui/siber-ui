@@ -49,7 +49,7 @@ export default function ComboboxDocsPage() {
             <h3 className="mb-4 text-lg font-medium text-slate-200">Neon Variant</h3>
             <p className="text-sm text-slate-400 mb-4">Combobox uses the Command palette under the hood, so it automatically inherits the Neon styling for both the trigger and the popup.</p>
             <Playground code={`<Combobox variant="neon" label="Command" />`}>
-              <div className="flex items-center justify-center p-8 h-[300px] bg-slate-900/50 rounded-xl border border-white/5">
+              <div className="flex items-center justify-center p-8 h-[300px] bg-slate-900/50 rounded-xl border border-border-hairline">
                 <div className="w-full max-w-sm flex items-start h-full pt-8">
                   <ComboboxNeonDemo />
                 </div>

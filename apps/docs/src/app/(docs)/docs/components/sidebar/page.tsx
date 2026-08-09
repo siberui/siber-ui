@@ -43,7 +43,7 @@ export default function SidebarDocsPage() {
   </SidebarFooter>
 </Sidebar>`}>
               <div className="flex items-center justify-center p-8 bg-slate-900 rounded-xl h-[500px]">
-                <div className="h-full border border-white/10 overflow-hidden flex shadow-2xl">
+                <div className="h-full border border-border-hairline overflow-hidden flex shadow-2xl">
                   <Sidebar>
                     <SidebarHeader>
                       <div className="flex items-center gap-2 px-2">

@@ -50,18 +50,18 @@ Accordion.displayName = 'Accordion';
 const accordionItemVariants = cva('transition-all duration-200', {
   variants: {
     variant: {
-      default: 'border-b border-white/10 last:border-b-0',
+      default: 'border-b border-border-hairline last:border-b-0',
       neon: [
         'border-b border-cyan-500/20 last:border-b-0',
         'data-[state=open]:border-cyan-400/60 data-[state=open]:bg-cyan-500/[0.03]',
       ].join(' '),
       bordered: [
-        'rounded-xl border border-white/10 bg-slate-950/60 overflow-hidden',
-        'data-[state=open]:border-white/20 data-[state=open]:bg-slate-900/60',
+        'rounded-xl border border-border-hairline bg-slate-950/60 overflow-hidden',
+        'data-[state=open]:border-border-strong data-[state=open]:bg-slate-900/60',
       ].join(' '),
       glass: [
-        'rounded-xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-md overflow-hidden',
-        'data-[state=open]:border-white/20 data-[state=open]:bg-white/[0.05]',
+        'rounded-xl border border-border-hairline bg-white/[0.02] backdrop-blur-md overflow-hidden',
+        'data-[state=open]:border-border-strong data-[state=open]:bg-white/[0.05]',
       ].join(' '),
     },
   },

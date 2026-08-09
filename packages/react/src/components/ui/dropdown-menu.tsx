@@ -52,9 +52,9 @@ const DropdownMenuSubContent = React.forwardRef<
     className={cn(
       'z-50 min-w-[8rem] overflow-hidden rounded-md p-1',
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-      variant === 'default' && 'bg-slate-900 border border-white/[0.08] shadow-lg text-slate-200',
+      variant === 'default' && 'bg-slate-900 border border-border-hairline shadow-lg text-slate-200',
       variant === 'neon' && 'bg-cyan-950/90 border border-cyan-500/40 shadow-[0_0_15px_rgba(0,240,255,0.15)] text-cyan-300 backdrop-blur-md',
-      variant === 'glass' && 'bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl text-slate-200 shadow-xl',
+      variant === 'glass' && 'bg-white/[0.02] border border-border-hairline backdrop-blur-xl text-slate-200 shadow-xl',
       className
     )}
     {...props}
@@ -78,9 +78,9 @@ const DropdownMenuContent = React.forwardRef<
       className={cn(
         'z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-md',
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-        variant === 'default' && 'bg-slate-950 border border-white/[0.08] text-slate-200',
+        variant === 'default' && 'bg-slate-950 border border-border-hairline text-slate-200',
         variant === 'neon' && 'bg-cyan-950/90 border border-cyan-500/40 shadow-[0_0_20px_rgba(0,240,255,0.15)] text-cyan-300 backdrop-blur-md',
-        variant === 'glass' && 'bg-[#0d121d]/70 border border-white/[0.08] backdrop-blur-xl text-slate-200 shadow-xl',
+        variant === 'glass' && 'bg-[#0d121d]/70 border border-border-hairline backdrop-blur-xl text-slate-200 shadow-xl',
         className
       )}
       {...props}

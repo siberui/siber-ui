@@ -10,6 +10,10 @@ const meta = {
       control: 'select',
       options: ['cyan', 'white', 'rose'],
     },
+    variant: {
+      control: 'select',
+      options: ['scramble', 'rgb', 'both'],
+    },
     active: {
       control: 'boolean',
     },
@@ -56,6 +60,28 @@ export const Variants: Story = {
       <div>
         <p className="text-xs text-slate-500 mb-2 font-mono">// active: false</p>
         <GlitchText text="STABLE CONNECTION" as="h2" active={false} color="cyan" className="text-2xl" />
+      </div>
+    </div>
+  ),
+};
+
+export const HudVariants: Story = {
+  args: {
+    text: '',
+  },
+  render: () => (
+    <div className="flex flex-col gap-8 p-12 bg-slate-950 rounded-lg border border-slate-800 w-fit">
+      <div>
+        <p className="text-xs text-slate-500 mb-2 font-mono">// variant: scramble</p>
+        <GlitchText text="SCRAMBLE_ONLY" as="h2" variant="scramble" className="text-2xl" />
+      </div>
+      <div>
+        <p className="text-xs text-slate-500 mb-2 font-mono">// variant: rgb</p>
+        <GlitchText text="RGB_SLICE_ONLY" as="h2" variant="rgb" color="cyan" className="text-2xl" />
+      </div>
+      <div>
+        <p className="text-xs text-slate-500 mb-2 font-mono">// variant: both (default)</p>
+        <GlitchText text="BOTH_COMBINED" as="h2" variant="both" color="rose" className="text-2xl" />
       </div>
     </div>
   ),

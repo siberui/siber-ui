@@ -34,10 +34,10 @@ const sidebarVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-slate-950 border-white/[0.06]',
+        default: 'bg-slate-950 border-border-hairline',
         neon: 'bg-[#050d14] border-cyan-500/20 shadow-[4px_0_20px_rgba(0,240,255,0.05)]',
         glass:
-          'bg-white/[0.02] border-white/[0.08] backdrop-blur-xl',
+          'bg-white/[0.02] border-border-hairline backdrop-blur-xl',
       },
       size: {
         sm: 'w-14 data-[collapsed=false]:w-48',
@@ -114,7 +114,7 @@ const SidebarHeader = React.forwardRef<
       className={cn(
         'flex flex-col gap-2 p-4',
         variant === 'neon' && 'border-b border-cyan-500/10',
-        variant !== 'neon' && 'border-b border-white/[0.05]',
+        variant !== 'neon' && 'border-b border-border-hairline',
         className
       )}
       {...props}
@@ -151,7 +151,7 @@ const SidebarFooter = React.forwardRef<
       ref={ref}
       className={cn(
         'p-4',
-        variant === 'neon' ? 'border-t border-cyan-500/10' : 'border-t border-white/[0.05]',
+        variant === 'neon' ? 'border-t border-cyan-500/10' : 'border-t border-border-hairline',
         className
       )}
       {...props}
@@ -230,7 +230,7 @@ const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>(
       },
       glass: {
         inactive: 'text-slate-400 hover:text-white hover:bg-white/[0.06]',
-        active: 'bg-white/[0.12] text-white border border-white/[0.1]',
+        active: 'bg-white/[0.12] text-white border border-border-subtle',
       },
     };
 

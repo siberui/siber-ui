@@ -11,17 +11,26 @@ export function TopNav() {
   const [searchOpen, setSearchOpen] = React.useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/25 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 w-full border-b border-border-default bg-bg/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2 group">
-            <Image src="/logo.svg" alt="Siber UI" width={28} height={28} className="h-7 w-7 rounded-sm border border-white/10 transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-500/50" />
-            <span className="text-base font-semibold tracking-[0.25em] text-slate-100 transition-colors duration-300 group-hover:text-cyan-400">
+          <Link
+            href="/"
+            className="flex items-center gap-2 group"
+          >
+            <Image
+              src="/logo.svg"
+              alt="Siber UI"
+              width={28}
+              height={28}
+              className="h-7 w-7 rounded-sm border border-border-default transition-colors duration-200 group-hover:border-signal-cyan/50"
+            />
+            <span className="text-label tracking-[0.25em] text-fg transition-colors duration-200 group-hover:text-signal-cyan">
               SIBER UI
             </span>
           </Link>
           <div className="hidden md:flex">
-            <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2 py-0.5 text-[10px] font-mono tracking-widest text-cyan-300">
+            <span className="rounded-full border border-signal-cyan/30 bg-signal-cyan/10 px-2 py-0.5 text-caption text-signal-cyan">
               v1.0.2
             </span>
           </div>
@@ -31,32 +40,55 @@ export function TopNav() {
           <Button
             variant="outline"
             onClick={() => setSearchOpen(true)}
-            className="w-full justify-start text-slate-400 border-white/10 bg-white/5 h-9 hover:border-cyan-500/40 hover:text-slate-200 cursor-pointer"
-            leftIcon={<Search className="h-4 w-4 text-cyan-400" />}
+            className="w-full justify-start text-fg-muted border-border-default bg-surface-1 h-9 hover:border-signal-cyan/40 hover:text-fg cursor-pointer"
+            leftIcon={<Search className="h-4 w-4 text-signal-cyan" />}
           >
             Search documentation...
-            <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-400">
+            <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border-default bg-surface-2 px-1.5 text-caption text-fg-subtle">
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
-          <DocSearchModal open={searchOpen} onOpenChange={setSearchOpen} />
+          <DocSearchModal
+            open={searchOpen}
+            onOpenChange={setSearchOpen}
+          />
         </div>
 
         <div className="flex items-center gap-2">
-          <Link href="https://github.com/siberui/siber-ui" target="_blank" rel="noreferrer">
-            <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white h-9 w-9">
+          <Link
+            href="https://github.com/siberui/siber-ui"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-fg-muted hover:text-fg h-9 w-9"
+            >
               <GitBranch className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
             </Button>
           </Link>
-          <Link href="https://www.npmjs.com/package/@siberui/react" target="_blank" rel="noreferrer">
-            <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white h-9 w-9">
+          <Link
+            href="https://www.npmjs.com/package/@siberui/react"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-fg-muted hover:text-fg h-9 w-9"
+            >
               <Code className="h-4 w-4" />
               <span className="sr-only">npm</span>
             </Button>
           </Link>
-          <div className="w-px h-4 bg-white/10 mx-1"></div>
-          <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white h-9 w-9">
+          <div className="w-px h-4 bg-border-default mx-1"></div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-fg-muted hover:text-fg h-9 w-9"
+          >
             <Monitor className="h-4 w-4" />
             <span className="sr-only">Theme</span>
           </Button>

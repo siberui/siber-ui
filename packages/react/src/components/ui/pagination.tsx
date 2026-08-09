@@ -79,8 +79,8 @@ const PaginationLink = React.forwardRef<HTMLAnchorElement, PaginationLinkProps>(
 
     const styles = {
       default: {
-        inactive: 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10',
-        active: 'bg-slate-700 text-white border border-white/20',
+        inactive: 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent hover:border-border-hairline',
+        active: 'bg-slate-700 text-white border border-border-strong',
       },
       neon: {
         inactive:

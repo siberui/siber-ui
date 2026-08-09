@@ -12,7 +12,7 @@ const avatarVariants = cva(
   [
     'relative inline-flex items-center justify-center shrink-0',
     'rounded-full overflow-hidden',
-    'bg-white/[0.05] border border-white/[0.1]',
+    'bg-white/[0.05] border border-border-hairline',
     'font-mono font-semibold tracking-tight select-none',
     'transition-all duration-300 ease-out',
   ].join(' '),
@@ -221,7 +221,7 @@ function AvatarGroup({
         <div
           className={cn(
             avatarVariants({ size }),
-            '-ml-2 bg-white/[0.06] border-white/[0.1] text-slate-400',
+            '-ml-2 bg-white/[0.06] border-border-hairline text-slate-400',
             'z-0'
           )}
         >

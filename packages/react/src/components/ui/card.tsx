@@ -4,48 +4,69 @@ import { cn } from '../../utils/cn';
 
 const cardVariants = cva(
   [
-    'rounded-xl text-slate-100 relative overflow-hidden',
-    'transition-all duration-300 ease-out',
-    'bg-white/[0.03] backdrop-blur-xl border border-white/[0.07]',
-    'shadow-[0_4px_30px_rgba(0,0,0,0.3)]',
+    'rounded-xl text-fg relative overflow-hidden',
+    'transition-colors duration-200 ease-out',
   ].join(' '),
   {
     variants: {
       variant: {
+        // Level 1 surface — the default, extremely usable everyday card.
         default: [
-          'hover:border-white/[0.12]',
-          'hover:shadow-[0_4px_40px_rgba(0,0,0,0.4)]',
+          'bg-surface-1 border border-border-hairline',
+          'hover:border-border-subtle',
         ].join(' '),
-        neon: [
-          'border-cyan-500/20',
-          'shadow-[0_0_25px_rgba(0,240,255,0.06),0_4px_30px_rgba(0,0,0,0.3)]',
-          'hover:border-cyan-500/40',
-          'hover:shadow-[0_0_35px_rgba(0,240,255,0.12),0_0_70px_rgba(0,240,255,0.05),0_4px_30px_rgba(0,0,0,0.3)]',
+        // Level 2 surface — for cards that sit above other content.
+        elevated: [
+          'bg-surface-2 border border-border-hairline shadow-[0_8px_24px_rgba(0,0,0,0.28)]',
+          'hover:border-border-subtle',
+        ].join(' '),
+        outlined: [
+          'bg-transparent border border-border-subtle',
+          'hover:border-signal-cyan/30',
         ].join(' '),
         interactive: [
-          'cursor-pointer',
-          'hover:border-white/[0.12] hover:bg-white/[0.05]',
-          'hover:scale-[1.02]',
-          'hover:shadow-[0_8px_50px_rgba(0,0,0,0.5)]',
+          'bg-surface-1 border border-border-hairline cursor-pointer',
+          'hover:border-border-subtle hover:bg-surface-2',
+          'active:translate-y-px',
         ].join(' '),
+        terminal: [
+          'bg-surface-1 border border-border-hairline font-mono',
+          'hover:border-signal-green/30',
+        ].join(' '),
+        signal: [
+          'bg-surface-1 border border-signal-cyan/25',
+          'shadow-[0_0_0_1px_rgba(0,217,232,0.06)]',
+          'hover:border-signal-cyan/40',
+        ].join(' '),
+        glass: [
+          'glass-surface border border-border-hairline',
+          'hover:border-border-subtle',
+        ].join(' '),
+        /** @deprecated use `signal` */
+        neon: [
+          'bg-surface-1 border-signal-cyan/20',
+          'shadow-[0_0_25px_rgba(0,217,232,0.05)]',
+          'hover:border-signal-cyan/40',
+        ].join(' '),
+        /** @deprecated use `default`/`ghost-like` transparent surface */
         ghost: [
-          'bg-transparent border-slate-800/40 shadow-none',
-          'hover:bg-white/[0.03]',
+          'bg-transparent border-transparent shadow-none',
+          'hover:bg-surface-1',
         ].join(' '),
       },
       accentLine: {
         none: '',
         cyan: [
           'before:absolute before:top-0 before:left-0 before:right-0 before:h-[1px]',
-          'before:bg-gradient-to-r before:from-transparent before:via-cyan-400/70 before:to-transparent',
+          'before:bg-gradient-to-r before:from-transparent before:via-signal-cyan/70 before:to-transparent',
         ].join(' '),
         purple: [
           'before:absolute before:top-0 before:left-0 before:right-0 before:h-[1px]',
-          'before:bg-gradient-to-r before:from-transparent before:via-purple-400/70 before:to-transparent',
+          'before:bg-gradient-to-r before:from-transparent before:via-signal-violet/70 before:to-transparent',
         ].join(' '),
         green: [
           'before:absolute before:top-0 before:left-0 before:right-0 before:h-[1px]',
-          'before:bg-gradient-to-r before:from-transparent before:via-emerald-400/70 before:to-transparent',
+          'before:bg-gradient-to-r before:from-transparent before:via-signal-green/70 before:to-transparent',
         ].join(' '),
       },
     },
@@ -53,11 +74,12 @@ const cardVariants = cva(
       variant: 'default',
       accentLine: 'none',
     },
-  }
+  },
 );
 
 export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -67,7 +89,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       className={cn(cardVariants({ variant, accentLine, className }))}
       {...props}
     />
-  )
+  ),
 );
 Card.displayName = 'Card';
 
@@ -89,10 +111,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn(
-      'text-lg font-semibold tracking-tight text-white font-sans',
-      className
-    )}
+    className={cn('text-title text-fg', className)}
     {...props}
   />
 ));
@@ -104,7 +123,10 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn('text-xs font-mono text-slate-500', className)}
+    className={cn(
+      'text-caption text-fg-subtle normal-case tracking-normal',
+      className,
+    )}
     {...props}
   />
 ));
@@ -114,7 +136,11 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+  <div
+    ref={ref}
+    className={cn('p-6 pt-0', className)}
+    {...props}
+  />
 ));
 CardContent.displayName = 'CardContent';
 
@@ -124,10 +150,20 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex items-center p-6 pt-4 border-t border-white/[0.06] mt-4', className)}
+    className={cn(
+      'flex items-center p-6 pt-4 border-t border-border-default mt-4',
+      className,
+    )}
     {...props}
   />
 ));
 CardFooter.displayName = 'CardFooter';
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+};

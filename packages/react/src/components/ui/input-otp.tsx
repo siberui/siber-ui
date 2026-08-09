@@ -107,7 +107,7 @@ const slotVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-white/[0.08] bg-white/[0.03] text-slate-100',
+        default: 'border-border-hairline bg-white/[0.03] text-slate-100',
         neon: 'border-cyan-500/20 bg-cyan-950/[0.06] text-cyan-100 font-mono',
         glass: 'border-transparent bg-white/[0.02] text-white',
       },
@@ -135,7 +135,7 @@ const slotVariants = cva(
       {
         variant: 'glass',
         isActive: true,
-        className: 'border-white/[0.1] bg-white/[0.04]',
+        className: 'border-border-subtle bg-white/[0.04]',
       },
       {
         state: 'error',

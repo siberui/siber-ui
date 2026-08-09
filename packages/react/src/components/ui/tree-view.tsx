@@ -50,9 +50,9 @@ function useTreeView() {
 const treeViewVariants = cva('rounded-xl overflow-y-auto p-2', {
   variants: {
     variant: {
-      default: 'bg-slate-950 border border-white/[0.08] text-slate-300',
+      default: 'bg-slate-950 border border-border-hairline text-slate-300',
       neon: 'bg-[#050d14] border border-cyan-500/20 shadow-[0_0_20px_rgba(0,240,255,0.03)] text-slate-300',
-      glass: 'bg-white/[0.02] border border-white/[0.1] backdrop-blur-xl text-slate-300 shadow-xl',
+      glass: 'bg-white/[0.02] border border-border-subtle backdrop-blur-xl text-slate-300 shadow-xl',
     },
   },
   defaultVariants: {

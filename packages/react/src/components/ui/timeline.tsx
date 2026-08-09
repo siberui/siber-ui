@@ -62,7 +62,7 @@ const TimelineItem = React.forwardRef<HTMLDivElement, TimelineItemProps>(
           <span className="w-1.5 h-1.5 rounded-full bg-current" />
         )}
       </div>
-      <div className="bg-slate-950/60 border border-white/[0.06] rounded-xl p-4 sm:p-5 backdrop-blur-md hover:border-cyan-500/30 transition-colors duration-300">
+      <div className="bg-slate-950/60 border border-border-hairline rounded-xl p-4 sm:p-5 backdrop-blur-md hover:border-cyan-500/30 transition-colors duration-300">
         {children}
       </div>
     </div>
@@ -96,7 +96,7 @@ const TimelinePeriod = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HT
     <span
       ref={ref}
       className={cn(
-        'text-[11px] font-mono px-2 py-0.5 rounded border border-white/10 bg-white/[0.03] text-slate-400',
+        'text-[11px] font-mono px-2 py-0.5 rounded border border-border-hairline bg-white/[0.03] text-slate-400',
         className
       )}
       {...props}

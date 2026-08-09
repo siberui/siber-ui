@@ -1,47 +1,82 @@
 /**
  * Siber-UI Color Palette
  *
- * A structured, semantic color system for the Siber-Minimalist Cyberpunk design language.
- * Organized into: Backgrounds, Neon Accents, Text, Borders, Status, and Semantic layers.
+ * A structured, semantic color system for the SiberUI design language.
+ * Organized into: Surfaces, Signal colors, Foreground, Borders, Semantic
+ * roles, and Glow tokens.
+ *
+ * Signal colors carry meaning, not decoration:
+ *   cyan = primary interaction · green = operational · amber = warning
+ *   rose = critical/destructive · violet = special/system
  *
  * Usage:
- *   import { colors } from 'siber-ui';
- *   <div style={{ background: colors.background.base }}>...</div>
+ *   import { colors } from '@siberui/react';
+ *   <div style={{ background: colors.surface.level1 }}>...</div>
  *
  * Or reference the CSS variables directly:
- *   var(--siber-bg-base)
+ *   var(--sb-surface-1)
  */
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Core Background / Surface
+// Surface system — layered elevation, near-black rather than pure black
 // ─────────────────────────────────────────────────────────────────────────────
+export const surface = {
+  /** Level 0 — application background */
+  background: '#05070a',
+  /** Level 1 — default surface (cards, panels) */
+  level1: '#080b10',
+  /** Level 2 — elevated surface */
+  level2: '#0b1017',
+  /** Level 3 — overlay (popover, dropdown) */
+  level3: '#101620',
+  /** Level 4 — modal / command surface */
+  level4: '#141a26',
+} as const;
+
+/** @deprecated use `surface` — kept for backwards compatibility */
 export const background = {
-  /** Deepest black — page root */
-  base: '#06090e',
-  /** Primary dark surface — cards, panels */
-  surface: '#0d121d',
-  /** Elevated surface — overlays, modals */
-  elevated: '#141c2c',
-  /** Hover state on surface */
-  hover: '#1e293b',
-  /** Subtle raised layer */
-  muted: '#253247',
+  base: surface.background,
+  surface: surface.level1,
+  elevated: surface.level2,
+  hover: surface.level3,
+  muted: surface.level4,
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Neon Accents — the signature cyberpunk glow colors
+// Signal colors — the signature SiberUI accents, each with semantic meaning
 // ─────────────────────────────────────────────────────────────────────────────
+export const signal = {
+  /** Primary interaction */
+  cyan: '#00d9e8',
+  /** Special / system state */
+  violet: '#a78bfa',
+  /** Operational / success state */
+  green: '#34d399',
+  /** Warning state */
+  amber: '#f5a524',
+  /** Critical / destructive state */
+  rose: '#fb5a7e',
+} as const;
+
+/** @deprecated use `signal` — kept for backwards compatibility */
 export const neon = {
-  /** Primary neon — cyan (default accent) */
-  cyan: '#00f0ff',
-  /** Secondary neon — purple */
-  purple: '#a855f7',
-  /** Tertiary neon — green */
-  green: '#39ff14',
-  /** Danger / alert neon — pink */
-  pink: '#ff007f',
-  /** Warning neon — amber */
-  amber: '#ffb800',
+  cyan: signal.cyan,
+  purple: signal.violet,
+  green: signal.green,
+  pink: signal.rose,
+  amber: signal.amber,
+} as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Semantic roles — map signal colors to intent
+// ─────────────────────────────────────────────────────────────────────────────
+export const semantic = {
+  primary: signal.cyan,
+  secondary: signal.violet,
+  success: signal.green,
+  warning: signal.amber,
+  danger: signal.rose,
+  info: signal.cyan,
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -49,15 +84,15 @@ export const neon = {
 // ─────────────────────────────────────────────────────────────────────────────
 export const text = {
   /** Primary text — brightest, for headings */
-  primary: '#f1f5f9',
+  primary: '#eceef2',
   /** Secondary text — body copy */
-  secondary: '#cbd5e1',
+  secondary: 'rgba(236, 238, 242, 0.64)',
   /** Muted text — labels, helpers */
-  muted: '#64748b',
+  muted: 'rgba(236, 238, 242, 0.38)',
   /** Disabled text */
-  disabled: '#475569',
+  disabled: 'rgba(236, 238, 242, 0.24)',
   /** Inverted text on light backgrounds */
-  inverted: '#06090e',
+  inverted: surface.background,
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -66,34 +101,32 @@ export const text = {
 export const border = {
   /** Default subtle border */
   default: 'rgba(255, 255, 255, 0.08)',
-  /** Slightly more visible border */
-  muted: 'rgba(255, 255, 255, 0.12)',
   /** Strong border for emphasis */
-  strong: 'rgba(255, 255, 255, 0.20)',
+  strong: 'rgba(255, 255, 255, 0.16)',
   /** Neon accent border */
-  accent: 'rgba(0, 240, 255, 0.30)',
+  accent: 'rgba(0, 217, 232, 0.30)',
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Status / Semantic
 // ─────────────────────────────────────────────────────────────────────────────
 export const status = {
-  success: '#39ff14',
-  successMuted: 'rgba(57, 255, 20, 0.15)',
-  warning: '#ffb800',
-  warningMuted: 'rgba(255, 184, 0, 0.15)',
-  error: '#f43f5e',
-  errorMuted: 'rgba(244, 63, 94, 0.15)',
-  info: '#00f0ff',
-  infoMuted: 'rgba(0, 240, 255, 0.15)',
+  success: signal.green,
+  successMuted: 'rgba(52, 211, 153, 0.15)',
+  warning: signal.amber,
+  warningMuted: 'rgba(245, 165, 36, 0.15)',
+  error: signal.rose,
+  errorMuted: 'rgba(251, 90, 126, 0.15)',
+  info: signal.cyan,
+  infoMuted: 'rgba(0, 217, 232, 0.15)',
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Glassmorphism / Transparency
+// Glassmorphism / Transparency — reserved for overlay/modal surfaces
 // ─────────────────────────────────────────────────────────────────────────────
 export const glass = {
   /** Standard glass surface */
-  surface: 'rgba(13, 18, 29, 0.70)',
+  surface: 'rgba(11, 16, 23, 0.72)',
   /** Light glass */
   light: 'rgba(255, 255, 255, 0.03)',
   /** Medium glass */
@@ -103,29 +136,55 @@ export const glass = {
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Glow Shadows (box-shadow values)
+// Glow Shadows (box-shadow values) — apply deliberately, not by default
 // ─────────────────────────────────────────────────────────────────────────────
 export const glow = {
-  cyan: '0 0 8px rgba(0, 240, 255, 0.12)',
-  purple: '0 0 8px rgba(168, 85, 247, 0.12)',
-  green: '0 0 8px rgba(57, 255, 20, 0.12)',
-  rose: '0 0 8px rgba(244, 63, 94, 0.12)',
-  cyanHover: '0 0 12px rgba(0, 240, 255, 0.20)',
-  purpleHover: '0 0 12px rgba(168, 85, 247, 0.20)',
-  greenHover: '0 0 12px rgba(57, 255, 20, 0.20)',
+  cyan: '0 0 0 1px rgba(0, 217, 232, 0.15), 0 0 16px rgba(0, 217, 232, 0.12)',
+  purple:
+    '0 0 0 1px rgba(167, 139, 250, 0.15), 0 0 16px rgba(167, 139, 250, 0.12)',
+  green:
+    '0 0 0 1px rgba(52, 211, 153, 0.15), 0 0 16px rgba(52, 211, 153, 0.12)',
+  rose: '0 0 0 1px rgba(251, 90, 126, 0.15), 0 0 16px rgba(251, 90, 126, 0.12)',
+  cyanHover:
+    '0 0 0 1px rgba(0, 217, 232, 0.25), 0 0 22px rgba(0, 217, 232, 0.16)',
+  purpleHover:
+    '0 0 0 1px rgba(167, 139, 250, 0.25), 0 0 22px rgba(167, 139, 250, 0.16)',
+  greenHover:
+    '0 0 0 1px rgba(52, 211, 153, 0.25), 0 0 22px rgba(52, 211, 153, 0.16)',
+} as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Motion tokens
+// ─────────────────────────────────────────────────────────────────────────────
+export const motion = {
+  duration: {
+    instant: '100ms',
+    fast: '150ms',
+    normal: '220ms',
+    slow: '400ms',
+  },
+  easing: {
+    out: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    inOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    emphasized: 'cubic-bezier(0.2, 0, 0, 1)',
+  },
 } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Combined export
 // ─────────────────────────────────────────────────────────────────────────────
 export const colors = {
+  surface,
   background,
+  signal,
   neon,
+  semantic,
   text,
   border,
   status,
   glass,
   glow,
+  motion,
 } as const;
 
 export type SiberColors = typeof colors;

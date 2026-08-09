@@ -77,7 +77,7 @@ export default function TagDocsPage() {
     />
   );
 }`}>
-              <div className="flex items-center justify-center p-8 bg-slate-900/30 rounded-xl border border-white/5">
+              <div className="flex items-center justify-center p-8 bg-slate-900/30 rounded-xl border border-border-hairline">
                 <TagGroupDemo />
               </div>
             </Playground>

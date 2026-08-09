@@ -44,7 +44,7 @@ export default function DataTableDocsPage() {
   data={data} 
   enableSelection 
 />`}>
-              <div className="w-full bg-slate-900/40 p-4 rounded-xl border border-white/5">
+              <div className="w-full bg-slate-900/40 p-4 rounded-xl border border-border-hairline">
                 <DataTableNeonDemo />
               </div>
             </Playground>
@@ -53,7 +53,7 @@ export default function DataTableDocsPage() {
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">Glass Variant</h3>
             <Playground code={`<DataTable variant="glass" columns={columns} data={data} />`}>
-              <div className="w-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-slate-900 p-8 rounded-xl border border-white/5">
+              <div className="w-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-slate-900 p-8 rounded-xl border border-border-hairline">
                 <DataTableGlassDemo />
               </div>
             </Playground>

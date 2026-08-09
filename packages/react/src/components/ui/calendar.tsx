@@ -15,9 +15,9 @@ export type CalendarVariant = 'default' | 'neon' | 'glass';
 const calendarVariants = cva('p-3', {
   variants: {
     variant: {
-      default: 'bg-slate-950 text-slate-100 rounded-xl border border-white/[0.08]',
+      default: 'bg-slate-950 text-slate-100 rounded-xl border border-border-hairline',
       neon: 'bg-[#050d14] text-cyan-50 rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(0,240,255,0.05)] font-mono',
-      glass: 'bg-slate-950/40 text-white backdrop-blur-xl rounded-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]',
+      glass: 'bg-slate-950/40 text-white backdrop-blur-xl rounded-2xl border border-border-hairline shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]',
     },
   },
   defaultVariants: {
@@ -65,8 +65,8 @@ function Calendar({
         'h-9 w-9 p-0 font-normal text-slate-200 aria-selected:opacity-100 hover:bg-white/10 hover:text-white transition-all'
       ),
       day_selected:
-        'aria-selected:bg-white/20 aria-selected:text-white aria-selected:border aria-selected:border-white/40 aria-selected:shadow-[0_0_20px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.4)] aria-selected:backdrop-blur-md aria-selected:font-bold',
-      day_today: 'bg-white/10 text-white font-semibold border border-white/20',
+        'aria-selected:bg-white/20 aria-selected:text-white aria-selected:border aria-selected:border-border-strong aria-selected:shadow-[0_0_20px_rgba(255,255,255,0.3),inset_0_1px_1px_rgba(255,255,255,0.4)] aria-selected:backdrop-blur-md aria-selected:font-bold',
+      day_today: 'bg-white/10 text-white font-semibold border border-border-strong',
     },
   };
 

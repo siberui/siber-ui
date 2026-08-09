@@ -20,7 +20,7 @@ const tagVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-white/[0.04] text-slate-300 border-white/[0.08] hover:border-white/[0.15] hover:text-slate-100',
+          'bg-white/[0.04] text-slate-300 border-border-hairline hover:border-border-subtle hover:text-slate-100',
         neon:
           'bg-cyan-500/[0.07] text-cyan-400 border-cyan-500/25 hover:border-cyan-500/50 hover:bg-cyan-500/[0.12]',
         neonPurple:
@@ -53,7 +53,7 @@ const tagVariants = cva(
       {
         variant: 'default',
         selected: true,
-        class: 'bg-white/[0.1] border-white/[0.2] text-white',
+        class: 'bg-white/[0.1] border-border-strong text-white',
       },
       {
         variant: 'neon',

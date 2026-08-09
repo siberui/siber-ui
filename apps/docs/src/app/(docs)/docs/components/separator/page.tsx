@@ -38,7 +38,7 @@ export default function SeparatorDocsPage() {
   </div>
 </div>`}>
               <div className="flex items-center justify-center p-8 w-full">
-                <div className="w-full max-w-sm rounded-lg border border-white/10 p-6 bg-slate-950/50">
+                <div className="w-full max-w-sm rounded-lg border border-border-hairline p-6 bg-slate-950/50">
                   <div className="space-y-1">
                     <h4 className="text-sm font-medium leading-none text-slate-200">System Logs</h4>
                     <p className="text-sm text-slate-400">View recent activities.</p>

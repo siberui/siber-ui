@@ -16,7 +16,7 @@ export default function GlitchTextDocsPage() {
     <ComponentPage headings={headings}>
       <ComponentHeader
         title="Glitch Text"
-        description="A stylized text component with a restrained cyberpunk scramble effect that stays readable."
+        description="A stylized text component with a restrained cyberpunk scramble effect that stays readable, plus an optional periodic HUD-style chromatic-split glitch burst."
       />
 
       <ContentSection
@@ -31,7 +31,7 @@ export default function GlitchTextDocsPage() {
             <Playground
               code={`<GlitchText as="h1" color="cyan" className="text-4xl">SYSTEM BREACH DETECTED</GlitchText>`}
             >
-              <div className="flex items-center justify-center p-8 bg-slate-900 rounded-xl h-48 border border-white/5">
+              <div className="flex items-center justify-center p-8 bg-slate-900 rounded-xl h-48 border border-border-hairline">
                 <GlitchText
                   as="h1"
                   color="cyan"
@@ -45,12 +45,58 @@ export default function GlitchTextDocsPage() {
 
           <div>
             <h3 className="mb-4 text-lg font-medium text-slate-200">
+              HUD Variants
+            </h3>
+            <Playground
+              code={`<div className="flex flex-col gap-6 text-3xl">
+  <GlitchText as="h2" variant="scramble" color="white">SCRAMBLE_ONLY</GlitchText>
+  <GlitchText as="h2" variant="rgb" color="cyan">RGB_SLICE_ONLY</GlitchText>
+  <GlitchText as="h2" variant="both" color="rose">BOTH (default)</GlitchText>
+</div>`}
+            >
+              <div className="flex flex-col items-center justify-center gap-8 p-8 bg-slate-950 rounded-xl h-72 border border-border-hairline">
+                <GlitchText
+                  as="h2"
+                  variant="scramble"
+                  color="white"
+                  className="text-xl md:text-2xl"
+                >
+                  SCRAMBLE_ONLY
+                </GlitchText>
+                <GlitchText
+                  as="h2"
+                  variant="rgb"
+                  color="cyan"
+                  className="text-xl md:text-2xl"
+                >
+                  RGB_SLICE_ONLY
+                </GlitchText>
+                <GlitchText
+                  as="h2"
+                  variant="both"
+                  color="rose"
+                  className="text-xl md:text-2xl"
+                >
+                  BOTH (default)
+                </GlitchText>
+              </div>
+            </Playground>
+            <p className="mt-3 text-xs text-slate-500">
+              &quot;rgb&quot; and &quot;both&quot; add a periodic chromatic-split
+              slice glitch (~every 7s) — a red/cyan duplicate layer punches
+              through via clip-path for a couple frames, like a dropped
+              signal. Respects <code>prefers-reduced-motion</code>.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="mb-4 text-lg font-medium text-slate-200">
               Reduced Motion
             </h3>
             <Playground
               code={`<GlitchText active={false} color="white" className="text-3xl">ACCESSIBILITY MODE ENABLED</GlitchText>`}
             >
-              <div className="flex items-center justify-center p-8 bg-slate-900 rounded-xl h-48 border border-white/5">
+              <div className="flex items-center justify-center p-8 bg-slate-900 rounded-xl h-48 border border-border-hairline">
                 <GlitchText
                   active={false}
                   color="white"
@@ -71,7 +117,7 @@ export default function GlitchTextDocsPage() {
   <GlitchText color="rose">ROSE_GLITCH_TEXT</GlitchText>
 </div>`}
             >
-              <div className="flex flex-col items-center justify-center gap-6 p-8 bg-slate-950 rounded-xl h-64 border border-white/5">
+              <div className="flex flex-col items-center justify-center gap-6 p-8 bg-slate-950 rounded-xl h-64 border border-border-hairline">
                 <GlitchText
                   color="cyan"
                   className="text-xl md:text-2xl"
@@ -125,6 +171,13 @@ export default function GlitchTextDocsPage() {
               description: 'The neon color theme.',
               type: '"cyan" | "white" | "rose"',
               defaultValue: '"white"',
+            },
+            {
+              property: 'variant',
+              description:
+                '"scramble" for character-noise only, "rgb" for the periodic HUD chromatic-split slice only, "both" to combine.',
+              type: '"scramble" | "rgb" | "both"',
+              defaultValue: '"both"',
             },
             {
               property: 'speed',

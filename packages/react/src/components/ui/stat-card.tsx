@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../utils/cn';
 
 const statCardVariants = cva(
-  'relative overflow-hidden rounded-xl bg-slate-950/60 border border-white/[0.08] hover:border-cyan-500/30 p-5 backdrop-blur-md transition-all duration-300 flex flex-col justify-between group',
+  'relative overflow-hidden rounded-xl bg-slate-950/60 border border-border-hairline hover:border-cyan-500/30 p-5 backdrop-blur-md transition-all duration-300 flex flex-col justify-between group',
   {
     variants: {
       color: {
@@ -42,7 +42,7 @@ const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
           {subtext && <p className="text-[11px] font-mono text-slate-500 break-words">{subtext}</p>}
         </div>
         {icon && (
-          <div className="stat-icon p-2 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-center flex-shrink-0">
+          <div className="stat-icon p-2 rounded-lg bg-white/[0.03] border border-border-hairline flex items-center justify-center flex-shrink-0">
             {icon}
           </div>
         )}
