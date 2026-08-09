@@ -38,7 +38,7 @@ export default function ProjectCardDocsPage() {
   <ProjectCardHeader>
     <div className="flex gap-2 mb-2">
       <Badge variant="neon" dot dotColor="cyan">ACTIVE</Badge>
-      <Badge variant="ghost">Next.js</Badge>
+      <Badge variant="outline">Next.js</Badge>
     </div>
     <ProjectCardTitle>Nexus Protocol</ProjectCardTitle>
     <ProjectCardDescription>
@@ -61,8 +61,8 @@ export default function ProjectCardDocsPage() {
                   <ProjectCardHeader>
                     <div className="flex flex-wrap gap-2 mb-3">
                       <Badge variant="neon" dot dotColor="cyan">ACTIVE</Badge>
-                      <Badge variant="ghost" className="text-[10px]">Next.js</Badge>
-                      <Badge variant="ghost" className="text-[10px]">TypeScript</Badge>
+                      <Badge variant="outline" className="text-[10px]">Next.js</Badge>
+                      <Badge variant="outline" className="text-[10px]">TypeScript</Badge>
                     </div>
                     <ProjectCardTitle>Nexus Protocol</ProjectCardTitle>
                     <ProjectCardDescription>
