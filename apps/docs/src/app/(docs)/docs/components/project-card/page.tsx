@@ -14,7 +14,7 @@ import {
   Button,
   Badge
 } from '@siberui/react';
-import { Terminal, ExternalLink, Activity } from 'lucide-react';
+import { Terminal, ExternalLink } from 'lucide-react';
 
 const headings = [
   { id: 'examples', text: 'Examples', level: 2 },

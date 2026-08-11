@@ -7,7 +7,6 @@ import { CodeBlock } from '@/components/docs/core/CodeBlock';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
 import {
-  colors,
   surface,
   signal,
   text,
@@ -81,7 +80,7 @@ const surfaceDark    = slate[950]; // '#05070a'
       {/* Signal Colors */}
       <ContentSection title="Signal Colors" id="signal-colors">
         <p className="mb-6 text-sm text-slate-400">
-          Signal colors carry semantic meaning across SiberUI interfaces. They guide the user's focus during high-density operations and critical events.
+          Signal colors carry semantic meaning across SiberUI interfaces. They guide the user&apos;s focus during high-density operations and critical events.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Cyan */}
