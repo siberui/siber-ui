@@ -6,13 +6,15 @@ import Link from 'next/link';
 import { Button } from '@siberui/react';
 import { Code, GitBranch, Search, Monitor } from 'lucide-react';
 import { DocSearchModal } from '../DocSearchModal';
+import { usePackageVersion } from '@/hooks/usePackageVersion';
 
 export function TopNav() {
   const [searchOpen, setSearchOpen] = React.useState(false);
+  const version = usePackageVersion();
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border-default bg-bg/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
+      <div className="flex h-14 w-full items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           <Link
             href="/"
@@ -31,7 +33,7 @@ export function TopNav() {
           </Link>
           <div className="hidden md:flex">
             <span className="rounded-full border border-signal-cyan/30 bg-signal-cyan/10 px-2 py-0.5 text-caption text-signal-cyan">
-              v1.0.2
+              v{version}
             </span>
           </div>
         </div>

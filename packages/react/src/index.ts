@@ -58,3 +58,4 @@ export * from './components/ui/scanline';
 export * from './components/ui/tech-label';
 export * from './components/ui/status';
 export * from './utils/cn';
+export * from './version';

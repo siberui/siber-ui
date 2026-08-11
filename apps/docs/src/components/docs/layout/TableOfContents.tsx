@@ -44,7 +44,7 @@ export function TableOfContents({ headings = [] }: TableOfContentsProps) {
   if (headings.length === 0) return null;
 
   return (
-    <div className="hidden xl:block w-64 shrink-0 pb-10">
+    <div className="hidden xl:block w-56 shrink-0 pb-10 pr-2">
       <div className="sticky top-14 pt-8">
         <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
           On this page

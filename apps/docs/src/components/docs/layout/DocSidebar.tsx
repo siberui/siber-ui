@@ -9,8 +9,8 @@ export function DocSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block md:w-64 overflow-y-auto">
-      <div className="h-full py-6 pr-6 lg:py-8">
+    <aside className="sticky top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-64 shrink-0 overflow-y-auto md:block">
+      <div className="h-full py-6 pl-4 pr-6 sm:pl-6 lg:py-8 lg:pl-8">
         <div className="flex flex-col gap-6">
           {docsNavigation.map((group) => (
             <div

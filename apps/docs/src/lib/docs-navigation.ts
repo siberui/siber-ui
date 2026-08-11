@@ -30,6 +30,7 @@ export const docsNavigation: DocNavGroup[] = [
       { title: 'Breadcrumb', href: '/docs/components/breadcrumb' },
       { title: 'Button', href: '/docs/components/button' },
       { title: 'Card', href: '/docs/components/card' },
+      { title: 'Colors', href: '/docs/components/colors', isNew: true },
       { title: 'Glitch Text', href: '/docs/components/glitch-text' },
       { title: 'Layout', href: '/docs/components/layout' },
       { title: 'Scroll Area', href: '/docs/components/scroll-area' },

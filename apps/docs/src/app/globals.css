@@ -36,6 +36,42 @@ main {
   z-index: 1;
 }
 
+/* ==========================================================================
+   SCROLLBAR — thin, minimal, signal-cyan glow on hover.
+   Matches the ScrollArea component's language for native-scroll surfaces
+   (sidebar nav, TOC, overflowing code/tables) without extra markup.
+   ========================================================================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--sb-border-strong);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 217, 232, 0.45);
+  box-shadow: var(--glow-cyan);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 @keyframes aura-breathe {
   0%,
   100% {

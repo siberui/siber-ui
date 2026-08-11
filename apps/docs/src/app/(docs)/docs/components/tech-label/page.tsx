@@ -4,7 +4,7 @@ import { ComponentHeader } from '@/components/docs/core/ComponentHeader';
 import { ContentSection } from '@/components/docs/core/ContentSection';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
-import { TechLabel, SystemBadge } from '@siberui/react';
+import { TechLabel, SystemBadge, VERSION } from '@siberui/react';
 
 const headings = [
   { id: 'examples', text: 'Examples', level: 2 },
@@ -50,7 +50,7 @@ export default function TechLabelDocsPage() {
             </h3>
             <Playground code={`<SystemBadge tone="cyan">BETA</SystemBadge>`}>
               <div className="flex flex-wrap gap-2 items-center justify-center">
-                <SystemBadge tone="neutral">v1.2.0</SystemBadge>
+                <SystemBadge tone="neutral">v{VERSION}</SystemBadge>
                 <SystemBadge tone="cyan">BETA</SystemBadge>
                 <SystemBadge tone="green">STABLE</SystemBadge>
                 <SystemBadge tone="amber">DEPRECATED</SystemBadge>

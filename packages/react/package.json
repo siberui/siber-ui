@@ -1,6 +1,6 @@
 {
   "name": "@siberui/react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Siber-Minimalist Cyberpunk React UI Kit",
 
   "main": "./dist/index.cjs",
@@ -12,6 +12,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
+    "./package.json": "./package.json",
     "./globals.css": "./dist/styles/globals.css"
   },
   "files": [

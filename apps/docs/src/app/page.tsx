@@ -52,9 +52,12 @@ const showcaseTabs = [
   { id: 'alerts', label: 'Feedback & Alerts' },
 ] as const;
 
+import { usePackageVersion } from '@/hooks/usePackageVersion';
+
 type ShowcaseTab = (typeof showcaseTabs)[number]['id'];
 
 export default function Home() {
+  const packageVersion = usePackageVersion();
   const [accentColor, setAccentColor] = useState<
     'cyan' | 'purple' | 'emerald' | 'rose'
   >('cyan');
@@ -114,6 +117,26 @@ export default function Home() {
       outcomeLabel: 'Assembly Time',
       outcomeValue: 'Under 10 min',
       outcomeTone: 'text-emerald-300',
+      link: '/docs/components/card',
+      templateCode: `import { Card, CardHeader, CardTitle, CardContent, Badge, Progress } from '@siberui/react';
+
+export function DashboardStarter() {
+  return (
+    <Card variant="interactive">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>System Performance</CardTitle>
+        <Badge variant="neon" dot dotColor="cyan">Stable</Badge>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="flex justify-between text-sm text-slate-400">
+          <span>Traffic Load</span>
+          <span className="text-cyan-400">72%</span>
+        </div>
+        <Progress value={72} variant="neon" size="sm" />
+      </CardContent>
+    </Card>
+  );
+}`,
     },
     security: {
       title: 'Security Ops Center',
@@ -123,6 +146,22 @@ export default function Home() {
       outcomeLabel: 'Incident Visibility',
       outcomeValue: 'Real-time',
       outcomeTone: 'text-rose-300',
+      link: '/docs/components/alert',
+      templateCode: `import { Alert, ThreatIndicator, RadarProgress } from '@siberui/react';
+
+export function SecurityOpsStarter() {
+  return (
+    <div className="space-y-4">
+      <Alert variant="destructive" title="Threat Signature Detected">
+        Auto-isolation protocol ready.
+      </Alert>
+      <div className="flex items-center justify-between p-4 border border-rose-500/20 rounded-xl bg-black/30">
+        <ThreatIndicator value={82} level="high" label="Escalated" />
+        <RadarProgress size="md" color="rose" />
+      </div>
+    </div>
+  );
+}`,
     },
     admin: {
       title: 'Admin Console',
@@ -132,6 +171,21 @@ export default function Home() {
       outcomeLabel: 'Operator Friction',
       outcomeValue: 'Reduced',
       outcomeTone: 'text-cyan-300',
+      link: '/docs/components/command',
+      templateCode: `import { TerminalBlock, Button } from '@siberui/react';
+
+export function AdminConsoleStarter() {
+  return (
+    <div className="space-y-4">
+      <TerminalBlock
+        title="ops.sh"
+        language="bash"
+        code="pnpm deploy --filter=dashboard"
+      />
+      <Button variant="primary">Execute Command</Button>
+    </div>
+  );
+}`,
     },
   } as const;
 
@@ -254,7 +308,7 @@ export default function Home() {
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-sm font-mono tracking-[0.2em] text-cyan-300">
               <span className="h-2 w-2 motion-safe:animate-pulse motion-reduce:animate-none rounded-full bg-cyan-400" />
-              v1.2.0 is now live
+              v{packageVersion} is now live
             </div>
 
             <GlitchText
@@ -1128,17 +1182,20 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-3 pt-1">
-                <Link href="/docs/components">
+                <Link href={activeScenario.link}>
                   <Button variant="primary">View Full Example</Button>
                 </Link>
                 <Button
                   variant="outline"
-                  onClick={() =>
+                  onClick={() => {
+                    if (navigator?.clipboard?.writeText) {
+                      navigator.clipboard.writeText(activeScenario.templateCode);
+                    }
                     toast({
                       title: 'Starter Template Copied',
-                      description: `${activeScenario.title} starter blueprint is ready.`,
-                    })
-                  }
+                      description: `${activeScenario.title} starter blueprint copied to clipboard.`,
+                    });
+                  }}
                 >
                   Copy Starter Template
                 </Button>

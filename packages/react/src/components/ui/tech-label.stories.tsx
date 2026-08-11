@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TechLabel, SystemBadge } from './tech-label';
+import { VERSION } from '../../version';
 
 const meta: Meta<typeof TechLabel> = {
   title: 'Components/UI/TechLabel',
@@ -36,7 +37,7 @@ export const Tones: Story = {
 export const SystemBadges: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
-      <SystemBadge tone="neutral">v1.2.0</SystemBadge>
+      <SystemBadge tone="neutral">v{VERSION}</SystemBadge>
       <SystemBadge tone="cyan">BETA</SystemBadge>
       <SystemBadge tone="green">STABLE</SystemBadge>
       <SystemBadge tone="amber">DEPRECATED</SystemBadge>
