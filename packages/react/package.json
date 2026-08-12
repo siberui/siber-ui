@@ -13,10 +13,11 @@
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json",
-    "./globals.css": "./dist/styles/globals.css"
+    "./globals.css": "./src/styles/globals.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/styles/globals.css"
   ],
   "scripts": {
     "build": "vite build",

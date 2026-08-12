@@ -11,7 +11,7 @@ export default function DocsLayout({
       <TopNav />
       <div className="flex w-full flex-1 items-start">
         <DocSidebar />
-        <main className="relative w-full min-w-0 max-w-[1600px] px-6 py-8 lg:px-8 xl:px-10">
+        <main className="relative w-full min-w-0 max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8 xl:px-10">
           {children}
         </main>
       </div>
