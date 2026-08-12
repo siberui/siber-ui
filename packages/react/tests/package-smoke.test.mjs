@@ -24,13 +24,13 @@ test('publishes the stylesheet declared by the globals.css export', async () => 
   const packageJson = JSON.parse(
     await readFile(new URL('../package.json', import.meta.url), 'utf8'),
   );
-  const stylesheet = new URL('../dist/styles/globals.css', import.meta.url);
+  const stylesheet = new URL('../src/styles/globals.css', import.meta.url);
   const stylesheetContents = await readFile(stylesheet, 'utf8');
 
   assert.equal(
     packageJson.exports['./globals.css'],
-    './dist/styles/globals.css',
+    './src/styles/globals.css',
   );
-  assert.deepEqual(packageJson.files, ['dist']);
+  assert.deepEqual(packageJson.files, ['dist', 'src/styles/globals.css']);
   assert.match(stylesheetContents, /@import\s+['"]tailwindcss['"]/);
 });
