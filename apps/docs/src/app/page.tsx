@@ -206,7 +206,7 @@ export function AdminConsoleStarter() {
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 w-full border-b border-border-hairline bg-black/25 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 sm:px-8 lg:px-12 py-4">
+        <div className="mx-auto flex max-w-[1360px] items-center justify-between px-6 sm:px-10 lg:px-16 py-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 group cursor-default">
               <Image
@@ -296,7 +296,7 @@ export function AdminConsoleStarter() {
       </nav>
 
       {/* Hero Section */}
-      <section className="mx-auto flex w-full max-w-[1600px] flex-col px-6 sm:px-8 lg:px-12 py-20 md:py-28">
+      <section className="mx-auto flex w-full max-w-[1360px] flex-col px-6 sm:px-10 lg:px-16 py-16 md:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
@@ -316,10 +316,10 @@ export function AdminConsoleStarter() {
               text="BUILD THE FUTURE. TODAY."
               color="cyan"
               speed={140}
-              className="max-w-4xl text-5xl font-black leading-[0.95] md:text-7xl"
+              className="max-w-3xl text-3xl font-black tracking-tight leading-[1.05] sm:text-4xl md:text-5xl lg:text-6xl"
             />
 
-            <p className="mt-6 max-w-xl text-lg text-slate-400 md:text-xl">
+            <p className="mt-5 max-w-lg text-base text-slate-400 md:text-lg leading-relaxed">
               A polished cyberpunk UI kit for modern teams that want minimalism,
               clarity, and a premium digital edge.
             </p>
@@ -426,7 +426,7 @@ export function AdminConsoleStarter() {
       </section>
 
       {/* MODERN INTERACTIVE COMPONENT SHOWCASE SECTION */}
-      <section className="relative mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-12 py-16">
+      <section className="relative mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 py-14">
         {/* HUD Cyber Grid Sub-layer background */}
         <div className="pointer-events-none absolute inset-0 rounded-3xl border border-border-hairline bg-gradient-to-b from-cyan-950/[0.04] via-transparent to-rose-950/[0.03] backdrop-blur-3xl" />
         <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(#22d3ee_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]" />
@@ -857,7 +857,7 @@ export function AdminConsoleStarter() {
       </section>
 
       {/* Architecture & Philosophy Section (Card-less Modern Layout) */}
-      <section className="mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-12 py-12 md:py-20">
+      <section className="mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 py-12 md:py-16">
         <div className="mb-12 flex flex-col gap-4 border-b border-border-hairline pb-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-400">
@@ -916,7 +916,7 @@ export function AdminConsoleStarter() {
       </section>
 
       {/* Bottom CTA / Highlight Section (UPDATED: Bottom Right accent changed to subtle Crimson Red) */}
-      <section className="mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-12 pb-20">
+      <section className="mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 pb-16">
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <Card
             variant="neon"
@@ -1206,7 +1206,7 @@ export function AdminConsoleStarter() {
       </section>
 
       {/* Cyberpunk FAQ Section (Showcasing Siber UI Accordion Component) */}
-      <section className="mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-12 pb-24">
+      <section className="mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 pb-20">
         <div className="mb-10 text-center">
           <div className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-mono tracking-widest text-cyan-400 uppercase">
             <HelpCircle className="h-3.5 w-3.5" />
@@ -1289,7 +1289,7 @@ export function AdminConsoleStarter() {
       </section>
 
       <footer className="mt-20 w-full border-t border-border-hairline py-8">
-        <div className="mx-auto max-w-[1600px] px-6 sm:px-8 lg:px-12 flex flex-col items-center justify-between gap-4 md:flex-row text-xs font-mono text-slate-500">
+        <div className="mx-auto max-w-[1360px] px-6 sm:px-10 lg:px-16 flex flex-col items-center justify-between gap-4 md:flex-row text-xs font-mono text-slate-500">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-emerald-500 motion-safe:animate-pulse motion-reduce:animate-none" />
@@ -1301,7 +1301,7 @@ export function AdminConsoleStarter() {
             <span>
               Designed &amp; built by{' '}
               <a
-                href="https://github.com/volkanozbek"
+                href="https://siber.dev"
                 target="_blank"
                 rel="noreferrer"
                 className="text-slate-400 hover:text-cyan-400 transition-colors duration-200"
