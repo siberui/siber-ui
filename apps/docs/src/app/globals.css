@@ -84,6 +84,12 @@ main {
   }
 }
 
-.animate-aura-breathe {
-  animation: aura-breathe 8s ease-in-out infinite;
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam calc(var(--duration, 6) * 1s) linear infinite;
 }

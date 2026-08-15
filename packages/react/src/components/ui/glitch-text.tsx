@@ -10,10 +10,10 @@ export interface GlitchTextProps extends React.HTMLAttributes<HTMLElement> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
   text?: string;
   active?: boolean;
-  color?: 'cyan' | 'white' | 'rose';
+  color?: 'cyan' | 'white' | 'rose' | 'violet' | 'emerald' | 'amber';
   speed?: number;
   /**
-   * 'scramble' — character-noise only (original behavior).
+   * 'scramble' — character-noise only.
    * 'rgb' — periodic HUD-style chromatic-split slice glitch only, text stays readable.
    * 'both' — combines both effects. Default, since it reads as the most "alive" HUD signal.
    */
@@ -70,11 +70,15 @@ export const GlitchText = React.forwardRef<HTMLElement, GlitchTextProps>(
       return () => clearInterval(intervalId);
     }, [active, originalText, effectiveSpeed, scrambleEnabled]);
 
-    const baseColorClass = {
-      cyan: 'text-cyan-300 drop-shadow-[0_0_4px_rgba(34,211,238,0.35)]',
-      white: 'text-slate-100 drop-shadow-[0_0_3px_rgba(241,245,249,0.28)]',
-      rose: 'text-rose-300 drop-shadow-[0_0_4px_rgba(251,113,133,0.32)]',
-    }[color];
+    const colorMap: Record<NonNullable<GlitchTextProps['color']>, string> = {
+      cyan: 'text-cyan-300 drop-shadow-[0_0_2px_rgba(0,217,232,0.25)]',
+      violet: 'text-violet-300 drop-shadow-[0_0_2px_rgba(167,139,250,0.25)]',
+      emerald: 'text-emerald-300 drop-shadow-[0_0_2px_rgba(52,211,153,0.25)]',
+      amber: 'text-amber-300 drop-shadow-[0_0_2px_rgba(245,165,36,0.25)]',
+      rose: 'text-rose-300 drop-shadow-[0_0_2px_rgba(251,90,126,0.25)]',
+      white: 'text-slate-100 drop-shadow-[0_0_2px_rgba(255,255,255,0.15)]',
+    };
+    const baseColorClass = colorMap[color] ?? colorMap.white;
 
     const stableAriaLabel = ariaLabelFromProps ?? (originalText || undefined);
     const renderedContent = originalText ? displayText : children;

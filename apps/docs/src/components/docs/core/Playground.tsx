@@ -18,10 +18,7 @@ export function Playground({ children, code, language = 'tsx', title }: Playgrou
       )}
       
       {/* Preview Area */}
-      <div className="relative flex min-h-[200px] sm:min-h-[250px] w-full items-center justify-center p-4 sm:p-8 bg-black/40">
-        {/* Subtle grid background for the playground */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-        
+      <div className="relative flex min-h-[200px] sm:min-h-[250px] w-full items-center justify-center p-4 sm:p-8 bg-[#04060b]">
         <div className="relative z-10 w-full max-w-3xl flex justify-center overflow-x-auto max-w-full">
           {children}
         </div>

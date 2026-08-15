@@ -6,7 +6,7 @@ const badgeVariants = cva(
   [
     'inline-flex items-center justify-center font-medium select-none',
     'transition-colors duration-200 ease-out',
-    'border rounded-full',
+    'border',
   ].join(' '),
   {
     variants: {
@@ -16,6 +16,7 @@ const badgeVariants = cva(
           'bg-primary-subtle text-primary border-primary-border',
         'primary-outline': 'bg-transparent text-primary border-primary-border',
         neon: 'font-mono uppercase tracking-wider bg-surface-1 text-primary border-primary-border shadow-glow-cyan',
+        glass: 'backdrop-blur-md bg-white/[0.05] border border-white/[0.15] text-slate-100 shadow-md',
         secondary: 'bg-surface-1 text-fg-muted border-border-hairline',
         outline:
           'bg-transparent text-fg-muted border-border-hairline hover:border-border-subtle',
@@ -26,12 +27,16 @@ const badgeVariants = cva(
         /** @deprecated use `danger` */
         destructive: 'bg-danger-subtle text-danger border-danger-border',
         /** @deprecated use `neon` + className override */
-        /** @deprecated use a `className` override with signal-violet */
         neonPurple:
           'font-mono uppercase tracking-wider bg-surface-1 text-secondary border-secondary-border shadow-glow-purple',
         /** @deprecated use `success` */
         neonGreen:
           'font-mono uppercase tracking-wider bg-surface-1 text-success border-success-border shadow-glow-green',
+      },
+      shape: {
+        pill: 'rounded-full',
+        rounded: 'rounded-md',
+        square: 'rounded-sm',
       },
       size: {
         sm: 'text-[10px] px-2 py-0.5 gap-1',
@@ -45,6 +50,7 @@ const badgeVariants = cva(
     },
     defaultVariants: {
       variant: 'primary',
+      shape: 'pill',
       size: 'md',
       pulse: false,
     },
@@ -56,7 +62,8 @@ export interface BadgeProps
     React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   dot?: boolean;
-  dotColor?: 'cyan' | 'purple' | 'green' | 'rose' | 'slate';
+  dotColor?: 'cyan' | 'purple' | 'green' | 'rose' | 'amber' | 'slate';
+  glow?: boolean;
 }
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
@@ -64,10 +71,12 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     {
       className,
       variant,
+      shape = 'pill',
       size,
       pulse,
       dot = false,
       dotColor,
+      glow = false,
       children,
       ...props
     },
@@ -83,6 +92,8 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
           return 'bg-success shadow-glow-green';
         case 'rose':
           return 'bg-danger shadow-glow-rose';
+        case 'amber':
+          return 'bg-warning shadow-[0_0_8px_rgba(245,165,36,0.8)]';
         default:
           return 'bg-current shadow-[0_0_6px_currentColor]';
       }
@@ -91,7 +102,11 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     return (
       <div
         ref={ref}
-        className={cn(badgeVariants({ variant, size, pulse, className }))}
+        className={cn(
+          badgeVariants({ variant, shape, size, pulse }),
+          glow && 'shadow-[0_0_14px_rgba(0,217,232,0.25)]',
+          className
+        )}
         {...props}
       >
         {dot && (

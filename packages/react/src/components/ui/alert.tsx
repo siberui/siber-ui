@@ -54,6 +54,10 @@ const alertVariants = cva(
           'bg-danger-subtle border-danger-border/60',
           'before:via-danger/60',
         ].join(' '),
+        glass: [
+          'bg-white/[0.04] border-white/10 text-white backdrop-blur-xl shadow-2xl',
+          'before:via-white/50',
+        ].join(' '),
       },
     },
     defaultVariants: {
@@ -111,6 +115,12 @@ const iconVariantMap: Record<string, React.ReactNode> = {
       strokeWidth={1.5}
     />
   ),
+  glass: (
+    <Info
+      className="h-4.5 w-4.5 shrink-0 mt-0.5 text-cyan-400"
+      strokeWidth={1.5}
+    />
+  ),
 };
 
 const titleColorMap: Record<string, string> = {
@@ -122,6 +132,7 @@ const titleColorMap: Record<string, string> = {
   success: 'text-success',
   warning: 'text-warning',
   destructive: 'text-danger',
+  glass: 'text-white',
 };
 
 /* ─────────────────────────────────────────────────────────

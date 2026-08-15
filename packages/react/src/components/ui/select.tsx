@@ -44,6 +44,11 @@ const selectVariants = cva(
           'hover:bg-white/[0.05]',
           'focus-visible:bg-white/[0.04] focus-visible:border-border-hairline',
         ].join(' '),
+        glass: [
+          'border border-white/10 bg-white/[0.04] text-white backdrop-blur-xl',
+          'hover:bg-white/[0.07] hover:border-white/20',
+          'focus-visible:bg-white/[0.08] focus-visible:border-cyan-400/80 focus-visible:ring-cyan-500/50',
+        ].join(' '),
       },
       selectSize: {
         sm: 'h-8 px-2.5 pr-8 text-xs rounded-md',

@@ -7,19 +7,25 @@ import { cn } from '../../utils/cn';
 // ─────────────────────────────────────────────────────────────────────────────
 // Breadcrumb Root
 // ─────────────────────────────────────────────────────────────────────────────
-export type BreadcrumbVariant = 'default' | 'neon' | 'ghost';
+export type BreadcrumbVariant = 'default' | 'neon' | 'glass' | 'ghost';
 
-const BreadcrumbContext = React.createContext<{ variant?: BreadcrumbVariant }>({
+interface BreadcrumbContextValue {
+  variant?: BreadcrumbVariant;
+  separator?: React.ReactNode;
+}
+
+const BreadcrumbContext = React.createContext<BreadcrumbContextValue>({
   variant: 'default',
 });
 
-interface BreadcrumbProps extends React.ComponentPropsWithoutRef<'nav'> {
+export interface BreadcrumbProps extends React.ComponentPropsWithoutRef<'nav'> {
   variant?: BreadcrumbVariant;
+  separator?: React.ReactNode;
 }
 
 const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
-  ({ className, variant = 'default', children, ...props }, ref) => (
-    <BreadcrumbContext.Provider value={{ variant }}>
+  ({ className, variant = 'default', separator, children, ...props }, ref) => (
+    <BreadcrumbContext.Provider value={{ variant, separator }}>
       <nav
         ref={ref}
         aria-label="breadcrumb"
@@ -39,16 +45,21 @@ Breadcrumb.displayName = 'Breadcrumb';
 const BreadcrumbList = React.forwardRef<
   HTMLOListElement,
   React.ComponentPropsWithoutRef<'ol'>
->(({ className, ...props }, ref) => (
-  <ol
-    ref={ref}
-    className={cn(
-      'flex flex-wrap items-center gap-1.5 break-words text-sm',
-      className
-    )}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const { variant } = React.useContext(BreadcrumbContext);
+
+  return (
+    <ol
+      ref={ref}
+      className={cn(
+        'flex flex-wrap items-center gap-1.5 break-words text-sm',
+        variant === 'neon' && 'gap-2',
+        className
+      )}
+      {...props}
+    />
+  );
+});
 BreadcrumbList.displayName = 'BreadcrumbList';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -79,11 +90,13 @@ const BreadcrumbLink = React.forwardRef<
     <a
       ref={ref}
       className={cn(
-        'transition-colors font-medium',
+        'transition-all font-medium inline-flex items-center gap-1.5',
         variant === 'neon'
-          ? 'text-cyan-400/70 hover:text-cyan-300 font-mono text-xs tracking-wide hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]'
+          ? 'text-cyan-400/70 hover:text-cyan-200 hover:bg-cyan-500/10 px-2 py-0.5 rounded font-mono text-xs tracking-wider hover:shadow-[0_0_10px_rgba(0,217,232,0.25)]'
+          : variant === 'glass'
+          ? 'text-slate-300 hover:text-white hover:bg-white/[0.06] px-2 py-0.5 rounded text-xs transition-colors'
           : variant === 'ghost'
-          ? 'text-slate-500 hover:text-slate-200'
+          ? 'text-slate-500 hover:text-slate-200 text-xs'
           : 'text-slate-400 hover:text-slate-100',
         className
       )}
@@ -109,12 +122,14 @@ const BreadcrumbPage = React.forwardRef<
       aria-disabled="true"
       aria-current="page"
       className={cn(
-        'font-medium',
+        'font-medium inline-flex items-center gap-1.5',
         variant === 'neon'
-          ? 'text-cyan-300 font-mono text-xs tracking-wide drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]'
+          ? 'text-cyan-200 bg-cyan-500/15 border border-cyan-500/40 px-2.5 py-0.5 rounded font-mono text-xs tracking-wider shadow-[0_0_14px_rgba(0,217,232,0.25)]'
+          : variant === 'glass'
+          ? 'text-white bg-white/[0.08] border border-white/10 px-2.5 py-0.5 rounded text-xs backdrop-blur-md'
           : variant === 'ghost'
-          ? 'text-slate-200'
-          : 'text-slate-100',
+          ? 'text-slate-200 text-xs font-semibold'
+          : 'text-slate-100 font-semibold',
         className
       )}
       {...props}
@@ -131,20 +146,20 @@ const BreadcrumbSeparator = ({
   className,
   ...props
 }: React.ComponentProps<'li'>) => {
-  const { variant } = React.useContext(BreadcrumbContext);
+  const { variant, separator } = React.useContext(BreadcrumbContext);
 
   return (
     <li
       role="presentation"
       aria-hidden="true"
       className={cn(
-        'flex items-center',
-        variant === 'neon' ? 'text-cyan-500/40' : 'text-slate-600',
+        'flex items-center select-none',
+        variant === 'neon' ? 'text-cyan-500/50 drop-shadow-[0_0_6px_rgba(0,217,232,0.3)] font-mono text-xs' : 'text-slate-600',
         className
       )}
       {...props}
     >
-      {children ?? <ChevronRight className="h-3.5 w-3.5" />}
+      {children ?? separator ?? <ChevronRight className="h-3.5 w-3.5" />}
     </li>
   );
 };
@@ -164,13 +179,17 @@ const BreadcrumbEllipsis = ({
       role="presentation"
       aria-hidden="true"
       className={cn(
-        'flex h-9 w-9 items-center justify-center rounded',
-        variant === 'neon' ? 'text-cyan-400/60' : 'text-slate-500',
+        'flex h-7 w-7 items-center justify-center rounded',
+        variant === 'neon'
+          ? 'text-cyan-400/60 bg-cyan-950/30 border border-cyan-500/20 font-mono text-xs'
+          : variant === 'glass'
+          ? 'text-slate-400 bg-white/[0.03] border border-white/10'
+          : 'text-slate-500',
         className
       )}
       {...props}
     >
-      <MoreHorizontal className="h-4 w-4" />
+      <MoreHorizontal className="h-3.5 w-3.5" />
       <span className="sr-only">More</span>
     </span>
   );

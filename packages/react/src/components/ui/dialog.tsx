@@ -30,18 +30,20 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-    variant?: 'default' | 'neon' | 'destructive';
+    variant?: 'default' | 'neon' | 'glass' | 'destructive';
   }
 >(({ className, children, variant = 'default', ...props }, ref) => {
   const variantStyles = {
     default: 'border-slate-800 bg-slate-950/95 shadow-xl',
     neon: 'border-cyan-500/30 bg-slate-950/95 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_0_12px_rgba(0,240,255,0.15)]',
+    glass: 'glass-surface border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-xl',
     destructive: 'border-rose-500/30 bg-slate-950/95 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_0_12px_rgba(244,63,94,0.15)]',
   };
 
   const closeStyles = {
     default: 'ring-offset-slate-950 focus:ring-slate-300',
     neon: 'text-cyan-400 hover:text-cyan-300 ring-offset-cyan-950 focus:ring-cyan-400/50',
+    glass: 'text-cyan-300 hover:text-white ring-offset-black/50 focus:ring-cyan-400/50',
     destructive: 'text-rose-400 hover:text-rose-300 ring-offset-rose-950 focus:ring-rose-400/50',
   };
 

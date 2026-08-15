@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304" height="304" viewBox="0 0 304 304" fill="none">
+  <!-- Background -->
+  <rect width="304" height="304" fill="#060913" />
+  
+  <!-- Subtle Ambient Glow -->
+  <circle cx="152" cy="152" r="120" fill="#00d9e8" fill-opacity="0.03" filter="blur(40px)" />
+
+  <!-- Circuit Traces & Nodes -->
+  <g stroke="#00d9e8" stroke-opacity="0.22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Path 1 -->
+    <path d="M0 40h40l20 20h60l15-15h45l20 20h40l20-20h44" />
+    <path d="M40 40v30l15 15h35l20 20v40l-20 20h-40l-15-15v-30" />
+    
+    <!-- Path 2 -->
+    <path d="M0 160h30l20-20h50l20 20v60l20 20h60l15-15h40l20 20h29" />
+    <path d="M120 160h40l15 15v35l-15 15h-30l-15-15v-35" />
+
+    <!-- Path 3 -->
+    <path d="M0 260h50l20-20h40l20 20h70l20-20h40l15 15h49" />
+    <path d="M200 40v40l20 20h40l15-15v-30" />
+    <path d="M260 120v40l-15 15h-45l-20-20v-35" />
+
+    <!-- Cross & Diagonal Connections -->
+    <path d="M80 0v25l15 15v40" />
+    <path d="M180 0v30l-15 15h-35" />
+    <path d="M240 0v35l15 15v50" />
+    <path d="M60 200v30l-15 15H0" />
+    <path d="M140 220v40l15 15v29" />
+    <path d="M220 220v30l-15 15h-45" />
+    <path d="M280 200v40l-15 15v49" />
+    <path d="M100 280l15 15v9" />
+    <path d="M200 280l15 15v9" />
+
+    <!-- IC Chip Package Outlines -->
+    <rect x="132" y="112" width="40" height="40" rx="4" stroke="#00d9e8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="4 2" />
+    <rect x="22" y="92" width="28" height="28" rx="3" stroke="#00d9e8" stroke-opacity="0.3" stroke-width="1.2" />
+    <rect x="242" y="192" width="32" height="32" rx="3" stroke="#00d9e8" stroke-opacity="0.3" stroke-width="1.2" />
+  </g>
+
+  <!-- Secondary Traces (Subtle Violet/Indigo) -->
+  <g stroke="#a78bfa" stroke-opacity="0.18" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M30 0v20l20 20v50l-20 20H0" />
+    <path d="M160 0v20l-20 20H90" />
+    <path d="M270 40h-30l-20 20v50l20 20h44" />
+    <path d="M90 140v40l20 20h40" />
+    <path d="M170 170h40l20 20v40l-20 20h-50" />
+    <path d="M0 220h20l20-20v-40" />
+    <path d="M80 304v-20l20-20h60l20 20v20" />
+    <path d="M240 304v-30l-20-20h-30" />
+  </g>
+
+  <!-- Solder Pad / Via Nodes -->
+  <g fill="#00d9e8" fill-opacity="0.4" stroke="#060913" stroke-width="1.5">
+    <circle cx="40" cy="40" r="3.5" />
+    <circle cx="120" cy="60" r="3" />
+    <circle cx="180" cy="45" r="3" />
+    <circle cx="260" cy="40" r="3.5" />
+    <circle cx="30" cy="160" r="3" />
+    <circle cx="100" cy="140" r="3.5" />
+    <circle cx="190" cy="160" r="3" />
+    <circle cx="250" cy="175" r="3.5" />
+    <circle cx="50" cy="260" r="3.5" />
+    <circle cx="110" cy="240" r="3" />
+    <circle cx="200" cy="260" r="3.5" />
+    <circle cx="270" cy="255" r="3" />
+    <circle cx="95" cy="40" r="2.5" />
+    <circle cx="140" cy="100" r="2.5" />
+    <circle cx="164" cy="100" r="2.5" />
+    <circle cx="140" cy="164" r="2.5" />
+    <circle cx="164" cy="164" r="2.5" />
+    <circle cx="220" cy="90" r="3" />
+    <circle cx="60" cy="230" r="3" />
+    <circle cx="155" cy="275" r="3" />
+  </g>
+
+  <!-- Glowing Pin Points -->
+  <g fill="#34d399" fill-opacity="0.6">
+    <circle cx="152" cy="132" r="2" />
+    <circle cx="36" cy="106" r="1.5" />
+    <circle cx="258" cy="208" r="1.5" />
+  </g>
+</svg>

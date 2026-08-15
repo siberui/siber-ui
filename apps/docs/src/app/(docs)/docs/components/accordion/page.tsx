@@ -76,24 +76,59 @@ export default function AccordionDocsPage() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-medium text-slate-200">Glass Variant</h3>
-            <Playground code={`<Accordion variant="glass" type="multiple" className="w-full">
+            <h3 className="mb-4 text-lg font-medium text-slate-200">Bordered Variant</h3>
+            <Playground code={`<Accordion variant="bordered" type="single" collapsible className="w-full">
   <AccordionItem value="item-1">
-    <AccordionTrigger>Encrypted Data</AccordionTrigger>
-    <AccordionContent>Decryption in progress...</AccordionContent>
+    <AccordionTrigger>Security Clearance</AccordionTrigger>
+    <AccordionContent>Level 4 authorized access verified.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Encryption Protocols</AccordionTrigger>
+    <AccordionContent>AES-256-GCM + Post-Quantum Lattice Key Exchange.</AccordionContent>
   </AccordionItem>
 </Accordion>`}>
-              <div className="w-full max-w-lg mx-auto p-4 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-slate-900/50 rounded-xl">
-                <Accordion variant="glass" type="multiple" className="w-full">
+              <div className="w-full max-w-lg mx-auto p-4">
+                <Accordion variant="bordered" type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
-                    <AccordionTrigger>Encrypted Data</AccordionTrigger>
-                    <AccordionContent>Decryption in progress...</AccordionContent>
+                    <AccordionTrigger>Security Clearance</AccordionTrigger>
+                    <AccordionContent>Level 4 authorized access verified.</AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
-                    <AccordionTrigger>Network Logs</AccordionTrigger>
-                    <AccordionContent>Accessing secure terminal history...</AccordionContent>
+                    <AccordionTrigger>Encryption Protocols</AccordionTrigger>
+                    <AccordionContent>AES-256-GCM + Post-Quantum Lattice Key Exchange.</AccordionContent>
                   </AccordionItem>
                 </Accordion>
+              </div>
+            </Playground>
+          </div>
+
+          <div>
+            <h3 className="mb-4 text-lg font-medium text-slate-200">Glass Variant</h3>
+            <Playground code={`<div className="p-6 rounded-2xl border border-white/10 bg-[#060913] bg-[url('/textures/circuit-board.svg')] bg-repeat">
+  <Accordion variant="glass" type="multiple" className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Encrypted Data Stream</AccordionTrigger>
+      <AccordionContent>Decryption in progress... Quantum handshake completed.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Network Telemetry Logs</AccordionTrigger>
+      <AccordionContent>Accessing secure node history. 0 anomalies detected.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</div>`}>
+              <div className="relative w-full max-w-lg mx-auto p-6 rounded-2xl border border-white/[0.08] bg-[#060913] bg-[url('/textures/circuit-board.svg')] bg-repeat overflow-hidden shadow-2xl">
+                <div className="relative z-10">
+                  <Accordion variant="glass" type="multiple" className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>Encrypted Data Stream</AccordionTrigger>
+                      <AccordionContent>Decryption in progress... Quantum handshake completed.</AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger>Network Telemetry Logs</AccordionTrigger>
+                      <AccordionContent>Accessing secure node history. 0 anomalies detected.</AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
               </div>
             </Playground>
           </div>

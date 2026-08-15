@@ -890,7 +890,34 @@
   animation: shimmer-sweep 1.8s ease-in-out infinite;
 }
 
+/* Skeleton scan sweep — vertical light scan */
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+.animate-scan-sweep {
+  animation: scan-sweep 2s ease-in-out infinite;
+}
+
 /* Border Beam animation */
+@keyframes border-beam {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam calc(var(--duration, 6) * 1s) linear infinite;
+}
+
 @keyframes border-beam-spin {
   0% {
     transform: rotate(0deg);

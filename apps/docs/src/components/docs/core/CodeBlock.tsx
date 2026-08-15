@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import * as React from 'react';
 import { codeToHtml } from 'shiki';
 import { CopyButton } from './CopyButton';
 
@@ -8,12 +10,36 @@ interface CodeBlockProps {
   className?: string;
 }
 
-export async function CodeBlock({ code, language = 'tsx', className }: CodeBlockProps) {
-  // We use the "vitesse-dark" or "github-dark" theme which looks good with our dark mode.
-  const html = await codeToHtml(code, {
-    lang: language,
-    theme: 'vitesse-dark',
-  });
+const htmlCache = new Map<string, string>();
+
+export function CodeBlock({ code, language = 'tsx', className }: CodeBlockProps) {
+  const cacheKey = `${language}:${code}`;
+  const [html, setHtml] = React.useState<string | null>(() => htmlCache.get(cacheKey) ?? null);
+
+  React.useEffect(() => {
+    if (htmlCache.has(cacheKey)) {
+      return;
+    }
+
+    let isMounted = true;
+    codeToHtml(code, {
+      lang: language,
+      theme: 'vitesse-dark',
+    })
+      .then((highlighted) => {
+        htmlCache.set(cacheKey, highlighted);
+        if (isMounted) {
+          setHtml(highlighted);
+        }
+      })
+      .catch((err) => {
+        console.error('Shiki highlight error:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [code, language, cacheKey]);
 
   return (
     <div className={`relative group rounded-lg overflow-hidden border border-border-hairline bg-[#121212] ${className || ''}`}>
@@ -21,10 +47,15 @@ export async function CodeBlock({ code, language = 'tsx', className }: CodeBlock
         <span className="text-xs font-mono text-slate-400">{language}</span>
         <CopyButton text={code} />
       </div>
-      <div 
-        className="p-4 overflow-x-auto text-sm font-mono [&>pre]:!bg-transparent [&>pre]:!m-0"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <div className="p-4 overflow-x-auto text-sm font-mono [&>pre]:!bg-transparent [&>pre]:!m-0">
+        {html ? (
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        ) : (
+          <pre className="!bg-transparent !m-0 text-slate-300">
+            <code>{code}</code>
+          </pre>
+        )}
+      </div>
     </div>
   );
 }

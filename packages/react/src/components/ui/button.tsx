@@ -21,73 +21,86 @@ const buttonVariants = cva(
         // Strongest semantic action.
         primary: [
           'bg-primary text-primary-foreground border border-primary-600',
-          'hover:bg-primary-600 hover:border-primary-500',
-          'active:bg-primary-700 active:border-primary-600',
+          'hover:bg-primary-600 hover:border-primary-400 hover:shadow-glow-cyan',
+          'active:bg-primary-700 active:border-primary-500',
         ].join(' '),
         'primary-subtle': [
           'bg-primary-subtle text-primary border border-primary-border',
-          'hover:bg-primary-hover hover:border-primary-400',
-          'active:bg-primary-active active:border-primary-500',
+          'hover:bg-primary-hover hover:border-signal-cyan/70 hover:text-cyan-200 hover:shadow-[0_0_12px_rgba(0,217,232,0.18)]',
+          'active:bg-primary-active active:border-signal-cyan',
         ].join(' '),
         'primary-outline': [
           'bg-transparent text-primary border border-primary-border',
-          'hover:bg-primary-subtle hover:border-primary-400',
-          'active:bg-primary-active active:border-primary-500',
+          'hover:bg-primary-subtle hover:border-signal-cyan hover:text-cyan-200 hover:shadow-glow-cyan',
+          'active:bg-primary-active active:border-signal-cyan',
         ].join(' '),
         secondary: [
           'bg-surface-1 text-fg-muted border border-border-hairline',
-          'hover:text-fg hover:border-border-subtle hover:bg-surface-2',
+          'hover:text-fg hover:border-border-strong hover:bg-surface-2',
+          'active:bg-surface-3',
         ].join(' '),
         outline: [
           'bg-transparent text-fg-muted border border-border-hairline',
-          'hover:text-fg hover:border-signal-cyan/40 hover:bg-surface-1',
+          'hover:text-fg hover:border-signal-cyan/60 hover:bg-surface-1 hover:shadow-[0_0_12px_rgba(0,217,232,0.15)]',
+          'active:bg-surface-2',
         ].join(' '),
         ghost: [
           'text-fg-muted border border-transparent',
-          'hover:bg-surface-1 hover:text-fg',
+          'hover:bg-surface-1 hover:text-fg hover:border-border-hairline',
+          'active:bg-surface-2',
+        ].join(' '),
+        // Frosted glassmorphism variant.
+        glass: [
+          'backdrop-blur-md bg-white/[0.04] text-slate-100 border border-white/[0.12] shadow-lg',
+          'hover:bg-white/[0.09] hover:border-cyan-500/50 hover:text-white hover:shadow-[0_0_16px_rgba(0,217,232,0.18)]',
+          'active:bg-white/[0.14] active:border-cyan-400',
         ].join(' '),
         // Semantic intent variants.
         danger: [
           'bg-danger-subtle text-danger border border-danger-border',
-          'hover:bg-danger-hover hover:border-danger-400',
-          'active:bg-danger-active active:border-danger-500',
+          'hover:bg-danger-hover hover:border-signal-rose hover:text-rose-200 hover:shadow-[0_0_14px_rgba(251,90,126,0.3)]',
+          'active:bg-danger-active active:border-signal-rose',
         ].join(' '),
         success: [
           'bg-success-subtle text-success border border-success-border',
-          'hover:bg-success-hover hover:border-success-400',
-          'active:bg-success-active active:border-success-500',
+          'hover:bg-success-hover hover:border-signal-green hover:text-emerald-200 hover:shadow-[0_0_14px_rgba(52,211,153,0.3)]',
+          'active:bg-success-active active:border-signal-green',
         ].join(' '),
         /** @deprecated use `danger` */
         destructive: [
           'bg-signal-rose/10 text-signal-rose border border-signal-rose/30',
-          'hover:bg-signal-rose/15 hover:border-signal-rose/50',
+          'hover:bg-signal-rose/20 hover:border-signal-rose hover:text-rose-200 hover:shadow-[0_0_16px_rgba(251,90,126,0.35)]',
+          'active:bg-signal-rose/30 active:border-signal-rose',
         ].join(' '),
         // Kept for API compatibility.
         signal: [
           'bg-primary-subtle text-primary border border-primary-border',
-          'hover:bg-primary-hover hover:border-primary-400',
-          'active:bg-primary-active active:border-primary-500',
+          'hover:bg-primary-hover hover:border-signal-cyan/70 hover:text-cyan-200 hover:shadow-[0_0_12px_rgba(0,217,232,0.18)]',
+          'active:bg-primary-active active:border-signal-cyan',
         ].join(' '),
         // Expressive special variant, intentionally below primary action weight.
         neon: [
           'bg-surface-1 text-primary border border-primary-border font-mono uppercase tracking-wider shadow-glow-cyan',
-          'hover:bg-surface-2 hover:border-primary-400',
-          'active:bg-surface-3 active:border-primary-500',
+          'hover:bg-surface-2 hover:border-signal-cyan hover:shadow-glow-cyan-hover hover:text-cyan-200',
+          'active:bg-surface-3 active:border-signal-cyan',
         ].join(' '),
         /** @deprecated use `variant="signal"` with a violet className override */
         neonPurple: [
           'bg-signal-violet/[0.08] text-signal-violet border border-signal-violet/30 font-mono uppercase tracking-wider',
-          'hover:bg-signal-violet hover:text-bg hover:border-signal-violet hover:shadow-glow-purple-hover',
+          'hover:bg-signal-violet/20 hover:text-white hover:border-signal-violet hover:shadow-glow-purple-hover',
+          'active:bg-signal-violet/30 active:border-signal-violet',
         ].join(' '),
         /** @deprecated use `success` */
         neonGreen: [
           'bg-signal-green/[0.08] text-signal-green border border-signal-green/30 font-mono uppercase tracking-wider',
-          'hover:bg-signal-green hover:text-bg hover:border-signal-green hover:shadow-glow-green-hover',
+          'hover:bg-signal-green/20 hover:text-white hover:border-signal-green hover:shadow-glow-green-hover',
+          'active:bg-signal-green/30 active:border-signal-green',
         ].join(' '),
         // Terminal — monospace, system-console voice.
         terminal: [
           'bg-surface-1 text-signal-green border border-border-default font-mono lowercase',
-          'hover:border-signal-green/40 hover:bg-surface-2',
+          'hover:border-signal-green hover:bg-surface-2 hover:text-emerald-200 hover:shadow-[0_0_12px_rgba(52,211,153,0.22)]',
+          'active:bg-surface-3 active:border-signal-green',
         ].join(' '),
       },
       size: {
