@@ -12,7 +12,6 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ['src'],
-      exclude: ['src/**/*.stories.ts', 'src/**/*.stories.tsx'],
     }),
     {
       name: 'copy-globals-css-to-dist',

@@ -7,8 +7,6 @@ export default [
   {
     ignores: [
       'dist/**',
-      'storybook-static/**',
-      'src/**/*.stories.tsx',
     ],
   },
   js.configs.recommended,
