@@ -1,13 +1,15 @@
+'use client';
+
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../utils/cn';
 
-const skillMatrixVariants = cva('grid gap-4 w-full', {
+const skillMatrixVariants = cva('grid gap-3.5 w-full', {
   variants: {
     cols: {
       1: 'grid-cols-1',
       2: 'grid-cols-1 md:grid-cols-2',
-      3: 'grid-cols-1 md:grid-cols-3',
+      3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
     },
   },
   defaultVariants: {
@@ -22,15 +24,36 @@ export interface SkillMatrixProps
 const SkillMatrix = React.forwardRef<HTMLDivElement, SkillMatrixProps>(
   ({ className, cols, ...props }, ref) => (
     <div ref={ref} className={cn(skillMatrixVariants({ cols, className }))} {...props} />
-  )
+  ),
 );
 SkillMatrix.displayName = 'SkillMatrix';
 
-const skillBarColorVariants = {
-  cyan: 'bg-cyan-400',
-  purple: 'bg-purple-400',
-  emerald: 'bg-emerald-400',
-  amber: 'bg-amber-400',
+const skillSignalVariants = {
+  cyan: {
+    text: 'text-cyan-400',
+    bar: 'bg-cyan-400 shadow-[0_0_6px_rgba(0,217,232,0.8)]',
+    border: 'group-hover:border-cyan-500/40',
+  },
+  violet: {
+    text: 'text-violet-400',
+    bar: 'bg-violet-400 shadow-[0_0_6px_rgba(167,139,250,0.8)]',
+    border: 'group-hover:border-violet-500/40',
+  },
+  emerald: {
+    text: 'text-emerald-400',
+    bar: 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]',
+    border: 'group-hover:border-emerald-500/40',
+  },
+  amber: {
+    text: 'text-amber-400',
+    bar: 'bg-amber-400 shadow-[0_0_6px_rgba(245,165,36,0.8)]',
+    border: 'group-hover:border-amber-500/40',
+  },
+  rose: {
+    text: 'text-rose-400',
+    bar: 'bg-rose-400 shadow-[0_0_6px_rgba(251,90,126,0.8)]',
+    border: 'group-hover:border-rose-500/40',
+  },
 };
 
 export interface SkillItemProps
@@ -39,64 +62,89 @@ export interface SkillItemProps
   level: number; // 0 to 100
   category?: string;
   icon?: React.ReactNode;
-  color?: 'cyan' | 'purple' | 'emerald' | 'amber';
+  signal?: 'cyan' | 'violet' | 'emerald' | 'amber' | 'rose';
   statusLabel?: string;
+  segments?: number;
+  /** Display automated tactical rank (e.g. MASTER, SPECIALIST) */
+  showRank?: boolean;
 }
 
+const getRankLabel = (level: number) => {
+  if (level >= 90) return 'MASTER';
+  if (level >= 75) return 'SPECIALIST';
+  if (level >= 50) return 'ADEPT';
+  return 'NOVICE';
+};
+
 const SkillItem = React.forwardRef<HTMLDivElement, SkillItemProps>(
-  ({ className, name, level, category, icon, color = 'cyan', statusLabel, ...props }, ref) => {
+  (
+    {
+      className,
+      name,
+      level,
+      category,
+      icon,
+      signal = 'cyan',
+      statusLabel,
+      segments = 12,
+      showRank = true,
+      ...props
+    },
+    ref,
+  ) => {
     const clampedLevel = Math.min(100, Math.max(0, level));
-    const totalSegments = 10;
-    const activeSegments = Math.round(clampedLevel / 10);
+    const activeSegments = Math.round((clampedLevel / 100) * segments);
+    const signalTheme = skillSignalVariants[signal];
 
     return (
       <div
         ref={ref}
         className={cn(
-          'p-4 rounded-xl bg-slate-950/60 border border-border-hairline hover:border-cyan-500/30 transition-colors duration-300 backdrop-blur-md group',
-          className
+          'p-4 rounded-xl bg-[#050811] border border-white/[0.08] transition-all duration-200 group hover:-translate-y-0.5 shadow-md',
+          signalTheme.border,
+          className,
         )}
         {...props}
       >
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <div className="flex items-center gap-2 min-w-0">
             {icon && (
-              <span className={cn('text-sm flex items-center justify-center', 
-                color === 'cyan' && 'text-cyan-400',
-                color === 'purple' && 'text-purple-400',
-                color === 'emerald' && 'text-emerald-400',
-                color === 'amber' && 'text-amber-400'
-              )}>
+              <span className={cn('text-sm shrink-0 flex items-center justify-center', signalTheme.text)}>
                 {icon}
               </span>
             )}
-            <span className="text-xs font-semibold text-slate-100 font-sans tracking-wide">{name}</span>
+            <span className="text-xs font-bold text-slate-100 font-sans tracking-wide truncate">
+              {name}
+            </span>
             {category && (
-              <span className="text-[10px] font-mono text-slate-500 bg-white/[0.04] px-1.5 py-0.5 rounded border border-border-hairline">
+              <span className="text-[9px] font-mono text-slate-500 bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.08] shrink-0">
                 {category}
               </span>
             )}
           </div>
-          <span className={cn("text-xs font-mono font-bold", 
-              color === 'cyan' && 'text-cyan-400',
-              color === 'purple' && 'text-purple-400',
-              color === 'emerald' && 'text-emerald-400',
-              color === 'amber' && 'text-amber-400'
-          )}>
-            {statusLabel || `${clampedLevel}%`}
-          </span>
+
+          <div className="flex items-center gap-2 shrink-0">
+            {showRank && (
+              <span className="text-[8px] font-mono font-bold text-slate-500 uppercase tracking-tight">
+                [{getRankLabel(clampedLevel)}]
+              </span>
+            )}
+            <span className={cn('text-xs font-mono font-bold', signalTheme.text)}>
+              {statusLabel || `${clampedLevel}%`}
+            </span>
+          </div>
         </div>
 
-        {/* Clean Segmented Matrix Power Bar */}
-        <div className="flex items-center gap-1 w-full h-2">
-          {Array.from({ length: totalSegments }).map((_, i) => {
+        {/* Precision Segmented Matrix LED Array */}
+        <div className="flex items-center gap-1 w-full h-2 bg-[#020409] p-0.5 rounded border border-white/[0.06]">
+          {Array.from({ length: segments }).map((_, i) => {
             const isActive = i < activeSegments;
             return (
               <div
                 key={i}
                 className={cn(
-                  'flex-1 h-full rounded-xs transition-opacity duration-300',
-                  isActive ? skillBarColorVariants[color] : 'bg-slate-900 border border-border-hairline opacity-40'
+                  'flex-1 h-full rounded-xs transition-all duration-300',
+                  isActive ? signalTheme.bar : 'bg-white/[0.04]',
                 )}
               />
             );
@@ -104,8 +152,8 @@ const SkillItem = React.forwardRef<HTMLDivElement, SkillItemProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 SkillItem.displayName = 'SkillItem';
 
-export { SkillMatrix, SkillItem };
+export { SkillMatrix, SkillItem, skillMatrixVariants };

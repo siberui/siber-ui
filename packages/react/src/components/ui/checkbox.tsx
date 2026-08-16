@@ -169,15 +169,23 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const iconColor = iconColorMap[variant || 'default'];
     const iconSize = iconSizeMap[checkboxSize || 'md'];
 
+    const hasDescription = Boolean(description);
+
     return (
       <label
         htmlFor={checkboxId}
         className={cn(
-          'inline-flex items-start gap-2.5 cursor-pointer group select-none',
+          'inline-flex gap-2.5 cursor-pointer group select-none',
+          hasDescription ? 'items-start' : 'items-center',
           disabled && 'cursor-not-allowed opacity-40',
         )}
       >
-        <div className="relative flex items-center justify-center pt-0.5">
+        <div
+          className={cn(
+            'relative flex items-center justify-center shrink-0',
+            hasDescription && 'pt-0.5',
+          )}
+        >
           <input
             type="checkbox"
             id={checkboxId}

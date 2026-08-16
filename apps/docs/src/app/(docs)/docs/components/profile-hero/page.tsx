@@ -15,31 +15,28 @@ import {
   ProfileTitle,
   ProfileSubtitle,
   ProfileMeta,
+  ProfileMetaItem,
   ProfileActions,
   Button,
-  Badge,
-  BorderBeam,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
 } from '@siberui/react';
 import {
-  MapPin,
+  Shield,
+  Send,
+  Award,
   Terminal,
+  MapPin,
+  Building,
+  Key,
 } from 'lucide-react';
 
 const headings = [
   { id: 'installation', text: 'Installation', level: 2 },
   { id: 'import', text: 'Import', level: 2 },
-  { id: 'basic-usage', text: 'Basic Usage & Operative Bio Anatomy', level: 2 },
-  { id: 'accent-colors', text: 'Laser Accent Wires (Cyan, Purple, Emerald)', level: 2 },
-  { id: 'avatar-statuses', text: 'Avatar Online & Air-Gap Status Rings', level: 2 },
-  { id: 'frosted-glass-hero', text: 'Frosted Cyber-Glass Dossier Header', level: 2 },
-  { id: 'tactical-hud-dossier', text: 'Tactical HUD Sentinel Command Card', level: 2 },
+  { id: 'basic-usage', text: 'Dossier Hero & Reticle Avatar', level: 2 },
+  { id: 'status-modes', text: 'Operative Statuses (Online, Busy, Classified)', level: 2 },
+  { id: 'copyable-meta', text: 'Copyable Cryptographic Metadata Chips', level: 2 },
   { id: 'api-reference', text: 'API Reference', level: 2 },
   { id: 'accessibility', text: 'Accessibility', level: 2 },
-  { id: 'best-practices', text: 'Best Practices', level: 2 },
 ];
 
 export default function ProfileHeroDocsPage() {
@@ -47,7 +44,7 @@ export default function ProfileHeroDocsPage() {
     <ComponentPage headings={headings}>
       <ComponentHeader
         title="Profile Hero"
-        description="Comprehensive developer bio, agent clearance dossier, and operative header unit with glowing avatar status rings, metadata tags, and action triggers."
+        description="Tactical operative dossier banner featuring HUD telemetry header tags, biometric targeting reticles, copyable metadata chips, and animated status beacons."
         status="Stable"
       />
 
@@ -62,225 +59,167 @@ export default function ProfileHeroDocsPage() {
           code={`import { 
   ProfileHero, 
   ProfileAvatar, 
-  ProfileInfo, 
-  ProfileTitle, 
-  ProfileSubtitle, 
+  ProfileInfo,
+  ProfileTitle,
+  ProfileSubtitle,
   ProfileMeta, 
+  ProfileMetaItem,
   ProfileActions 
 } from '@siberui/react';`}
         />
       </ContentSection>
 
       {/* ── Basic Usage ── */}
-      <ContentSection title="Basic Usage & Operative Bio Anatomy" id="basic-usage">
+      <ContentSection title="Dossier Hero & Reticle Avatar" id="basic-usage">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            The profile hero combines high-impact typography, metadata pills, avatar status rings, and tactical call-to-action buttons.
+            Composite hero banner featuring tactical clearance header, reticle corner brackets around avatar, and metadata badges.
           </p>
 
           <Playground
-            code={`<ProfileHero className="w-full max-w-2xl">
-  <ProfileAvatar fallback="0x42" status="online" />
+            code={`<ProfileHero
+  tag="OPERATIVE // DOSSIER_09"
+  clearance="CLEARANCE: LVL-5"
+  status="online"
+  signal="cyan"
+  className="max-w-2xl w-full"
+>
+  <ProfileAvatar
+    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    alt="Elena Vance"
+    status="online"
+    reticles
+  />
   <ProfileInfo>
-    <ProfileTitle>Alex Vance</ProfileTitle>
-    <ProfileSubtitle>LEAD ZERO-DAY RESEARCHER</ProfileSubtitle>
+    <ProfileTitle>Elena Vance</ProfileTitle>
+    <ProfileSubtitle>Principal Sentinel Architect // Zero-Trust Systems</ProfileSubtitle>
+    <p className="text-xs text-slate-300 leading-relaxed">
+      Architecting distributed zero-knowledge verification nodes and post-quantum lattice security mesh. Leading global cyber defense infrastructure.
+    </p>
     <ProfileMeta>
-      <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-cyan-400" /> Sector 09 // Orbital</span>
-      <span className="flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5 text-emerald-400" /> 8 YOE</span>
+      <ProfileMetaItem icon={<Building className="w-3.5 h-3.5" />}>ORBITAL DEFENSE CMD</ProfileMetaItem>
+      <ProfileMetaItem icon={<MapPin className="w-3.5 h-3.5" />}>NEO-ZURICH (UTC+1)</ProfileMetaItem>
+      <ProfileMetaItem icon={<Key className="w-3.5 h-3.5" />} copyable>0x7F4A...B881</ProfileMetaItem>
     </ProfileMeta>
     <ProfileActions>
-      <Button variant="neon" size="sm" glow>DEPLOY AGENT</Button>
-      <Button variant="secondary" size="sm">VIEW DOSSIER</Button>
+      <Button variant="ghost" size="sm" leftIcon={<Terminal className="w-3.5 h-3.5" />}>
+        VIEW AUDIT
+      </Button>
+      <Button variant="primary" size="sm" leftIcon={<Send className="w-3.5 h-3.5" />}>
+        TRANSMIT PING
+      </Button>
     </ProfileActions>
   </ProfileInfo>
 </ProfileHero>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <ProfileHero className="w-full max-w-2xl">
-                <ProfileAvatar fallback="0x42" status="online" />
-                <ProfileInfo>
-                  <ProfileTitle>Alex Vance</ProfileTitle>
-                  <ProfileSubtitle>LEAD ZERO-DAY RESEARCHER</ProfileSubtitle>
-                  <ProfileMeta>
-                    <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-cyan-400" /> Sector 09 // Orbital</span>
-                    <span className="flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5 text-emerald-400" /> 8 YOE</span>
-                  </ProfileMeta>
-                  <ProfileActions>
-                    <Button variant="neon" size="sm" glow>DEPLOY AGENT</Button>
-                    <Button variant="secondary" size="sm">VIEW DOSSIER</Button>
-                  </ProfileActions>
-                </ProfileInfo>
-              </ProfileHero>
-            </div>
-          </Playground>
-        </div>
-      </ContentSection>
-
-      {/* ── Accent Colors ── */}
-      <ContentSection title="Laser Accent Wires (Cyan, Purple, Emerald)" id="accent-colors">
-        <div className="flex flex-col gap-6">
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Specify the top laser gradient accent wire via <code className="text-cyan-400">accent=&quot;cyan&quot; | &quot;purple&quot; | &quot;emerald&quot;</code>.
-          </p>
-
-          <Playground
-            code={`<div className="flex flex-col gap-4 w-full max-w-2xl">
-  <ProfileHero accent="purple">
-    <ProfileAvatar fallback="SYS" status="busy" />
-    <ProfileInfo>
-      <ProfileTitle>Network Core Sentinel</ProfileTitle>
-      <ProfileSubtitle>INFRASTRUCTURE ARCHITECT</ProfileSubtitle>
-    </ProfileInfo>
-  </ProfileHero>
-
-  <ProfileHero accent="emerald">
-    <ProfileAvatar fallback="SEC" status="online" />
-    <ProfileInfo>
-      <ProfileTitle>Kyber HSM Operator</ProfileTitle>
-      <ProfileSubtitle>POST-QUANTUM SECURITY</ProfileSubtitle>
-    </ProfileInfo>
-  </ProfileHero>
-</div>`}
-          >
-            <div className="flex flex-col gap-4 p-8 bg-[#03060d] rounded-2xl border border-white/[0.06] w-full">
-              <ProfileHero accent="purple" className="w-full max-w-2xl">
-                <ProfileAvatar fallback="SYS" status="busy" />
-                <ProfileInfo>
-                  <ProfileTitle>Network Core Sentinel</ProfileTitle>
-                  <ProfileSubtitle>INFRASTRUCTURE ARCHITECT</ProfileSubtitle>
-                </ProfileInfo>
-              </ProfileHero>
-
-              <ProfileHero accent="emerald" className="w-full max-w-2xl">
-                <ProfileAvatar fallback="SEC" status="online" />
-                <ProfileInfo>
-                  <ProfileTitle>Kyber HSM Operator</ProfileTitle>
-                  <ProfileSubtitle>POST-QUANTUM SECURITY</ProfileSubtitle>
-                </ProfileInfo>
-              </ProfileHero>
-            </div>
-          </Playground>
-        </div>
-      </ContentSection>
-
-      {/* ── Avatar Statuses ── */}
-      <ContentSection title="Avatar Online & Air-Gap Status Rings" id="avatar-statuses">
-        <div className="flex flex-col gap-6">
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Indicate live telemetry availability with <code className="text-cyan-400">status=&quot;online&quot; | &quot;busy&quot; | &quot;offline&quot;</code>.
-          </p>
-
-          <Playground
-            code={`<div className="flex flex-wrap gap-8 items-center justify-center">
-  <ProfileAvatar fallback="ON" status="online" />
-  <ProfileAvatar fallback="BSY" status="busy" />
-  <ProfileAvatar fallback="OFF" status="offline" />
-</div>`}
-          >
-            <div className="flex flex-wrap gap-8 items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <ProfileAvatar fallback="ON" status="online" />
-              <ProfileAvatar fallback="BSY" status="busy" />
-              <ProfileAvatar fallback="OFF" status="offline" />
-            </div>
-          </Playground>
-        </div>
-      </ContentSection>
-
-      {/* ── Frosted Cyber-Glass Dossier Header ── */}
-      <ContentSection title="Frosted Cyber-Glass Dossier Header" id="frosted-glass-hero">
-        <div className="flex flex-col gap-6">
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Composite profile hero over circuit substrate textures with perimeter laser sweeps.
-          </p>
-
-          <Playground
-            code={`<div className="relative w-full max-w-2xl p-8 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
-  <ProfileHero className="bg-transparent border-0 p-0">
-    <ProfileAvatar fallback="AGT" status="online" />
-    <ProfileInfo>
-      <ProfileTitle>Sentinel Envoy</ProfileTitle>
-      <ProfileSubtitle>ORBITAL ENCLAVE LIAISON</ProfileSubtitle>
-      <ProfileMeta>
-        <span>Clearance: Level 5 Cryptographic</span>
-      </ProfileMeta>
-    </ProfileInfo>
-  </ProfileHero>
-  <BorderBeam variant="neon" size={140} duration={6} borderWidth={1.5} glow />
-</div>`}
-          >
-            <div className="relative flex items-center justify-center p-8 rounded-2xl border border-white/[0.08] bg-[#060913] bg-[url('/textures/circuit-board.svg')] bg-repeat overflow-hidden shadow-2xl w-full">
-              <div className="relative z-10 w-full max-w-2xl">
-                <ProfileHero className="bg-transparent border-0 p-0">
-                  <ProfileAvatar fallback="AGT" status="online" />
+            <div className="flex items-center justify-center p-6 sm:p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <div className="max-w-2xl w-full min-w-0">
+                <ProfileHero
+                  tag="OPERATIVE // DOSSIER_09"
+                  clearance="CLEARANCE: LVL-5"
+                  status="online"
+                  signal="cyan"
+                >
+                  <ProfileAvatar
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+                    alt="Elena Vance"
+                    status="online"
+                    reticles
+                  />
                   <ProfileInfo>
-                    <ProfileTitle>Sentinel Envoy</ProfileTitle>
-                    <ProfileSubtitle>ORBITAL ENCLAVE LIAISON</ProfileSubtitle>
+                    <ProfileTitle>Elena Vance</ProfileTitle>
+                    <ProfileSubtitle>Principal Sentinel Architect // Zero-Trust Systems</ProfileSubtitle>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Architecting distributed zero-knowledge verification nodes and post-quantum lattice security mesh. Leading global cyber defense infrastructure.
+                    </p>
                     <ProfileMeta>
-                      <span>Clearance: Level 5 Cryptographic</span>
+                      <ProfileMetaItem icon={<Building className="w-3.5 h-3.5" />}>ORBITAL DEFENSE CMD</ProfileMetaItem>
+                      <ProfileMetaItem icon={<MapPin className="w-3.5 h-3.5" />}>NEO-ZURICH (UTC+1)</ProfileMetaItem>
+                      <ProfileMetaItem icon={<Key className="w-3.5 h-3.5" />} copyable>0x7F4A...B881</ProfileMetaItem>
                     </ProfileMeta>
+                    <ProfileActions>
+                      <Button variant="ghost" size="sm" leftIcon={<Terminal className="w-3.5 h-3.5" />}>
+                        VIEW AUDIT
+                      </Button>
+                      <Button variant="primary" size="sm" leftIcon={<Send className="w-3.5 h-3.5" />}>
+                        TRANSMIT PING
+                      </Button>
+                    </ProfileActions>
                   </ProfileInfo>
                 </ProfileHero>
               </div>
-              <BorderBeam variant="neon" size={140} duration={6} borderWidth={1.5} glow />
             </div>
           </Playground>
         </div>
       </ContentSection>
 
-      {/* ── Tactical HUD Sentinel Command Card ── */}
-      <ContentSection title="Tactical HUD Sentinel Command Card" id="tactical-hud-dossier">
+      {/* ── Status Modes ── */}
+      <ContentSection title="Operative Statuses (Online, Busy, Classified)" id="status-modes">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Composite mission defense card with embedded profile header.
+            The <code className="text-cyan-400">status</code> prop governs the radar beacon tone: <code className="text-emerald-400">online</code> (Emerald), <code className="text-amber-400">busy</code> (Amber), <code className="text-violet-400">classified</code> (Violet), or <code className="text-slate-400">offline</code>.
           </p>
 
           <Playground
-            code={`<Card className="max-w-2xl mx-auto border-cyan-500/30 bg-[#070b14] shadow-xl">
-  <CardHeader className="pb-3 border-b border-white/[0.06]">
-    <div className="flex items-center justify-between">
-      <CardTitle className="text-sm font-mono text-cyan-400 tracking-wider">COMMANDER DOSSIER</CardTitle>
-      <Badge variant="neon" size="sm">ACTIVE ON-STATION</Badge>
-    </div>
-  </CardHeader>
+            code={`<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+  <ProfileHero tag="SYNTHETIC // ACTIVE" status="online" signal="emerald">
+    <ProfileAvatar fallback="01" status="online" reticles />
+    <ProfileInfo>
+      <ProfileTitle className="text-xl">Unit Zero-One</ProfileTitle>
+      <ProfileSubtitle>Autonomous Defense Node</ProfileSubtitle>
+    </ProfileInfo>
+  </ProfileHero>
 
-  <CardContent className="p-6">
-    <ProfileHero className="bg-black/30 border-cyan-500/20">
-      <ProfileAvatar fallback="CMD" status="online" />
-      <ProfileInfo>
-        <ProfileTitle>Marshal Thorne</ProfileTitle>
-        <ProfileSubtitle>SECTOR DEFENSE COMMANDER</ProfileSubtitle>
-        <ProfileMeta>
-          <span>Flagship: SSV-VALIANT</span>
-          <span>Consensus: 100%</span>
-        </ProfileMeta>
-      </ProfileInfo>
-    </ProfileHero>
-  </CardContent>
-</Card>`}
+  <ProfileHero tag="RESTRICTED // GHOST" clearance="TOP SECRET" status="classified" signal="rose">
+    <ProfileAvatar fallback="G" status="classified" reticles />
+    <ProfileInfo>
+      <ProfileTitle className="text-xl">Ghost Operative</ProfileTitle>
+      <ProfileSubtitle>Special Recon Vector</ProfileSubtitle>
+    </ProfileInfo>
+  </ProfileHero>
+</div>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <Card className="max-w-2xl w-full border-cyan-500/25 bg-[#070b14] shadow-xl">
-                <CardHeader className="pb-3 border-b border-white/[0.06]">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-mono text-cyan-400 tracking-wider">COMMANDER DOSSIER</CardTitle>
-                    <Badge variant="neon" size="sm">ACTIVE ON-STATION</Badge>
-                  </div>
-                </CardHeader>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 bg-[#03060d] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <ProfileHero tag="SYNTHETIC // ACTIVE" status="online" signal="emerald">
+                <ProfileAvatar fallback="01" status="online" reticles />
+                <ProfileInfo>
+                  <ProfileTitle className="text-xl">Unit Zero-One</ProfileTitle>
+                  <ProfileSubtitle>Autonomous Defense Node</ProfileSubtitle>
+                </ProfileInfo>
+              </ProfileHero>
 
-                <CardContent className="p-6">
-                  <ProfileHero className="bg-black/30 border-cyan-500/20">
-                    <ProfileAvatar fallback="CMD" status="online" />
-                    <ProfileInfo>
-                      <ProfileTitle>Marshal Thorne</ProfileTitle>
-                      <ProfileSubtitle>SECTOR DEFENSE COMMANDER</ProfileSubtitle>
-                      <ProfileMeta>
-                        <span>Flagship: SSV-VALIANT</span>
-                        <span>Consensus: 100%</span>
-                      </ProfileMeta>
-                    </ProfileInfo>
-                  </ProfileHero>
-                </CardContent>
-              </Card>
+              <ProfileHero tag="RESTRICTED // GHOST" clearance="TOP SECRET" status="classified" signal="rose">
+                <ProfileAvatar fallback="G" status="classified" reticles />
+                <ProfileInfo>
+                  <ProfileTitle className="text-xl">Ghost Operative</ProfileTitle>
+                  <ProfileSubtitle>Special Recon Vector</ProfileSubtitle>
+                </ProfileInfo>
+              </ProfileHero>
+            </div>
+          </Playground>
+        </div>
+      </ContentSection>
+
+      {/* ── Copyable Metadata ── */}
+      <ContentSection title="Copyable Cryptographic Metadata Chips" id="copyable-meta">
+        <div className="flex flex-col gap-6">
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Adding <code className="text-cyan-400">copyable</code> to <code className="text-cyan-400">ProfileMetaItem</code> enables single-click clipboard copying with visual confirmation.
+          </p>
+
+          <Playground
+            code={`<ProfileMeta>
+  <ProfileMetaItem icon={<Key className="w-3.5 h-3.5" />} copyable>0x3A9F419828C1D421</ProfileMetaItem>
+  <ProfileMetaItem icon={<Shield className="w-3.5 h-3.5" />}>4096-BIT RSA KEY</ProfileMetaItem>
+  <ProfileMetaItem icon={<Award className="w-3.5 h-3.5" />}>CTF RANK #4 GLOBAL</ProfileMetaItem>
+</ProfileMeta>`}
+          >
+            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <ProfileMeta>
+                <ProfileMetaItem icon={<Key className="w-3.5 h-3.5" />} copyable>0x3A9F419828C1D421</ProfileMetaItem>
+                <ProfileMetaItem icon={<Shield className="w-3.5 h-3.5" />}>4096-BIT RSA KEY</ProfileMetaItem>
+                <ProfileMetaItem icon={<Award className="w-3.5 h-3.5" />}>CTF RANK #4 GLOBAL</ProfileMetaItem>
+              </ProfileMeta>
             </div>
           </Playground>
         </div>
@@ -288,37 +227,31 @@ export default function ProfileHeroDocsPage() {
 
       {/* ── API Reference ── */}
       <ContentSection title="API Reference" id="api-reference">
-        <h3 className="text-base font-semibold text-slate-200 mb-3">ProfileHero Props</h3>
         <ApiTable
           props={[
             {
-              property: 'accent',
-              description: 'Top laser gradient wire accent color ("cyan", "purple", "emerald").',
-              type: '"cyan" | "purple" | "emerald"',
-              defaultValue: '"cyan"',
-            },
-          ]}
-        />
-
-        <h3 className="text-base font-semibold text-slate-200 mb-3 mt-8">ProfileAvatar Props</h3>
-        <ApiTable
-          props={[
-            {
-              property: 'src',
-              description: 'URL of the operative avatar image.',
+              property: 'tag',
+              description: 'Top-left tactical dossier tag string (e.g. "OPERATIVE // 09").',
               type: 'string',
+              defaultValue: '"OPERATIVE // DOSSIER"',
             },
             {
-              property: 'fallback',
-              description: 'Monospace initials rendered when no image is supplied.',
+              property: 'clearance',
+              description: 'Security clearance badge label (e.g. "CLEARANCE: LVL-5").',
               type: 'string',
-              defaultValue: '"USER"',
+              defaultValue: '"CLEARANCE: LVL-5"',
             },
             {
               property: 'status',
-              description: 'Online telemetry availability badge dot.',
-              type: '"online" | "busy" | "offline"',
+              description: 'Live operational status mode.',
+              type: '"online" | "busy" | "offline" | "classified"',
               defaultValue: '"online"',
+            },
+            {
+              property: 'signal',
+              description: 'Signal highlight and glow color.',
+              type: '"cyan" | "violet" | "emerald" | "amber" | "rose"',
+              defaultValue: '"cyan"',
             },
           ]}
         />
@@ -328,16 +261,10 @@ export default function ProfileHeroDocsPage() {
       <ContentSection title="Accessibility" id="accessibility">
         <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
           <li>
-            <strong>Semantic Hierarchy:</strong> <code className="text-cyan-400 font-mono text-xs bg-cyan-950/50 px-1.5 py-0.5 rounded">ProfileTitle</code> outputs a primary <code className="text-cyan-400 font-mono text-xs bg-cyan-950/50 px-1.5 py-0.5 rounded">&lt;h1&gt;</code> element with accessible image fallbacks on <code className="text-cyan-400 font-mono text-xs bg-cyan-950/50 px-1.5 py-0.5 rounded">ProfileAvatar</code>.
+            <strong>Heading Order:</strong> The operative name renders in semantic <code className="text-cyan-400 font-mono text-xs bg-cyan-950/50 px-1.5 py-0.5 rounded">&lt;h1&gt;</code> for accessible screen reader document hierarchy.
           </li>
-        </ul>
-      </ContentSection>
-
-      {/* ── Best Practices ── */}
-      <ContentSection title="Best Practices" id="best-practices">
-        <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
           <li>
-            <strong>Responsive Layout:</strong> ProfileHero automatically adapts from a centered column on mobile to a side-by-side flex row on desktop viewports.
+            <strong>Copy Announcement:</strong> The copy feedback includes visual confirmation and native clipboard API handling.
           </li>
         </ul>
       </ContentSection>

@@ -644,10 +644,18 @@
 
 @keyframes scanline-sweep {
   0% {
-    transform: translateY(-100%);
+    top: -15%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
   }
   100% {
-    transform: translateY(100%);
+    top: 115%;
+    opacity: 0;
   }
 }
 .animate-scanline-sweep {
@@ -890,18 +898,66 @@
   animation: shimmer-sweep 1.8s ease-in-out infinite;
 }
 
-/* Skeleton scan sweep — vertical light scan */
+/* Skeleton & full container scan sweep — vertical light scan */
 @keyframes scan-sweep {
   0% {
+    top: 0%;
     transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
   }
   100% {
-    transform: translateY(200%);
+    top: 100%;
+    transform: translateY(0%);
+    opacity: 0;
+  }
+}
+
+@keyframes laser-sweep-bounce {
+  0% {
+    top: 2%;
+    opacity: 0.8;
+  }
+  50% {
+    top: 96%;
+    opacity: 1;
+  }
+  100% {
+    top: 2%;
+    opacity: 0.8;
+  }
+}
+
+@keyframes laser-sweep-horizontal {
+  0% {
+    left: 2%;
+    opacity: 0.8;
+  }
+  50% {
+    left: 96%;
+    opacity: 1;
+  }
+  100% {
+    left: 2%;
+    opacity: 0.8;
   }
 }
 
 .animate-scan-sweep {
   animation: scan-sweep 2s ease-in-out infinite;
+}
+
+.animate-laser-bounce {
+  animation: laser-sweep-bounce 1.6s ease-in-out infinite;
+}
+
+.animate-laser-horizontal {
+  animation: laser-sweep-horizontal 2s ease-in-out infinite;
 }
 
 /* Border Beam animation */

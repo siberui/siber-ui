@@ -4,10 +4,24 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@siberui/react';
-import { Code, GitBranch, Search, Monitor, Menu } from 'lucide-react';
+import { Search, Menu, GitBranch } from 'lucide-react';
 import { DocSearchModal } from '../DocSearchModal';
 import { DocMobileNav } from './DocMobileNav';
 import { usePackageVersion } from '@/hooks/usePackageVersion';
+
+function NpmIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className || 'h-4 w-4'}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="24" height="24" rx="4" fill="currentColor" />
+      <path d="M5 5v14h7V9.5h4.5V19H19V5H5z" fill="#03060d" />
+    </svg>
+  );
+}
 
 export function TopNav() {
   const [searchOpen, setSearchOpen] = React.useState(false);
@@ -78,45 +92,40 @@ export function TopNav() {
           >
             <Search className="h-4 w-4 text-signal-cyan" />
           </Button>
+
           <Link
             href="https://github.com/siberui/siber-ui"
             target="_blank"
             rel="noreferrer"
             className="hidden sm:inline-flex"
+            title="GitHub Repository"
           >
             <Button
               variant="ghost"
               size="icon"
-              className="text-fg-muted hover:text-fg h-9 w-9"
+              className="text-slate-400 hover:text-white h-9 w-9 hover:border hover:border-white/10"
             >
               <GitBranch className="h-4 w-4" />
               <span className="sr-only">GitHub</span>
             </Button>
           </Link>
+
           <Link
             href="https://www.npmjs.com/package/@siberui/react"
             target="_blank"
             rel="noreferrer"
             className="hidden sm:inline-flex"
+            title="NPM Package"
           >
             <Button
               variant="ghost"
               size="icon"
-              className="text-fg-muted hover:text-fg h-9 w-9"
+              className="text-slate-400 hover:text-white h-9 w-9 hover:border hover:border-white/10"
             >
-              <Code className="h-4 w-4" />
+              <NpmIcon className="h-4 w-4" />
               <span className="sr-only">npm</span>
             </Button>
           </Link>
-          <div className="w-px h-4 bg-border-default mx-1 hidden sm:block"></div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-fg-muted hover:text-fg h-9 w-9"
-          >
-            <Monitor className="h-4 w-4" />
-            <span className="sr-only">Theme</span>
-          </Button>
         </div>
       </div>
 
@@ -132,4 +141,3 @@ export function TopNav() {
     </nav>
   );
 }
-

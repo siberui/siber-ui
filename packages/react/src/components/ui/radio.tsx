@@ -210,15 +210,23 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
     const dotSize = dotSizeMap[radioSize || 'md'];
     const dotGlow = dotGlowMap[variant || 'default'];
 
+    const hasDescription = Boolean(description);
+
     return (
       <label
         htmlFor={radioId}
         className={cn(
-          'inline-flex items-start gap-2.5 cursor-pointer group select-none',
+          'inline-flex gap-2.5 cursor-pointer group select-none',
+          hasDescription ? 'items-start' : 'items-center',
           isDisabled && 'cursor-not-allowed opacity-40',
         )}
       >
-        <div className="relative flex items-center justify-center pt-0.5">
+        <div
+          className={cn(
+            'relative flex items-center justify-center shrink-0',
+            hasDescription && 'pt-0.5',
+          )}
+        >
           <input
             type="radio"
             id={radioId}

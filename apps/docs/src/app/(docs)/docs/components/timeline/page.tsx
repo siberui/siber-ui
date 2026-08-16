@@ -16,13 +16,7 @@ import {
   TimelineSubtitle,
   TimelinePeriod,
   TimelineContent,
-  Badge,
-  BorderBeam,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
+  TimelineTags,
 } from '@siberui/react';
 import {
   Terminal,
@@ -35,14 +29,12 @@ import {
 const headings = [
   { id: 'installation', text: 'Installation', level: 2 },
   { id: 'import', text: 'Import', level: 2 },
-  { id: 'basic-usage', text: 'Basic Career & Incident Timeline', level: 2 },
-  { id: 'connecting-lines', text: 'Connecting Laser Variants (Neon, Cyan, Emerald, Rose)', level: 2 },
-  { id: 'node-statuses', text: 'Status Node Modes (Active, Completed, Future, Archived)', level: 2 },
-  { id: 'frosted-glass-timeline', text: 'Frosted Cyber-Glass Event Chronicle', level: 2 },
-  { id: 'tactical-hud-timeline', text: 'Tactical HUD Mission Milestone Card', level: 2 },
+  { id: 'basic-usage', text: 'Chronological Timeline with Laser Spine', level: 2 },
+  { id: 'connecting-lines', text: 'Connecting Laser Spine Variants', level: 2 },
+  { id: 'node-statuses', text: 'Tactical Node Statuses (Active Ping, Completed, Future)', level: 2 },
+  { id: 'mission-tags', text: 'Integrated Tech Stack & Mission Tags', level: 2 },
   { id: 'api-reference', text: 'API Reference', level: 2 },
   { id: 'accessibility', text: 'Accessibility', level: 2 },
-  { id: 'best-practices', text: 'Best Practices', level: 2 },
 ];
 
 export default function TimelineDocsPage() {
@@ -50,7 +42,7 @@ export default function TimelineDocsPage() {
     <ComponentPage headings={headings}>
       <ComponentHeader
         title="Timeline"
-        description="Chronological event vertical rail with illuminated node points, status badges, neon connecting laser wires, and expandable event dossiers."
+        description="Chronological event vertical rail featuring illuminated neon connecting laser spines, active radar pulsing node indicators, and integrated mission / technology tags."
         status="Stable"
       />
 
@@ -69,20 +61,21 @@ export default function TimelineDocsPage() {
   TimelineTitle, 
   TimelineSubtitle, 
   TimelinePeriod, 
-  TimelineContent 
+  TimelineContent,
+  TimelineTags 
 } from '@siberui/react';`}
         />
       </ContentSection>
 
       {/* ── Basic Usage ── */}
-      <ContentSection title="Basic Career & Incident Timeline" id="basic-usage">
+      <ContentSection title="Chronological Timeline with Laser Spine" id="basic-usage">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            The timeline connects sequential milestones through illuminated status indicators and chronological cards.
+            Connects sequential milestones through an illuminated laser data spine and animated radar ping indicators for active nodes.
           </p>
 
           <Playground
-            code={`<Timeline>
+            code={`<Timeline variant="neon">
   <TimelineItem status="active" icon={<Terminal className="h-3 w-3" />}>
     <TimelineHeader>
       <TimelineTitle>Principal Sentinel Architect</TimelineTitle>
@@ -92,23 +85,25 @@ export default function TimelineDocsPage() {
     <TimelineContent>
       Architecting zero-trust distributed mesh networks and automated intrusion countermeasures across 12 planetary satellite clusters.
     </TimelineContent>
+    <TimelineTags tags={['RUST', 'EBPF', 'ZERO-TRUST', 'POST-QUANTUM']} />
   </TimelineItem>
 
   <TimelineItem status="completed" icon={<Shield className="h-3 w-3" />}>
     <TimelineHeader>
-      <TimelineTitle>Cyber Warfare Analyst</TimelineTitle>
+      <TimelineTitle>Lead Cyber Warfare Analyst</TimelineTitle>
       <TimelinePeriod>2021 - 2024</TimelinePeriod>
     </TimelineHeader>
     <TimelineSubtitle>NEO MATRIX LABS</TimelineSubtitle>
     <TimelineContent>
       Conducted automated red-team simulations and validated Post-Quantum lattice cryptography protocols.
     </TimelineContent>
+    <TimelineTags tags={['C++', 'REVERSE-ENG', 'CRYPTO']} />
   </TimelineItem>
 </Timeline>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <div className="w-full max-w-xl">
-                <Timeline>
+            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <div className="w-full max-w-xl min-w-0">
+                <Timeline variant="neon">
                   <TimelineItem status="active" icon={<Terminal className="h-3 w-3" />}>
                     <TimelineHeader>
                       <TimelineTitle>Principal Sentinel Architect</TimelineTitle>
@@ -118,17 +113,19 @@ export default function TimelineDocsPage() {
                     <TimelineContent>
                       Architecting zero-trust distributed mesh networks and automated intrusion countermeasures across 12 planetary satellite clusters.
                     </TimelineContent>
+                    <TimelineTags tags={['RUST', 'EBPF', 'ZERO-TRUST', 'POST-QUANTUM']} />
                   </TimelineItem>
 
                   <TimelineItem status="completed" icon={<Shield className="h-3 w-3" />}>
                     <TimelineHeader>
-                      <TimelineTitle>Cyber Warfare Analyst</TimelineTitle>
+                      <TimelineTitle>Lead Cyber Warfare Analyst</TimelineTitle>
                       <TimelinePeriod>2021 - 2024</TimelinePeriod>
                     </TimelineHeader>
                     <TimelineSubtitle>NEO MATRIX LABS</TimelineSubtitle>
                     <TimelineContent>
                       Conducted automated red-team simulations and validated Post-Quantum lattice cryptography protocols.
                     </TimelineContent>
+                    <TimelineTags tags={['C++', 'REVERSE-ENG', 'CRYPTO']} />
                   </TimelineItem>
                 </Timeline>
               </div>
@@ -137,11 +134,11 @@ export default function TimelineDocsPage() {
         </div>
       </ContentSection>
 
-      {/* ── Connecting Laser Variants ── */}
-      <ContentSection title="Connecting Laser Variants (Neon, Cyan, Emerald, Rose)" id="connecting-lines">
+      {/* ── Connecting Laser Spine Variants ── */}
+      <ContentSection title="Connecting Laser Spine Variants" id="connecting-lines">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Customize the vertical connecting spine with <code className="text-cyan-400">variant=&quot;neon&quot; | &quot;cyan&quot; | &quot;emerald&quot; | &quot;rose&quot; | &quot;mono&quot;</code>.
+            The <code className="text-cyan-400">variant</code> prop selects the laser gradient wire style (<code className="text-cyan-400">&quot;neon&quot; | &quot;cyan&quot; | &quot;violet&quot; | &quot;emerald&quot; | &quot;amber&quot; | &quot;rose&quot; | &quot;mono&quot;</code>).
           </p>
 
           <Playground
@@ -151,33 +148,35 @@ export default function TimelineDocsPage() {
       <TimelineTitle>STAGE 01: LATTICE COMPILATION</TimelineTitle>
       <TimelinePeriod>COMPLETED</TimelinePeriod>
     </TimelineHeader>
-    <TimelineContent>Binary hashes generated and verified.</TimelineContent>
+    <TimelineContent>Binary hashes generated and verified against HSM master root.</TimelineContent>
   </TimelineItem>
+
   <TimelineItem status="active" icon={<Zap className="h-3 w-3" />}>
     <TimelineHeader>
       <TimelineTitle>STAGE 02: ORBITAL BROADCAST</TimelineTitle>
       <TimelinePeriod>IN PROGRESS</TimelinePeriod>
     </TimelineHeader>
-    <TimelineContent>Streaming firmware to fleet transponders.</TimelineContent>
+    <TimelineContent>Streaming firmware payload to orbital fleet transponders.</TimelineContent>
   </TimelineItem>
 </Timeline>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#03060d] rounded-2xl border border-white/[0.06] w-full">
-              <div className="w-full max-w-xl">
+            <div className="flex items-center justify-center p-8 bg-[#03060d] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <div className="w-full max-w-xl min-w-0">
                 <Timeline variant="emerald">
                   <TimelineItem status="completed" icon={<CheckCircle2 className="h-3 w-3" />}>
                     <TimelineHeader>
                       <TimelineTitle>STAGE 01: LATTICE COMPILATION</TimelineTitle>
                       <TimelinePeriod>COMPLETED</TimelinePeriod>
                     </TimelineHeader>
-                    <TimelineContent>Binary hashes generated and verified.</TimelineContent>
+                    <TimelineContent>Binary hashes generated and verified against HSM master root.</TimelineContent>
                   </TimelineItem>
+
                   <TimelineItem status="active" icon={<Zap className="h-3 w-3" />}>
                     <TimelineHeader>
                       <TimelineTitle>STAGE 02: ORBITAL BROADCAST</TimelineTitle>
                       <TimelinePeriod>IN PROGRESS</TimelinePeriod>
                     </TimelineHeader>
-                    <TimelineContent>Streaming firmware to fleet transponders.</TimelineContent>
+                    <TimelineContent>Streaming firmware payload to orbital fleet transponders.</TimelineContent>
                   </TimelineItem>
                 </Timeline>
               </div>
@@ -187,169 +186,37 @@ export default function TimelineDocsPage() {
       </ContentSection>
 
       {/* ── Status Node Modes ── */}
-      <ContentSection title="Status Node Modes (Active, Completed, Future, Archived)" id="node-statuses">
+      <ContentSection title="Tactical Node Statuses (Active Ping, Completed, Future)" id="node-statuses">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Each <code className="text-cyan-400">TimelineItem</code> accepts a <code className="text-cyan-400">status</code> prop that determines its indicator ring glow and border tone.
+            The <code className="text-cyan-400">status</code> prop controls node ring glow: <code className="text-cyan-400">active</code> (animated radar ping), <code className="text-emerald-400">completed</code>, <code className="text-rose-400">future</code>, or <code className="text-slate-400">archived</code>.
           </p>
 
           <Playground
             code={`<Timeline variant="cyan">
-  <TimelineItem status="active">
-    <TimelineHeader><TimelineTitle>ACTIVE NODE</TimelineTitle></TimelineHeader>
-    <TimelineContent>Currently executing process thread.</TimelineContent>
+  <TimelineItem status="active" icon={<Activity className="h-3 w-3" />}>
+    <TimelineHeader><TimelineTitle>ACTIVE EXPLOIT ANALYSIS</TimelineTitle></TimelineHeader>
+    <TimelineContent>Realtime sandbox instrumentation running.</TimelineContent>
   </TimelineItem>
   <TimelineItem status="completed">
-    <TimelineHeader><TimelineTitle>COMPLETED NODE</TimelineTitle></TimelineHeader>
-    <TimelineContent>Past verified milestone.</TimelineContent>
-  </TimelineItem>
-  <TimelineItem status="future">
-    <TimelineHeader><TimelineTitle>FUTURE STAGE</TimelineTitle></TimelineHeader>
-    <TimelineContent>Pending execution pipeline.</TimelineContent>
-  </TimelineItem>
-  <TimelineItem status="archived">
-    <TimelineHeader><TimelineTitle>ARCHIVED RECORD</TimelineTitle></TimelineHeader>
-    <TimelineContent>Historical reference log.</TimelineContent>
+    <TimelineHeader><TimelineTitle>FIREWALL ISOLATION</TimelineTitle></TimelineHeader>
+    <TimelineContent>Perimeter quarantine completed.</TimelineContent>
   </TimelineItem>
 </Timeline>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <div className="w-full max-w-xl">
+            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <div className="w-full max-w-xl min-w-0">
                 <Timeline variant="cyan">
-                  <TimelineItem status="active">
-                    <TimelineHeader><TimelineTitle>ACTIVE NODE</TimelineTitle></TimelineHeader>
-                    <TimelineContent>Currently executing process thread.</TimelineContent>
+                  <TimelineItem status="active" icon={<Activity className="h-3 w-3" />}>
+                    <TimelineHeader><TimelineTitle>ACTIVE EXPLOIT ANALYSIS</TimelineTitle></TimelineHeader>
+                    <TimelineContent>Realtime sandbox instrumentation running.</TimelineContent>
                   </TimelineItem>
                   <TimelineItem status="completed">
-                    <TimelineHeader><TimelineTitle>COMPLETED NODE</TimelineTitle></TimelineHeader>
-                    <TimelineContent>Past verified milestone.</TimelineContent>
-                  </TimelineItem>
-                  <TimelineItem status="future">
-                    <TimelineHeader><TimelineTitle>FUTURE STAGE</TimelineTitle></TimelineHeader>
-                    <TimelineContent>Pending execution pipeline.</TimelineContent>
-                  </TimelineItem>
-                  <TimelineItem status="archived">
-                    <TimelineHeader><TimelineTitle>ARCHIVED RECORD</TimelineTitle></TimelineHeader>
-                    <TimelineContent>Historical reference log.</TimelineContent>
+                    <TimelineHeader><TimelineTitle>FIREWALL ISOLATION</TimelineTitle></TimelineHeader>
+                    <TimelineContent>Perimeter quarantine completed.</TimelineContent>
                   </TimelineItem>
                 </Timeline>
               </div>
-            </div>
-          </Playground>
-        </div>
-      </ContentSection>
-
-      {/* ── Frosted Cyber-Glass Event Chronicle ── */}
-      <ContentSection title="Frosted Cyber-Glass Event Chronicle" id="frosted-glass-timeline">
-        <div className="flex flex-col gap-6">
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Composite timeline layered over circuit board textures with perimeter laser sweeps.
-          </p>
-
-          <Playground
-            code={`<div className="relative w-full max-w-xl p-8 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
-  <Timeline variant="neon">
-    <TimelineItem status="active" icon={<Activity className="h-3 w-3" />}>
-      <TimelineHeader>
-        <TimelineTitle>QUANTUM DECOHERENCE DETECTED</TimelineTitle>
-        <TimelinePeriod>T-00:12:44</TimelinePeriod>
-      </TimelineHeader>
-      <TimelineSubtitle>SECTOR 04 SENSOR ARRAY</TimelineSubtitle>
-      <TimelineContent>Automated self-healing realignment engaged.</TimelineContent>
-    </TimelineItem>
-  </Timeline>
-  <BorderBeam variant="neon" size={140} duration={6} borderWidth={1.5} glow />
-</div>`}
-          >
-            <div className="relative flex items-center justify-center p-8 rounded-2xl border border-white/[0.08] bg-[#060913] bg-[url('/textures/circuit-board.svg')] bg-repeat overflow-hidden shadow-2xl w-full">
-              <div className="relative z-10 w-full max-w-xl">
-                <Timeline variant="neon">
-                  <TimelineItem status="active" icon={<Activity className="h-3 w-3" />}>
-                    <TimelineHeader>
-                      <TimelineTitle>QUANTUM DECOHERENCE DETECTED</TimelineTitle>
-                      <TimelinePeriod>T-00:12:44</TimelinePeriod>
-                    </TimelineHeader>
-                    <TimelineSubtitle>SECTOR 04 SENSOR ARRAY</TimelineSubtitle>
-                    <TimelineContent>Automated self-healing realignment engaged.</TimelineContent>
-                  </TimelineItem>
-                </Timeline>
-              </div>
-              <BorderBeam variant="neon" size={140} duration={6} borderWidth={1.5} glow />
-            </div>
-          </Playground>
-        </div>
-      </ContentSection>
-
-      {/* ── Tactical HUD Mission Milestone Card ── */}
-      <ContentSection title="Tactical HUD Mission Milestone Card" id="tactical-hud-timeline">
-        <div className="flex flex-col gap-6">
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Composite mission defense card with milestone chronicle.
-          </p>
-
-          <Playground
-            code={`<Card className="max-w-xl mx-auto border-cyan-500/30 bg-[#070b14] shadow-xl">
-  <CardHeader className="pb-3 border-b border-white/[0.06]">
-    <div className="flex items-center justify-between">
-      <CardTitle className="text-sm font-mono text-cyan-400 tracking-wider">INCIDENT ESCALATION TRAIL</CardTitle>
-      <Badge variant="neon" size="sm">RESOLVING</Badge>
-    </div>
-    <CardDescription className="text-xs text-slate-400">
-      Chronological audit log for Sector 09 anomaly.
-    </CardDescription>
-  </CardHeader>
-
-  <CardContent className="p-6">
-    <Timeline variant="neon">
-      <TimelineItem status="completed">
-        <TimelineHeader>
-          <TimelineTitle>Inbound Packet Spike</TimelineTitle>
-          <TimelinePeriod>14:02:18</TimelinePeriod>
-        </TimelineHeader>
-        <TimelineContent>Rate limiter throttled 4.8M anomalous SYN packets.</TimelineContent>
-      </TimelineItem>
-      <TimelineItem status="active">
-        <TimelineHeader>
-          <TimelineTitle>Firewall Rule Deployed</TimelineTitle>
-          <TimelinePeriod>14:04:02</TimelinePeriod>
-        </TimelineHeader>
-        <TimelineContent>Air-gap isolation verified across all perimeter relays.</TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  </CardContent>
-</Card>`}
-          >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <Card className="max-w-xl w-full border-cyan-500/25 bg-[#070b14] shadow-xl">
-                <CardHeader className="pb-3 border-b border-white/[0.06]">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-mono text-cyan-400 tracking-wider">INCIDENT ESCALATION TRAIL</CardTitle>
-                    <Badge variant="neon" size="sm">RESOLVING</Badge>
-                  </div>
-                  <CardDescription className="text-xs text-slate-400">
-                    Chronological audit log for Sector 09 anomaly.
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent className="p-6">
-                  <Timeline variant="neon">
-                    <TimelineItem status="completed">
-                      <TimelineHeader>
-                        <TimelineTitle>Inbound Packet Spike</TimelineTitle>
-                        <TimelinePeriod>14:02:18</TimelinePeriod>
-                      </TimelineHeader>
-                      <TimelineContent>Rate limiter throttled 4.8M anomalous SYN packets.</TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem status="active">
-                      <TimelineHeader>
-                        <TimelineTitle>Firewall Rule Deployed</TimelineTitle>
-                        <TimelinePeriod>14:04:02</TimelinePeriod>
-                      </TimelineHeader>
-                      <TimelineContent>Air-gap isolation verified across all perimeter relays.</TimelineContent>
-                    </TimelineItem>
-                  </Timeline>
-                </CardContent>
-              </Card>
             </div>
           </Playground>
         </div>
@@ -362,8 +229,8 @@ export default function TimelineDocsPage() {
           props={[
             {
               property: 'variant',
-              description: 'Color theme and gradient styling of the vertical connecting laser wire.',
-              type: '"neon" | "cyan" | "emerald" | "rose" | "red" | "mono"',
+              description: 'Vertical connecting laser spine gradient color.',
+              type: '"neon" | "cyan" | "violet" | "emerald" | "amber" | "rose" | "mono"',
               defaultValue: '"neon"',
             },
           ]}
@@ -374,13 +241,13 @@ export default function TimelineDocsPage() {
           props={[
             {
               property: 'status',
-              description: 'Visual status mode determining node ring color and glow.',
+              description: 'Node activation state.',
               type: '"active" | "completed" | "archived" | "future"',
               defaultValue: '"completed"',
             },
             {
               property: 'icon',
-              description: 'Optional ReactNode icon glyph rendered inside the node ring.',
+              description: 'Icon glyph rendered inside the node ring.',
               type: 'React.ReactNode',
             },
           ]}
@@ -391,16 +258,7 @@ export default function TimelineDocsPage() {
       <ContentSection title="Accessibility" id="accessibility">
         <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
           <li>
-            <strong>Semantic Order:</strong> Timeline entries render in chronological DOM order for clear screen reader traversal.
-          </li>
-        </ul>
-      </ContentSection>
-
-      {/* ── Best Practices ── */}
-      <ContentSection title="Best Practices" id="best-practices">
-        <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
-          <li>
-            <strong>Timestamp Pills:</strong> Use <code className="text-cyan-400">TimelinePeriod</code> on every milestone item to clearly distinguish past logs from active operations.
+            <strong>Chronological Hierarchy:</strong> Events render in strict DOM sequence for sequential screen reader traversal.
           </li>
         </ul>
       </ContentSection>

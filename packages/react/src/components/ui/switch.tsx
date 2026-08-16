@@ -102,7 +102,11 @@ const thumbColorMap: Record<string, { off: string; on: string }> = {
   },
 };
 
-const thumbSizeMap: Record<string, { size: string; translate: string }> = {
+type SwitchSize = 'sm' | 'md' | 'lg';
+
+// translate = track-width - thumb-width - 2×padding(p-0.5=2px)
+// sm: 28-12-4=12px → translate-x-3 | md: 36-16-4=16px → translate-x-4 | lg: 44-20-4=20px → translate-x-5
+const thumbSizeMap: Record<SwitchSize, { size: string; translate: string }> = {
   sm: { size: 'h-3 w-3', translate: 'translate-x-3' },
   md: { size: 'h-4 w-4', translate: 'translate-x-4' },
   lg: { size: 'h-5 w-5', translate: 'translate-x-5' },
@@ -115,6 +119,7 @@ export interface SwitchProps
   label?: string;
   description?: string;
   labelPosition?: 'left' | 'right';
+  trackClassName?: string;
   onCheckedChange?: (checked: boolean) => void;
 }
 
@@ -122,6 +127,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
       className,
+      trackClassName,
       variant = 'default',
       switchSize = 'md',
       label,
@@ -153,8 +159,8 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       [controlled, onChange, onCheckedChange],
     );
 
-    const thumb = thumbColorMap[variant || 'default'];
-    const thumbSize = thumbSizeMap[switchSize || 'md'];
+    const thumb = thumbColorMap[variant ?? 'default'];
+    const thumbSize = thumbSizeMap[(switchSize ?? 'md') as SwitchSize];
 
     const labelContent = (label || description) && (
       <div className="flex flex-col gap-0.5">
@@ -177,11 +183,12 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
         className={cn(
           'inline-flex items-center gap-2.5 cursor-pointer group select-none',
           disabled && 'cursor-not-allowed opacity-40',
+          className,
         )}
       >
         {labelPosition === 'left' && labelContent}
 
-        <div className="relative inline-flex items-center">
+        <div className="relative inline-flex items-center shrink-0">
           <input
             type="checkbox"
             role="switch"
@@ -198,12 +205,12 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
             data-state={currentChecked ? 'checked' : 'unchecked'}
             className={cn(
               switchTrackVariants({ variant, switchSize }),
-              className,
+              trackClassName,
             )}
           >
             <span
               className={cn(
-                'pointer-events-none block rounded-full transition-transform duration-300 ease-out shrink-0',
+                'pointer-events-none block rounded-full transition-transform duration-200 ease-out shrink-0',
                 thumbSize.size,
                 currentChecked ? thumb.on : thumb.off,
                 currentChecked ? thumbSize.translate : 'translate-x-0',

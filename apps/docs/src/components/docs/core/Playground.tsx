@@ -18,8 +18,8 @@ export function Playground({ children, code, language = 'tsx', title }: Playgrou
       )}
       
       {/* Preview Area */}
-      <div className="relative flex min-h-[200px] sm:min-h-[250px] w-full items-center justify-center p-4 sm:p-8 bg-[#04060b]">
-        <div className="relative z-10 w-full max-w-3xl flex justify-center overflow-x-auto max-w-full">
+      <div className="relative flex min-h-[200px] sm:min-h-[250px] w-full items-center justify-center p-4 sm:p-8 bg-[#04060b] overflow-hidden">
+        <div className="relative z-10 w-full max-w-3xl flex justify-center max-w-full min-w-0">
           {children}
         </div>
       </div>

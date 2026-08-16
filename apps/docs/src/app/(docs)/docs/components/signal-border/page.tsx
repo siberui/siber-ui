@@ -8,29 +8,18 @@ import { InstallCommand } from '@/components/docs/core/InstallCommand';
 import { CodeBlock } from '@/components/docs/core/CodeBlock';
 import { Playground } from '@/components/docs/core/Playground';
 import { ApiTable } from '@/components/docs/core/ApiTable';
-import {
-  SignalBorder,
-  Button,
-  Badge,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  BorderBeam,
-} from '@siberui/react';
-// No extra lucide icons needed in signal-border page
+import { SignalBorder } from '@siberui/react';
 
 const headings = [
   { id: 'installation', text: 'Installation', level: 2 },
   { id: 'import', text: 'Import', level: 2 },
-  { id: 'basic-usage', text: 'Basic Usage & Gradient Edge Primitive', level: 2 },
+  { id: 'basic-usage', text: 'Basic Instrumented Hairline Edge', level: 2 },
   { id: 'signal-spectrum', text: 'Signal Spectrum (Cyan, Violet, Green, Amber, Rose)', level: 2 },
-  { id: 'frosted-glass-border', text: 'Frosted Cyber-Glass Laser Perimeter Card', level: 2 },
-  { id: 'tactical-hud-instrument', text: 'Tactical HUD Telemetry Instrument Card', level: 2 },
+  { id: 'placements', text: 'Edge Placements (All, Top, Bottom, Sides)', level: 2 },
+  { id: 'effects', text: 'Border Effects (Static, Pulse, Dashed)', level: 2 },
+  { id: 'tech-notch', text: 'Technical HUD Notch Badge', level: 2 },
   { id: 'api-reference', text: 'API Reference', level: 2 },
   { id: 'accessibility', text: 'Accessibility', level: 2 },
-  { id: 'best-practices', text: 'Best Practices', level: 2 },
 ];
 
 const signalList = ['cyan', 'violet', 'green', 'amber', 'rose'] as const;
@@ -40,7 +29,7 @@ export default function SignalBorderDocsPage() {
     <ComponentPage headings={headings}>
       <ComponentHeader
         title="Signal Border"
-        description="Instrumented surface boundary primitive featuring a precise 1px gradient edge that seamlessly transitions from active signal colors to transparent glass."
+        description="Instrumented surface boundary primitive featuring a crisp 1px optical laser hairline, ambient top gradient illumination, and integrated technical HUD status badges with zero background wash."
         status="Stable"
       />
 
@@ -55,33 +44,37 @@ export default function SignalBorderDocsPage() {
       </ContentSection>
 
       {/* ── Basic Usage ── */}
-      <ContentSection title="Basic Usage & Gradient Edge Primitive" id="basic-usage">
+      <ContentSection title="Basic Instrumented Hairline Edge" id="basic-usage">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            SignalBorder projects a delicate 1px directional laser gradient across container boundaries without heavy box-shadow halos.
+            Positioned as a non-intrusive overlay inside a <code className="text-cyan-400">relative</code> container, rendering an ambient 1px neon hairline perimeter while maintaining 100% dark background contrast.
           </p>
 
           <Playground
-            code={`<SignalBorder signal="cyan" className="max-w-md w-full rounded-2xl bg-[#070b14] p-6 space-y-2">
-  <div className="flex items-center justify-between">
-    <span className="font-mono text-xs font-bold text-cyan-400">INSTRUMENTED CORE</span>
-    <Badge variant="neon" size="sm">ACTIVE</Badge>
+            code={`<div className="relative p-6 sm:p-8 rounded-2xl bg-[#060a14] border border-white/[0.06] max-w-md w-full">
+  <SignalBorder signal="cyan" glow />
+  <div className="relative z-10 space-y-2">
+    <span className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-widest">
+      INSTRUMENTED CORE
+    </span>
+    <p className="text-xs text-slate-300">
+      Clean 1px laser gradient hairline edge with high-contrast text readability.
+    </p>
   </div>
-  <p className="text-xs text-slate-400 leading-relaxed">
-    Clean 1px laser gradient fade providing high-tech surface instrumentation.
-  </p>
-</SignalBorder>`}
+</div>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <SignalBorder signal="cyan" className="max-w-md w-full rounded-2xl bg-[#070b14] p-6 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-cyan-400">INSTRUMENTED CORE</span>
-                  <Badge variant="neon" size="sm">ACTIVE</Badge>
+            <div className="flex items-center justify-center p-6 sm:p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <div className="relative p-6 sm:p-8 rounded-2xl bg-[#060a14] border border-white/[0.06] max-w-md w-full">
+                <SignalBorder signal="cyan" glow />
+                <div className="relative z-10 space-y-2">
+                  <span className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-widest">
+                    INSTRUMENTED CORE
+                  </span>
+                  <p className="text-xs text-slate-300">
+                    Clean 1px laser gradient hairline edge with high-contrast text readability.
+                  </p>
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Clean 1px laser gradient fade providing high-tech surface instrumentation.
-                </p>
-              </SignalBorder>
+              </div>
             </div>
           </Playground>
         </div>
@@ -91,130 +84,135 @@ export default function SignalBorderDocsPage() {
       <ContentSection title="Signal Spectrum (Cyan, Violet, Green, Amber, Rose)" id="signal-spectrum">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Available across all Siber UI semantic signal tokens: <code className="text-cyan-400">cyan</code>, <code className="text-purple-400">violet</code>, <code className="text-emerald-400">green</code>, <code className="text-amber-400">amber</code>, and <code className="text-rose-400">rose</code>.
+            Five core neon signal color spectrum options in the SiberUI design system.
           </p>
 
           <Playground
-            code={`<div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl">
-  {(['cyan', 'violet', 'green', 'amber', 'rose'] as const).map((sig) => (
-    <SignalBorder
-      key={sig}
-      signal={sig}
-      className="p-5 rounded-xl bg-[#070b14] flex flex-col items-center justify-center min-h-[90px]"
-    >
-      <span className="font-mono text-xs uppercase text-slate-300">
-        SIGNAL: {sig}
-      </span>
-    </SignalBorder>
+            code={`<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
+  {['cyan', 'violet', 'green', 'amber', 'rose'].map((sig) => (
+    <div key={sig} className="relative p-5 rounded-xl bg-[#060a12] border border-white/[0.06] text-center">
+      <SignalBorder signal={sig} glow />
+      <span className="text-xs font-mono uppercase font-bold tracking-wider">{sig}</span>
+    </div>
   ))}
 </div>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#03060d] rounded-2xl border border-white/[0.06] w-full">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-2xl">
-                {signalList.map((sig) => (
-                  <SignalBorder
-                    key={sig}
-                    signal={sig}
-                    className="p-5 rounded-xl bg-[#070b14] flex flex-col items-center justify-center min-h-[90px]"
-                  >
-                    <span className="font-mono text-xs uppercase text-slate-300">
-                      SIGNAL: {sig}
-                    </span>
-                  </SignalBorder>
-                ))}
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full min-w-0 p-4 bg-[#040711] rounded-2xl border border-white/[0.06]">
+              {signalList.map((sig) => (
+                <div key={sig} className="relative p-5 rounded-xl bg-[#060a12] border border-white/[0.06] text-center min-w-0">
+                  <SignalBorder signal={sig} glow />
+                  <span className="text-xs font-mono uppercase font-bold tracking-wider">{sig}</span>
+                </div>
+              ))}
             </div>
           </Playground>
         </div>
       </ContentSection>
 
-      {/* ── Frosted Cyber-Glass Laser Perimeter Card ── */}
-      <ContentSection title="Frosted Cyber-Glass Laser Perimeter Card" id="frosted-glass-border">
+      {/* ── Placements ── */}
+      <ContentSection title="Edge Placements (All, Top, Bottom, Sides)" id="placements">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Combine SignalBorder with acrylic backdrops on circuit textures and dynamic border sweeps.
+            The <code className="text-cyan-400">placement</code> prop controls which edges receive the hairline laser stroke: <code className="text-cyan-400">&quot;all&quot; | &quot;top&quot; | &quot;bottom&quot; | &quot;sides&quot;</code>.
           </p>
 
           <Playground
-            code={`<div className="relative w-full max-w-md p-8 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
-  <SignalBorder signal="cyan" className="relative z-10 p-6 rounded-xl bg-black/40 space-y-4">
-    <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
-      <span className="font-mono text-xs font-bold text-white">QUANTUM OPTICAL LINK</span>
-      <Badge variant="glass" dot dotColor="cyan">STANDBY</Badge>
-    </div>
-    <p className="text-xs text-slate-300 leading-relaxed font-mono">
-      Photonic packet carrier modulation: 100 THz
-    </p>
-  </SignalBorder>
-  <BorderBeam variant="neon" size={140} duration={6} borderWidth={1.5} glow />
+            code={`<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+  <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.04]">
+    <SignalBorder signal="cyan" placement="top" glow />
+    <span className="text-xs font-mono text-slate-300">TOP ONLY</span>
+  </div>
+
+  <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.04]">
+    <SignalBorder signal="green" placement="bottom" glow />
+    <span className="text-xs font-mono text-slate-300">BOTTOM ONLY</span>
+  </div>
+
+  <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.04]">
+    <SignalBorder signal="amber" placement="sides" glow />
+    <span className="text-xs font-mono text-slate-300">SIDES ONLY</span>
+  </div>
 </div>`}
           >
-            <div className="relative w-full p-8 rounded-2xl border border-white/[0.08] bg-[#060913] bg-[url('/textures/circuit-board.svg')] bg-repeat overflow-hidden shadow-2xl flex justify-center">
-              <div className="relative w-full max-w-md p-8 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
-                <SignalBorder signal="cyan" className="relative z-10 p-6 rounded-xl bg-black/40 space-y-4">
-                  <div className="flex items-center justify-between pb-2 border-b border-white/[0.08]">
-                    <span className="font-mono text-xs font-bold text-white">QUANTUM OPTICAL LINK</span>
-                    <Badge variant="glass" dot dotColor="cyan">STANDBY</Badge>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed font-mono">
-                    Photonic packet carrier modulation: 100 THz
-                  </p>
-                </SignalBorder>
-                <BorderBeam variant="neon" size={140} duration={6} borderWidth={1.5} glow />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full min-w-0 p-4 sm:p-6 bg-[#040711] rounded-2xl border border-white/[0.06]">
+              <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.04] min-w-0">
+                <SignalBorder signal="cyan" placement="top" glow />
+                <span className="text-xs font-mono text-slate-300">TOP ONLY</span>
+              </div>
+
+              <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.04] min-w-0">
+                <SignalBorder signal="green" placement="bottom" glow />
+                <span className="text-xs font-mono text-slate-300">BOTTOM ONLY</span>
+              </div>
+
+              <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.04] min-w-0">
+                <SignalBorder signal="amber" placement="sides" glow />
+                <span className="text-xs font-mono text-slate-300">SIDES ONLY</span>
               </div>
             </div>
           </Playground>
         </div>
       </ContentSection>
 
-      {/* ── Tactical HUD Telemetry Instrument Card ── */}
-      <ContentSection title="Tactical HUD Telemetry Instrument Card" id="tactical-hud-instrument">
+      {/* ── Effects ── */}
+      <ContentSection title="Border Effects (Static, Pulse, Dashed)" id="effects">
         <div className="flex flex-col gap-6">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Composite mission defense card with embedded signal borders.
+            Use <code className="text-cyan-400">effect</code> to configure border animation styles: <code className="text-cyan-400">&quot;static&quot;</code>, <code className="text-cyan-400">&quot;pulse&quot;</code> (breathing signal), or <code className="text-cyan-400">&quot;dashed&quot;</code> (technical segmented stroke).
           </p>
 
           <Playground
-            code={`<Card className="max-w-md mx-auto border-cyan-500/30 bg-[#070b14] shadow-xl">
-  <CardHeader className="pb-4 border-b border-white/[0.06]">
-    <div className="flex items-center justify-between">
-      <CardTitle className="text-sm font-mono text-cyan-400 tracking-wider">DEFENSE FIREWALL ENCLAVE</CardTitle>
-      <Badge variant="neon" size="sm">NOMINAL</Badge>
-    </div>
-    <CardDescription className="text-xs text-slate-400">
-      Zero-trust perimeter telemetry container.
-    </CardDescription>
-  </CardHeader>
+            code={`<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
+  <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.06] min-w-0">
+    <SignalBorder signal="cyan" effect="pulse" glow />
+    <span className="text-xs font-mono text-cyan-400 font-bold">EFFECT: PULSE (BREATHING)</span>
+  </div>
 
-  <CardContent className="p-6">
-    <SignalBorder signal="cyan" className="p-5 rounded-xl bg-[#040711] space-y-3">
-      <span className="font-mono text-xs text-cyan-300 block font-bold">STATE: ISOLATED_SUBGRAPH</span>
-      <p className="text-xs text-slate-400 font-mono">Quarantine tunnel active on port 8443</p>
-      <Button variant="neon" size="sm" glow className="w-full">PURGE QUARANTINE</Button>
-    </SignalBorder>
-  </CardContent>
-</Card>`}
+  <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.06] min-w-0">
+    <SignalBorder signal="violet" effect="dashed" />
+    <span className="text-xs font-mono text-violet-400 font-bold">EFFECT: DASHED (TECHNICAL)</span>
+  </div>
+</div>`}
           >
-            <div className="flex items-center justify-center p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full">
-              <Card className="max-w-md w-full border-cyan-500/25 bg-[#070b14] shadow-xl">
-                <CardHeader className="pb-4 border-b border-white/[0.06]">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-mono text-cyan-400 tracking-wider">DEFENSE FIREWALL ENCLAVE</CardTitle>
-                    <Badge variant="neon" size="sm">NOMINAL</Badge>
-                  </div>
-                  <CardDescription className="text-xs text-slate-400">
-                    Zero-trust perimeter telemetry container.
-                  </CardDescription>
-                </CardHeader>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full min-w-0 p-4 sm:p-6 bg-[#040711] rounded-2xl border border-white/[0.06]">
+              <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.06] min-w-0">
+                <SignalBorder signal="cyan" effect="pulse" glow />
+                <span className="text-xs font-mono text-cyan-400 font-bold">EFFECT: PULSE (BREATHING)</span>
+              </div>
 
-                <CardContent className="p-6">
-                  <SignalBorder signal="cyan" className="p-5 rounded-xl bg-[#040711] space-y-3">
-                    <span className="font-mono text-xs text-cyan-300 block font-bold">STATE: ISOLATED_SUBGRAPH</span>
-                    <p className="text-xs text-slate-400 font-mono">Quarantine tunnel active on port 8443</p>
-                    <Button variant="neon" size="sm" glow className="w-full">PURGE QUARANTINE</Button>
-                  </SignalBorder>
-                </CardContent>
-              </Card>
+              <div className="relative p-6 rounded-xl bg-[#060912] border border-white/[0.06] min-w-0">
+                <SignalBorder signal="violet" effect="dashed" />
+                <span className="text-xs font-mono text-violet-400 font-bold">EFFECT: DASHED (TECHNICAL)</span>
+              </div>
+            </div>
+          </Playground>
+        </div>
+      </ContentSection>
+
+      {/* ── Technical HUD Notch Badge ── */}
+      <ContentSection title="Technical HUD Notch Badge" id="tech-notch">
+        <div className="flex flex-col gap-6">
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Attach an embedded status indicator tag flush with the top border using <code className="text-cyan-400">techNotch</code> and <code className="text-cyan-400">notchLabel</code>.
+          </p>
+
+          <Playground
+            code={`<div className="relative p-6 sm:p-8 rounded-2xl bg-[#060a14] border border-white/[0.06] max-w-md w-full">
+  <SignalBorder signal="cyan" techNotch notchLabel="// NODE.01" notchAlign="left" glow />
+  <div className="relative z-10 space-y-2 text-center pt-2">
+    <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest">TACTICAL TELEMETRY HUD</h4>
+    <p className="text-xs text-slate-300">Embedded status badge sitting cleanly on the hairline border.</p>
+  </div>
+</div>`}
+          >
+            <div className="flex items-center justify-center p-6 sm:p-8 bg-[#040711] rounded-2xl border border-white/[0.06] w-full min-w-0">
+              <div className="relative p-6 sm:p-8 rounded-2xl bg-[#060a14] border border-white/[0.06] max-w-md w-full">
+                <SignalBorder signal="cyan" techNotch notchLabel="// NODE.01" notchAlign="left" glow />
+                <div className="relative z-10 space-y-2 text-center pt-2">
+                  <h4 className="text-xs font-mono text-cyan-400 font-bold tracking-widest">TACTICAL TELEMETRY HUD</h4>
+                  <p className="text-xs text-slate-300">Embedded status badge sitting cleanly on the hairline border.</p>
+                </div>
+              </div>
             </div>
           </Playground>
         </div>
@@ -226,9 +224,45 @@ export default function SignalBorderDocsPage() {
           props={[
             {
               property: 'signal',
-              description: 'Semantic token determining the edge accent color.',
-              type: '"cyan" | "violet" | "green" | "amber" | "rose"',
+              description: 'Active neon signal accent color theme.',
+              type: '"cyan" | "violet" | "green" | "amber" | "rose" | "white"',
               defaultValue: '"cyan"',
+            },
+            {
+              property: 'placement',
+              description: 'Border edge placements.',
+              type: '"all" | "top" | "bottom" | "sides"',
+              defaultValue: '"all"',
+            },
+            {
+              property: 'effect',
+              description: 'Visual animation and stroke pattern.',
+              type: '"static" | "pulse" | "dashed"',
+              defaultValue: '"static"',
+            },
+            {
+              property: 'techNotch',
+              description: 'Embeds a technical HUD status tag badge on the top border.',
+              type: 'boolean',
+              defaultValue: 'false',
+            },
+            {
+              property: 'notchLabel',
+              description: 'Custom textual content for the HUD notch badge.',
+              type: 'string',
+              defaultValue: '"// SYS.01"',
+            },
+            {
+              property: 'notchAlign',
+              description: 'Horizontal alignment of the notch badge.',
+              type: '"left" | "center" | "right"',
+              defaultValue: '"left"',
+            },
+            {
+              property: 'glow',
+              description: 'Casts a subtle neon drop-shadow aura around the 1px stroke.',
+              type: 'boolean',
+              defaultValue: 'false',
             },
           ]}
         />
@@ -238,16 +272,7 @@ export default function SignalBorderDocsPage() {
       <ContentSection title="Accessibility" id="accessibility">
         <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
           <li>
-            <strong>Zero Layout Disruption:</strong> SignalBorder provides an unobtrusive visual edge without shifting interior child elements.
-          </li>
-        </ul>
-      </ContentSection>
-
-      {/* ── Best Practices ── */}
-      <ContentSection title="Best Practices" id="best-practices">
-        <ul className="list-disc pl-5 space-y-2 text-slate-400 text-sm">
-          <li>
-            <strong>Use Cases:</strong> Use SignalBorder on interactive cards and status callouts to impart a sleek, high-precision instrument look.
+            <strong>Decorative Element:</strong> SignalBorder has <code className="text-cyan-400 font-mono text-xs bg-cyan-950/50 px-1.5 py-0.5 rounded">aria-hidden=&quot;true&quot;</code> and <code className="text-cyan-400 font-mono text-xs bg-cyan-950/50 px-1.5 py-0.5 rounded">pointer-events-none</code>, ensuring no interference with focus or accessibility tree traversal.
           </li>
         </ul>
       </ContentSection>

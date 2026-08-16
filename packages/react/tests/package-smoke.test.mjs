@@ -10,6 +10,13 @@ test('exports core public APIs', () => {
     'Card',
     'CommandDialog',
     'ToastProvider',
+    'CypherText',
+    'ChamferCard',
+    'ArcGauge',
+    'BiometricScanner',
+    'KillSwitch',
+    'HexViewer',
+    'useCyberAudio',
     'cn',
   ]) {
     assert.ok(exportName in library, `Missing public export: ${exportName}`);
