@@ -1,6 +1,6 @@
 {
   "name": "@siberui/react",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Siber-Minimalist Cyberpunk React UI Kit",
 
   "main": "./dist/index.cjs",

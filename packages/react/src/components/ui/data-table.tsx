@@ -553,7 +553,7 @@ function DataTablePagination<TData>({
       : 'bg-slate-900 border-border-hairline text-slate-300';
 
   return (
-    <div className="flex items-center justify-between px-1">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-1 py-1">
       {/* Row count info */}
       <div
         className={cn(
@@ -564,7 +564,7 @@ function DataTablePagination<TData>({
         {table.getFilteredRowModel().rows.length.toLocaleString()} row(s)
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
         {/* Page size selector */}
         <div className="flex items-center gap-2">
           <span

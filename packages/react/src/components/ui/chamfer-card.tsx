@@ -386,7 +386,7 @@ const ChamferCardHeader = React.forwardRef<HTMLDivElement, ChamferCardHeaderProp
     <div
       ref={ref}
       className={cn(
-        'flex flex-col space-y-1.5 p-5 sm:p-6',
+        'flex flex-col space-y-1.5 p-4 sm:p-6',
         bordered && 'border-b border-white/[0.06]',
         className,
       )}
@@ -441,7 +441,7 @@ const ChamferCardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('p-5 sm:p-6 flex-1 min-w-0', className)}
+    className={cn('p-4 sm:p-6 flex-1 min-w-0', className)}
     {...props}
   />
 ));
@@ -459,7 +459,7 @@ const ChamferCardFooter = React.forwardRef<HTMLDivElement, ChamferCardFooterProp
     <div
       ref={ref}
       className={cn(
-        'flex items-center justify-between p-4 sm:p-5',
+        'flex items-center justify-between p-3.5 sm:p-5',
         bordered && 'border-t border-white/[0.06] bg-surface-2/30',
         className,
       )}

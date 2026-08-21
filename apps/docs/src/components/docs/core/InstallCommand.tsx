@@ -24,7 +24,7 @@ export function InstallCommand() {
             key={pm}
             onClick={() => setActiveTab(pm)}
             className={cn(
-              'relative px-4 py-2.5 text-xs font-mono transition-colors',
+              'relative px-3 sm:px-4 py-2.5 text-xs font-mono transition-colors cursor-pointer',
               activeTab === pm
                 ? 'text-cyan-400'
                 : 'text-slate-500 hover:text-slate-300'
@@ -37,8 +37,8 @@ export function InstallCommand() {
           </button>
         ))}
       </div>
-      <div className="flex items-center justify-between p-4 text-sm font-mono text-slate-300">
-        <span>
+      <div className="flex items-center justify-between p-3 sm:p-4 text-xs sm:text-sm font-mono text-slate-300 gap-2">
+        <span className="truncate">
           <span className="text-slate-500 mr-2">$</span>
           {commands[activeTab]}
         </span>

@@ -59,11 +59,11 @@ export default function DocsIntroductionPage() {
         <div className="p-4 rounded-lg border border-border-hairline bg-black/50 text-sm font-mono text-cyan-300">
           import {'{'} Button {'}'} from {'@siberui/react'};
         </div>
-        <div className="mt-6 flex gap-4">
-          <Link href="/docs/components/button" className="inline-flex h-10 items-center justify-center rounded-md bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-cyan-400">
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          <Link href="/docs/components/button" className="inline-flex h-10 items-center justify-center rounded-md bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-cyan-400 w-full sm:w-auto text-center">
             View Button Docs
           </Link>
-          <Link href="/docs/installation" className="inline-flex h-10 items-center justify-center rounded-md border border-border-hairline bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white">
+          <Link href="/docs/installation" className="inline-flex h-10 items-center justify-center rounded-md border border-border-hairline bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/10 hover:text-white w-full sm:w-auto text-center">
             Full Installation Guide
           </Link>
         </div>

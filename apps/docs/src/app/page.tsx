@@ -63,10 +63,12 @@ import {
   Activity,
   Server,
   Fingerprint,
+  Menu,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { DocSearchModal } from '@/components/docs/DocSearchModal';
+import { DocMobileNav } from '@/components/docs/layout/DocMobileNav';
 import { usePackageVersion } from '@/hooks/usePackageVersion';
 
 function NpmIcon({ className }: { className?: string }) {
@@ -105,6 +107,7 @@ export default function Home() {
     'pnpm',
   );
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scenarioTab, setScenarioTab] = useState<
     'dashboard' | 'security' | 'admin'
   >('dashboard');
@@ -235,9 +238,22 @@ export function AdminConsoleStarter() {
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 w-full border-b border-white/[0.08] bg-[#03060d]/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1360px] items-center justify-between px-6 sm:px-10 lg:px-16 py-3.5">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
+        <div className="mx-auto flex max-w-[1360px] items-center justify-between px-4 sm:px-8 lg:px-16 py-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                play('click');
+                setMobileNavOpen(true);
+              }}
+              className="md:hidden text-slate-400 hover:text-white h-9 w-9 -ml-1 border border-white/[0.08] hover:border-cyan-500/40"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5 text-cyan-400" />
+            </Button>
+
+            <Link href="/" className="flex items-center gap-2 group cursor-pointer">
               <div className="relative p-1 rounded border border-cyan-500/30 bg-cyan-950/30 group-hover:border-cyan-400 group-hover:shadow-[0_0_12px_rgba(0,217,232,0.4)] transition-all">
                 <Image
                   src="/logo.svg"
@@ -248,10 +264,10 @@ export function AdminConsoleStarter() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-black tracking-[0.25em] text-white transition-colors duration-300 group-hover:text-cyan-400 font-mono">
+                <span className="text-xs sm:text-sm font-black tracking-[0.25em] text-white transition-colors duration-300 group-hover:text-cyan-400 font-mono">
                   SIBER UI
                 </span>
-                <span className="text-[9px] font-mono text-slate-500 tracking-wider">
+                <span className="hidden xs:inline text-[9px] font-mono text-slate-500 tracking-wider">
                   CYBER-MINIMALIST KIT
                 </span>
               </div>
@@ -306,8 +322,21 @@ export function AdminConsoleStarter() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Quick Search Button */}
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            {/* Quick Search Button (Mobile Icon / Desktop Bar) */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                play('click');
+                setSearchOpen(true);
+              }}
+              className="sm:hidden text-slate-400 hover:text-white h-9 w-9"
+              aria-label="Search documentation"
+            >
+              <Search className="h-4 w-4 text-cyan-400" />
+            </Button>
+
             <Button
               variant="outline"
               onClick={() => {
@@ -328,6 +357,7 @@ export function AdminConsoleStarter() {
               target="_blank"
               rel="noreferrer"
               title="GitHub Repository"
+              className="hidden sm:inline-flex"
             >
               <Button
                 variant="ghost"
@@ -345,6 +375,7 @@ export function AdminConsoleStarter() {
               target="_blank"
               rel="noreferrer"
               title="NPM Package"
+              className="hidden sm:inline-flex"
             >
               <Button
                 variant="ghost"
@@ -359,10 +390,11 @@ export function AdminConsoleStarter() {
             <Link href="/docs/installation">
               <Button
                 variant="secondary"
+                size="sm"
                 onClick={() => play('click')}
-                className="group border-white/10 hover:border-cyan-500/40 text-slate-200 hover:text-white"
+                className="group border-white/10 hover:border-cyan-500/40 text-slate-200 hover:text-white h-9 px-3 sm:px-4 text-xs sm:text-sm"
                 rightIcon={
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 text-cyan-400" />
+                  <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1 text-cyan-400" />
                 }
               >
                 View Docs
@@ -374,10 +406,17 @@ export function AdminConsoleStarter() {
           open={searchOpen}
           onOpenChange={setSearchOpen}
         />
+        <DocMobileNav
+          isOpen={mobileNavOpen}
+          onClose={() => setMobileNavOpen(false)}
+          onOpenSearch={() => setSearchOpen(true)}
+          accentColor={accentColor}
+          onAccentColorChange={setAccentColor}
+        />
       </nav>
 
-      {/* Hero Section (Restored Clean Direction + Terminal on Right) */}
-      <section className="mx-auto flex w-full max-w-[1360px] flex-col px-6 sm:px-10 lg:px-16 py-16 md:py-24">
+      {/* Hero Section */}
+      <section className="mx-auto flex w-full max-w-[1360px] flex-col px-4 sm:px-8 lg:px-16 py-12 md:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
@@ -397,52 +436,52 @@ export function AdminConsoleStarter() {
               text="BUILD THE FUTURE. TODAY."
               color="cyan"
               speed={140}
-              className="max-w-3xl text-3xl font-black tracking-tight leading-[1.05] sm:text-4xl md:text-5xl lg:text-6xl font-mono"
+              className="max-w-3xl text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] font-mono"
             />
 
-            <p className="mt-5 max-w-lg text-sm sm:text-base text-slate-400 md:text-lg leading-relaxed font-mono">
+            <p className="mt-4 sm:mt-5 max-w-lg text-sm sm:text-base text-slate-400 md:text-lg leading-relaxed font-mono">
               A polished cyberpunk UI kit for modern teams that want minimalism,
               clarity, and a premium digital edge.
             </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Link href="/docs/installation">
+            <div className="mt-6 sm:mt-8 flex flex-col gap-3 sm:gap-4 sm:flex-row">
+              <Link href="/docs/installation" className="w-full sm:w-auto">
                 <Button
                   variant="neon"
                   size="lg"
                   onClick={() => play('granted')}
-                  className="group gap-2 px-8 text-lg"
+                  className="group gap-2 px-6 sm:px-8 text-base sm:text-lg w-full sm:w-auto"
                 >
                   Get Started
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Link href="/docs/components/accordion">
+              <Link href="/docs/components/accordion" className="w-full sm:w-auto">
                 <Button
                   variant="ghost"
                   size="lg"
                   onClick={() => play('click')}
-                  className="border-white/[0.08] px-8 text-base text-slate-300 hover:border-cyan-500/40"
+                  className="border-white/[0.08] px-6 sm:px-8 text-sm sm:text-base text-slate-300 hover:border-cyan-500/40 w-full sm:w-auto"
                 >
                   View Components
                 </Button>
               </Link>
             </div>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-3">
               {[
                 { value: '45+', label: 'components' },
-                { value: '100%', label: 'tailwind-ready' },
-                { value: '⚡', label: 'fast to ship' },
+                { value: '100%', label: 'tailwind v4' },
+                { value: '⚡ 0ms', label: 'runtime delay' },
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-white/[0.08] bg-white/5 px-4 py-4 backdrop-blur"
+                  className="rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/5 p-2.5 sm:p-4 text-center backdrop-blur"
                 >
-                  <p className="text-xl font-semibold text-slate-100 font-mono">
+                  <p className="text-base sm:text-xl font-bold text-slate-100 font-mono">
                     {item.value}
                   </p>
-                  <p className="mt-1 text-sm text-slate-400">{item.label}</p>
+                  <p className="mt-0.5 text-[10px] sm:text-xs text-slate-400 truncate">{item.label}</p>
                 </div>
               ))}
             </div>
@@ -468,16 +507,16 @@ export function AdminConsoleStarter() {
                 duration={10}
                 className="motion-reduce:hidden"
               />
-              <CardHeader className="space-y-3">
-                <div className="flex items-center justify-between">
+              <CardHeader className="space-y-3 p-4 sm:p-6">
+                <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <Terminal className="h-4 w-4 text-cyan-400" />
-                    <CardTitle className="font-mono text-sm tracking-wider uppercase text-slate-300">
+                    <CardTitle className="font-mono text-xs sm:text-sm tracking-wider uppercase text-slate-300">
                       Quick Installation
                     </CardTitle>
                   </div>
                   {/* Package Manager Selector Tabs */}
-                  <div className="flex rounded-md border border-white/[0.08] bg-black/40 p-0.5 font-mono text-[10px]">
+                  <div className="flex self-start xs:self-auto rounded-md border border-white/[0.08] bg-black/40 p-0.5 font-mono text-[10px]">
                     {(['pnpm', 'npm', 'yarn', 'bun'] as const).map((pm) => (
                       <button
                         key={pm}
@@ -496,11 +535,11 @@ export function AdminConsoleStarter() {
                     ))}
                   </div>
                 </div>
-                <CardDescription>
+                <CardDescription className="text-xs sm:text-sm">
                   Import design tokens and start building immediately.
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0">
                 <TerminalBlock
                   title={`install.${pkgManager}`}
                   code={getInstallCmd(pkgManager)}
@@ -513,16 +552,16 @@ export function AdminConsoleStarter() {
       </section>
 
       {/* SIGNATURE CYBER PRIMITIVES SHOWCASE (NEW FLAGSHIP SUITE) */}
-      <section className="relative mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 py-14">
-        <div className="relative mb-12 text-center">
+      <section className="relative mx-auto w-full max-w-[1360px] px-4 sm:px-8 lg:px-16 py-12 md:py-16">
+        <div className="relative mb-10 sm:mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-mono tracking-[0.2em] text-cyan-300">
             <Sparkles className="h-3.5 w-3.5" />
             SIGNATURE CYBER SUITE
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl font-sans">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white md:text-5xl font-sans">
             Engineered for high-stakes digital experiences
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-400 md:text-base leading-relaxed">
+          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm md:text-base text-slate-400 leading-relaxed">
             Every primitive is built from scratch with hardware-inspired styling, WAI-ARIA keyboard navigation, zero external asset dependencies, and strict TypeScript definitions.
           </p>
         </div>
@@ -538,33 +577,34 @@ export function AdminConsoleStarter() {
             className="flex flex-col justify-between"
           >
             <ChamferCardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Binary className="h-4 w-4 text-cyan-400" />
-                  <ChamferCardTitle className="text-sm">Hex &amp; Memory Viewer</ChamferCardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Binary className="h-4 w-4 text-cyan-400 shrink-0" />
+                  <ChamferCardTitle className="text-xs sm:text-sm truncate">Hex &amp; Memory Viewer</ChamferCardTitle>
                 </div>
                 <Link href="/docs/components/hex-viewer">
-                  <Badge variant="outline" className="text-[10px] hover:border-cyan-400 cursor-pointer">
+                  <Badge variant="outline" className="text-[9px] sm:text-[10px] hover:border-cyan-400 cursor-pointer shrink-0">
                     DOCS &rarr;
                   </Badge>
                 </Link>
               </div>
-              <ChamferCardDescription className="text-xs text-slate-400">
+              <ChamferCardDescription className="text-[11px] sm:text-xs text-slate-400">
                 Synchronized memory address dump with live ASCII hover linking and search.
               </ChamferCardDescription>
             </ChamferCardHeader>
 
-            <ChamferCardContent className="pt-2">
+            <ChamferCardContent className="pt-2 p-2 sm:p-6 overflow-hidden">
               <HexViewer
                 data={sampleHexDump}
                 baseOffset={0x00400000}
+                bytesPerRow={8}
                 signal="cyan"
                 maxHeight="180px"
                 showToolbar={false}
                 title="RAM // DUMP_SNAPSHOT"
               />
             </ChamferCardContent>
-            <ChamferCardFooter className="pt-2 flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <ChamferCardFooter className="pt-2 flex flex-wrap justify-between items-center gap-1 text-[9px] sm:text-[10px] font-mono text-slate-500">
               <span>8/16/32 BYTE COLUMNS</span>
               <span className="text-cyan-400">0x00400000</span>
             </ChamferCardFooter>
@@ -579,31 +619,32 @@ export function AdminConsoleStarter() {
             className="flex flex-col justify-between"
           >
             <ChamferCardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Fingerprint className="h-4 w-4 text-emerald-400" />
-                  <ChamferCardTitle className="text-sm">Biometric Interlock</ChamferCardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Fingerprint className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <ChamferCardTitle className="text-xs sm:text-sm truncate">Biometric Interlock</ChamferCardTitle>
                 </div>
                 <Link href="/docs/components/biometric-scanner">
-                  <Badge variant="outline" className="text-[10px] hover:border-emerald-400 cursor-pointer">
+                  <Badge variant="outline" className="text-[9px] sm:text-[10px] hover:border-emerald-400 cursor-pointer shrink-0">
                     DOCS &rarr;
                   </Badge>
                 </Link>
               </div>
-              <ChamferCardDescription className="text-xs text-slate-400">
+              <ChamferCardDescription className="text-[11px] sm:text-xs text-slate-400">
                 Optical laser beam sweep with retina, fingerprint, facial, and DNA models.
               </ChamferCardDescription>
             </ChamferCardHeader>
 
-            <ChamferCardContent className="flex flex-col items-center justify-center py-4">
+            <ChamferCardContent className="flex flex-col items-center justify-center py-4 px-2 sm:px-6">
               <BiometricScanner
                 mode="retina"
                 signal="green"
                 label="OCULAR RETINA SENSOR"
                 onScanComplete={(success) => play(success ? 'granted' : 'denied')}
+                className="mx-auto"
               />
             </ChamferCardContent>
-            <ChamferCardFooter className="pt-2 flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <ChamferCardFooter className="pt-2 flex flex-wrap justify-between items-center gap-1 text-[9px] sm:text-[10px] font-mono text-slate-500">
               <span>4 VECTOR MODES</span>
               <span className="text-emerald-400">CLICK TO TRIGGER</span>
             </ChamferCardFooter>
@@ -618,32 +659,33 @@ export function AdminConsoleStarter() {
             className="flex flex-col justify-between"
           >
             <ChamferCardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Flame className="h-4 w-4 text-rose-400" />
-                  <ChamferCardTitle className="text-sm">Two-Stage Kill Switch</ChamferCardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Flame className="h-4 w-4 text-rose-400 shrink-0" />
+                  <ChamferCardTitle className="text-xs sm:text-sm truncate">Two-Stage Kill Switch</ChamferCardTitle>
                 </div>
                 <Link href="/docs/components/kill-switch">
-                  <Badge variant="outline" className="text-[10px] hover:border-rose-400 cursor-pointer">
+                  <Badge variant="outline" className="text-[9px] sm:text-[10px] hover:border-rose-400 cursor-pointer shrink-0">
                     DOCS &rarr;
                   </Badge>
                 </Link>
               </div>
-              <ChamferCardDescription className="text-xs text-slate-400">
+              <ChamferCardDescription className="text-[11px] sm:text-xs text-slate-400">
                 3D translucent protective flip-cover guard with emergency ESC key fail-safe.
               </ChamferCardDescription>
             </ChamferCardHeader>
 
-            <ChamferCardContent className="flex flex-col items-center justify-center py-4">
+            <ChamferCardContent className="flex flex-col items-center justify-center py-4 px-2 sm:px-6">
               <KillSwitch
                 size="md"
                 hazard="rose"
                 label="EMERGENCY OVERRIDE"
                 onCoverOpenChange={() => play('arm')}
                 onArmChange={(armed) => play(armed ? 'alarm' : 'click')}
+                className="mx-auto"
               />
             </ChamferCardContent>
-            <ChamferCardFooter className="pt-2 flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <ChamferCardFooter className="pt-2 flex flex-wrap justify-between items-center gap-1 text-[9px] sm:text-[10px] font-mono text-slate-500">
               <span>TWO-STAGE INTERLOCK</span>
               <span className="text-rose-400">ESC DISARMS</span>
             </ChamferCardFooter>
@@ -658,32 +700,33 @@ export function AdminConsoleStarter() {
             className="flex flex-col justify-between"
           >
             <ChamferCardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Activity className="h-4 w-4 text-amber-400" />
-                  <ChamferCardTitle className="text-sm">Cockpit Arc Gauge</ChamferCardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Activity className="h-4 w-4 text-amber-400 shrink-0" />
+                  <ChamferCardTitle className="text-xs sm:text-sm truncate">Cockpit Arc Gauge</ChamferCardTitle>
                 </div>
                 <Link href="/docs/components/arc-gauge">
-                  <Badge variant="outline" className="text-[10px] hover:border-amber-400 cursor-pointer">
+                  <Badge variant="outline" className="text-[9px] sm:text-[10px] hover:border-amber-400 cursor-pointer shrink-0">
                     DOCS &rarr;
                   </Badge>
                 </Link>
               </div>
-              <ChamferCardDescription className="text-xs text-slate-400">
+              <ChamferCardDescription className="text-[11px] sm:text-xs text-slate-400">
                 Precision SVG radial telemetry dial with auto severity threshold shifting.
               </ChamferCardDescription>
             </ChamferCardHeader>
 
-            <ChamferCardContent className="flex flex-col items-center justify-center py-2">
+            <ChamferCardContent className="flex flex-col items-center justify-center py-2 sm:py-3">
               <ArcGauge
                 size="sm"
                 value={78}
                 color="auto"
                 label="CORE FLUX LOAD"
                 glow
+                className="mx-auto"
               />
             </ChamferCardContent>
-            <ChamferCardFooter className="pt-2 flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <ChamferCardFooter className="pt-2 flex flex-wrap justify-between items-center gap-1 text-[9px] sm:text-[10px] font-mono text-slate-500">
               <span>180° / 240° / 270° ANGLES</span>
               <span className="text-amber-400">AUTO-THRESHOLD</span>
             </ChamferCardFooter>
@@ -698,47 +741,47 @@ export function AdminConsoleStarter() {
             className="flex flex-col justify-between"
           >
             <ChamferCardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Volume2 className="h-4 w-4 text-violet-400" />
-                  <ChamferCardTitle className="text-sm">Audio Engine &amp; Cypher</ChamferCardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Volume2 className="h-4 w-4 text-violet-400 shrink-0" />
+                  <ChamferCardTitle className="text-xs sm:text-sm truncate">Audio Engine &amp; Cypher</ChamferCardTitle>
                 </div>
                 <Link href="/docs/components/cyber-audio">
-                  <Badge variant="outline" className="text-[10px] hover:border-violet-400 cursor-pointer">
+                  <Badge variant="outline" className="text-[9px] sm:text-[10px] hover:border-violet-400 cursor-pointer shrink-0">
                     DOCS &rarr;
                   </Badge>
                 </Link>
               </div>
-              <ChamferCardDescription className="text-xs text-slate-400">
+              <ChamferCardDescription className="text-[11px] sm:text-xs text-slate-400">
                 Zero-asset Web Audio API oscillator synthesis with live scramble decryption.
               </ChamferCardDescription>
             </ChamferCardHeader>
 
-            <ChamferCardContent className="space-y-4 pt-2">
-              <div className="p-3 rounded-lg bg-black/40 border border-white/[0.06] text-center min-h-[50px] flex items-center justify-center">
+            <ChamferCardContent className="space-y-3 sm:space-y-4 pt-2 p-3 sm:p-6">
+              <div className="p-2 sm:p-3 rounded-lg bg-black/40 border border-white/[0.06] text-center min-h-[44px] sm:min-h-[50px] flex items-center justify-center overflow-hidden">
                 <CypherText
                   text="QUANTUM_TELEMETRY_SYNCED"
                   color="violet"
                   glow
                   trigger="mount"
                   speed={20}
-                  className="font-mono text-xs font-bold"
+                  className="font-mono text-[10px] xs:text-xs font-bold truncate max-w-full"
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-2">
-                <Button size="sm" variant="outline" onClick={() => play('click')} className="text-[10px] font-mono">
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                <Button size="sm" variant="outline" onClick={() => play('click')} className="text-[9px] sm:text-[10px] font-mono px-1 sm:px-3 h-8">
                   CLICK
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => play('scan')} className="text-[10px] font-mono text-cyan-300">
+                <Button size="sm" variant="outline" onClick={() => play('scan')} className="text-[9px] sm:text-[10px] font-mono text-cyan-300 px-1 sm:px-3 h-8">
                   SCAN
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => play('granted')} className="text-[10px] font-mono text-emerald-300">
+                <Button size="sm" variant="outline" onClick={() => play('granted')} className="text-[9px] sm:text-[10px] font-mono text-emerald-300 px-1 sm:px-3 h-8">
                   CHIME
                 </Button>
               </div>
             </ChamferCardContent>
-            <ChamferCardFooter className="pt-2 flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <ChamferCardFooter className="pt-2 flex flex-wrap justify-between items-center gap-1 text-[9px] sm:text-[10px] font-mono text-slate-500">
               <span>0 EXTERNAL AUDIO FILES</span>
               <span className="text-violet-400">WEB AUDIO API</span>
             </ChamferCardFooter>
@@ -753,23 +796,23 @@ export function AdminConsoleStarter() {
             className="flex flex-col justify-between"
           >
             <ChamferCardHeader className="pb-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Server className="h-4 w-4 text-cyan-400" />
-                  <ChamferCardTitle className="text-sm">Telemetry Stat Cards</ChamferCardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Server className="h-4 w-4 text-cyan-400 shrink-0" />
+                  <ChamferCardTitle className="text-xs sm:text-sm truncate">Telemetry Stat Cards</ChamferCardTitle>
                 </div>
                 <Link href="/docs/components/stat-card">
-                  <Badge variant="outline" className="text-[10px] hover:border-cyan-400 cursor-pointer">
+                  <Badge variant="outline" className="text-[9px] sm:text-[10px] hover:border-cyan-400 cursor-pointer shrink-0">
                     DOCS &rarr;
                   </Badge>
                 </Link>
               </div>
-              <ChamferCardDescription className="text-xs text-slate-400">
+              <ChamferCardDescription className="text-[11px] sm:text-xs text-slate-400">
                 Tactical index tags, trend delta chips, and micro activity gauges.
               </ChamferCardDescription>
             </ChamferCardHeader>
 
-            <ChamferCardContent className="space-y-3 pt-2">
+            <ChamferCardContent className="space-y-3 pt-2 p-3 sm:p-6">
               <StatCard
                 indexTag="[NODE.NET_01]"
                 label="ORBITAL EGRESS LINK"
@@ -782,7 +825,7 @@ export function AdminConsoleStarter() {
                 className="bg-transparent border-0 p-0"
               />
             </ChamferCardContent>
-            <ChamferCardFooter className="pt-2 flex justify-between items-center text-[10px] font-mono text-slate-500">
+            <ChamferCardFooter className="pt-2 flex flex-wrap justify-between items-center gap-1 text-[9px] sm:text-[10px] font-mono text-slate-500">
               <span>MICRO ACTIVITY SPARKS</span>
               <span className="text-cyan-400">[SYS.01]</span>
             </ChamferCardFooter>
@@ -791,7 +834,7 @@ export function AdminConsoleStarter() {
       </section>
 
       {/* FULL COMPONENT MATRIX FILTER SECTION */}
-      <section className="relative mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 py-14">
+      <section className="relative mx-auto w-full max-w-[1360px] px-4 sm:px-8 lg:px-16 py-12 md:py-16">
         <div className="relative mb-10 text-center">
           <h2 className="text-2xl font-bold tracking-tight text-white md:text-4xl font-sans">
             Complete Cyber Library Matrix
@@ -801,7 +844,7 @@ export function AdminConsoleStarter() {
           </p>
 
           {/* Filter Tabs */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
             {showcaseTabs.map((tab) => (
               <button
                 key={tab.id}
@@ -810,7 +853,7 @@ export function AdminConsoleStarter() {
                   setActiveTab(tab.id);
                 }}
                 aria-pressed={activeTab === tab.id}
-                className={`rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+                className={`rounded-full px-3 sm:px-4 py-1.5 text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                   activeTab === tab.id
                     ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_12px_rgba(0,217,232,0.2)] font-semibold'
                     : 'bg-white/5 text-slate-400 border border-white/[0.08] hover:border-white/20 hover:text-slate-200'
@@ -1163,13 +1206,13 @@ export function DefenseNode() {
       </section>
 
       {/* Architecture & Philosophy Section */}
-      <section className="mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 py-12 md:py-16">
+      <section className="mx-auto w-full max-w-[1360px] px-4 sm:px-8 lg:px-16 py-12 md:py-16">
         <div className="mb-12 flex flex-col gap-4 border-b border-white/[0.08] pb-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-400">
               {'// Architecture & Philosophy'}
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white md:text-4xl font-sans">
+            <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-white md:text-4xl font-sans">
               Built for Speed. Styled for Impact.
             </h2>
           </div>
@@ -1184,8 +1227,8 @@ export function DefenseNode() {
           </Link>
         </div>
 
-        <div className="numbered-list grid gap-10 md:grid-cols-3">
-          <div className="numbered-row group relative border-l-2 border-white/[0.08] pl-8 transition-colors duration-300 hover:border-cyan-400/80">
+        <div className="numbered-list grid gap-8 sm:gap-10 md:grid-cols-3">
+          <div className="numbered-row group relative border-l-2 border-white/[0.08] pl-5 sm:pl-8 transition-colors duration-300 hover:border-cyan-400/80">
             <div className="mb-3 flex items-center gap-2">
               <Zap className="h-5 w-5 text-cyan-400 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="text-lg font-bold text-white font-sans">Elevated Motion</h3>
@@ -1195,7 +1238,7 @@ export function DefenseNode() {
             </p>
           </div>
 
-          <div className="numbered-row group relative border-l-2 border-white/[0.08] pl-8 transition-colors duration-300 hover:border-cyan-400/80">
+          <div className="numbered-row group relative border-l-2 border-white/[0.08] pl-5 sm:pl-8 transition-colors duration-300 hover:border-cyan-400/80">
             <div className="mb-3 flex items-center gap-2">
               <Layers className="h-5 w-5 text-slate-400 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="text-lg font-bold text-white font-sans">Dual-Polygon Chamfers</h3>
@@ -1205,7 +1248,7 @@ export function DefenseNode() {
             </p>
           </div>
 
-          <div className="numbered-row group relative border-l-2 border-white/[0.08] pl-8 transition-colors duration-300 hover:border-cyan-400/80">
+          <div className="numbered-row group relative border-l-2 border-white/[0.08] pl-5 sm:pl-8 transition-colors duration-300 hover:border-cyan-400/80">
             <div className="mb-3 flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-slate-400 transition-transform duration-300 group-hover:scale-110" />
               <h3 className="text-lg font-bold text-white font-sans">
@@ -1220,7 +1263,7 @@ export function DefenseNode() {
       </section>
 
       {/* Interactive Scenario Composer */}
-      <section className="mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 pb-16">
+      <section className="mx-auto w-full max-w-[1360px] px-4 sm:px-8 lg:px-16 pb-16">
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <Card
             variant="neon"
@@ -1384,12 +1427,13 @@ export function DefenseNode() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-3 pt-1">
-                <Link href={activeScenario.link}>
-                  <Button variant="primary" onClick={() => play('click')}>View Full Example</Button>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 pt-1">
+                <Link href={activeScenario.link} className="w-full sm:w-auto">
+                  <Button variant="primary" onClick={() => play('click')} className="w-full sm:w-auto">View Full Example</Button>
                 </Link>
                 <Button
                   variant="outline"
+                  className="w-full sm:w-auto"
                   onClick={() => {
                     play('granted');
                     if (navigator?.clipboard?.writeText) {
@@ -1410,16 +1454,16 @@ export function DefenseNode() {
       </section>
 
       {/* FAQ Section */}
-      <section className="mx-auto w-full max-w-[1360px] px-6 sm:px-10 lg:px-16 pb-20">
-        <div className="mb-10 text-center">
+      <section className="mx-auto w-full max-w-[1360px] px-4 sm:px-8 lg:px-16 pb-16 sm:pb-20">
+        <div className="mb-8 sm:mb-10 text-center">
           <div className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3 py-1 text-xs font-mono tracking-widest text-cyan-400 uppercase">
             <HelpCircle className="h-3.5 w-3.5" />
             Knowledge Base
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl font-sans">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white md:text-4xl font-sans">
             Frequently Asked Questions
           </h2>
-          <p className="mt-2 text-sm font-mono text-slate-400">
+          <p className="mt-2 text-xs sm:text-sm font-mono text-slate-400">
             Everything you need to know about integrating Siber UI into your workflow.
           </p>
         </div>
@@ -1427,7 +1471,7 @@ export function DefenseNode() {
         <div className="mx-auto max-w-3xl">
           <Card
             variant="default"
-            className="p-6 border-white/[0.08] bg-[#050811]"
+            className="p-4 sm:p-6 border-white/[0.08] bg-[#050811]"
           >
             <Accordion
               type="single"
@@ -1490,16 +1534,16 @@ export function DefenseNode() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-20 w-full border-t border-white/[0.08] py-8 bg-[#020409]">
-        <div className="mx-auto max-w-[1360px] px-6 sm:px-10 lg:px-16 flex flex-col items-center justify-between gap-4 md:flex-row text-xs font-mono text-slate-500">
-          <div className="flex items-center gap-3">
+      <footer className="mt-16 w-full border-t border-white/[0.08] py-8 bg-[#020409]">
+        <div className="mx-auto max-w-[1360px] px-4 sm:px-8 lg:px-16 flex flex-col items-center justify-between gap-4 md:flex-row text-xs font-mono text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-emerald-500 motion-safe:animate-pulse motion-reduce:animate-none shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
               <span className="uppercase tracking-widest text-[10px] text-emerald-400 font-bold">
                 sys.status: online
               </span>
             </div>
-            <span className="text-white/10">|</span>
+            <span className="hidden xs:inline text-white/10">|</span>
             <span>
               Designed &amp; built by{' '}
               <a
@@ -1512,7 +1556,7 @@ export function DefenseNode() {
               </a>
             </span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-center">
             <span>MIT License &copy; 2026 Siber UI</span>
             <span className="text-white/10">|</span>
             <a

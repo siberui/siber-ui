@@ -193,7 +193,7 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               {/* Jump to offset */}
               <form onSubmit={handleJumpTo} className="flex items-center">
                 <input
@@ -201,7 +201,7 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
                   placeholder="GOTO 0x..."
                   value={jumpInput}
                   onChange={(e) => setJumpInput(e.target.value)}
-                  className="w-20 rounded bg-white/[0.04] border border-white/[0.1] px-1.5 py-0.5 text-[9px] text-slate-200 placeholder:text-slate-600 outline-none focus:border-[var(--hv-signal)]"
+                  className="w-16 sm:w-20 rounded bg-white/[0.04] border border-white/[0.1] px-1.5 py-0.5 text-[9px] text-slate-200 placeholder:text-slate-600 outline-none focus:border-[var(--hv-signal)]"
                 />
               </form>
 
@@ -211,7 +211,7 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
                 placeholder="FIND..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-16 sm:w-20 rounded bg-white/[0.04] border border-white/[0.1] px-1.5 py-0.5 text-[9px] text-slate-200 placeholder:text-slate-600 outline-none focus:border-[var(--hv-signal)]"
+                className="w-14 sm:w-20 rounded bg-white/[0.04] border border-white/[0.1] px-1.5 py-0.5 text-[9px] text-slate-200 placeholder:text-slate-600 outline-none focus:border-[var(--hv-signal)]"
               />
 
               {/* Copy Hex */}
@@ -235,33 +235,36 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
           </div>
         )}
 
-        {/* Hex Matrix Column Headers */}
-        <div className="grid grid-cols-[auto_1fr_auto] gap-4 border-b border-white/[0.06] bg-[#020409] px-3.5 py-1 text-[9px] text-slate-500 font-bold tracking-wider select-none">
-          {showOffset && <div className="w-20">OFFSET</div>}
-          <div className="flex gap-1.5">
-            {Array.from({ length: bytesPerRow }).map((_, i) => (
-              <span
-                key={i}
-                className={cn(
-                  'w-5 text-center',
-                  i === 7 && bytesPerRow === 16 && 'mr-2',
-                  i === 15 && bytesPerRow === 32 && 'mr-2',
-                )}
-              >
-                {i.toString(16).toUpperCase()}
-              </span>
-            ))}
-          </div>
-          {showAscii && <div className="w-24 text-left">DECODED ASCII</div>}
-        </div>
+        {/* Scrollable Binary Memory Grid and Headers */}
+        <div className="overflow-x-auto w-full">
+          <div className="min-w-max">
+            {/* Hex Matrix Column Headers */}
+            <div className="flex items-center gap-4 border-b border-white/[0.06] bg-[#020409] px-3.5 py-1 text-[9px] text-slate-500 font-bold tracking-wider select-none">
+              {showOffset && <div className="w-20 shrink-0">OFFSET</div>}
+              <div className="flex gap-1.5 shrink-0">
+                {Array.from({ length: bytesPerRow }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={cn(
+                      'w-5 text-center',
+                      i === 7 && bytesPerRow === 16 && 'mr-2',
+                      i === 15 && bytesPerRow === 32 && 'mr-2',
+                    )}
+                  >
+                    {i.toString(16).toUpperCase()}
+                  </span>
+                ))}
+              </div>
+              {showAscii && <div className="w-24 text-left border-l border-transparent pl-3 shrink-0">DECODED ASCII</div>}
+            </div>
 
-        {/* Scrollable Binary Memory Grid */}
-        <div
-          ref={scrollContainerRef}
-          style={{ maxHeight }}
-          className="overflow-y-auto overflow-x-auto p-3.5 space-y-1 focus:outline-none"
-          tabIndex={0}
-        >
+            {/* Scrollable Binary Memory Grid */}
+            <div
+              ref={scrollContainerRef}
+              style={{ maxHeight }}
+              className="overflow-y-auto p-3.5 space-y-1 focus:outline-none"
+              tabIndex={0}
+            >
           {Array.from({ length: totalRows }).map((_, rowIndex) => {
             const rowOffset = baseOffset + rowIndex * bytesPerRow;
             const startByteIndex = rowIndex * bytesPerRow;
@@ -349,6 +352,8 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
               </div>
             );
           })}
+            </div>
+          </div>
         </div>
 
         {/* Bottom Interactive HUD Inspector Telemetry Bar */}
@@ -356,7 +361,7 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.08] bg-[#03050a] px-3.5 py-1.5 text-[9px] text-slate-400">
             {inspectorIndex !== null && inspectorByte !== null ? (
               <>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                   <span className="text-[var(--hv-signal)] font-bold">
                     OFFSET: 0x{formatAddress(baseOffset + inspectorIndex)}
                   </span>
@@ -384,7 +389,7 @@ export const HexViewer = React.forwardRef<HTMLDivElement, HexViewerProps>(
                 </span>
               </>
             ) : (
-              <div className="flex items-center justify-between w-full">
+              <div className="flex flex-wrap items-center justify-between gap-1 w-full text-[8px] sm:text-[9px]">
                 <span className="text-slate-500">HOVER OR CLICK A BYTE TO INSPECT RAW VALUES</span>
                 <span className="text-slate-600">ENCODING: UTF-8 / RAW HEX</span>
               </div>
